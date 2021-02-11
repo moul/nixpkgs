@@ -14,15 +14,10 @@
     ];
   };
 
-  programs.firefox = {
+  programs.git = {
     enable = true;
-    profiles = {
-      myprofile = {
-        settings = {
-          "general.smoothScroll" = false;
-        };
-      };
-    };
+    userName = "Manfred Touron";
+    userEmail = "94029+moul@users.noreply.github.com";
   };
 
   services.gpg-agent = {
