@@ -30,6 +30,13 @@
       enable = true;
       userName = "Manfred Touron";
       userEmail = "94029+moul@users.noreply.github.com";
+      #signing = {
+      #  key = "";
+      #  signByDefault = true;
+      #};
+      extraConfig = {
+        pull.rebase = true;
+      };
     };
 
     tmux = {
