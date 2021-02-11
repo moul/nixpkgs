@@ -1,9 +1,16 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   home.packages = [
-    pkgs.htop
+    pkgs.curl
+    pkgs.docker
     pkgs.fortune
+    pkgs.git
+    pkgs.htop
+    pkgs.hub
+    pkgs.mosh
+    pkgs.tmux
+    pkgs.wget
   ];
 
   programs.emacs = {
