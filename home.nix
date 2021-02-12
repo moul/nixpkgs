@@ -1,5 +1,8 @@
 { config, pkgs, lib, ... }:
 
+let
+  spacemacs = "${lib.cleanSource ./config/.spacemacs}";
+in
 {
   home = {
     packages = [
@@ -15,6 +18,10 @@
     ];
     #username = "moul";
     #homeDirectory = "/home/moul";
+
+    file = {
+      ".spacemacs" = { source = spacemacs; };
+    };
   };
 
   programs = {
