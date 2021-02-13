@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  spacemacs = "${lib.cleanSource ./config/.spacemacs}";
+  configd = "~/.config/nixpkgs/config";
 in
 {
   home = {
@@ -19,8 +19,14 @@ in
     #username = "moul";
     #homeDirectory = "/home/moul";
 
-    file = {
-      ".spacemacs" = { source = spacemacs; };
+    #file = {
+    #  ".spacemacs" = { source = spacemacs; };
+    #};
+
+    activation = {
+      afterWriteBoundary = config.lib.dag.entryAfter [ "writeBoundary"] ''
+        ln -sf ${configd}/.spacemacs ~/.spacemacs
+      '';
     };
   };
 
@@ -44,6 +50,10 @@ in
       extraConfig = {
         pull.rebase = true;
       };
+    };
+
+    go = {
+      enable = true;
     };
 
     tmux = {
