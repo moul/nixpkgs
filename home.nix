@@ -28,6 +28,10 @@ in
         ln -sf ${configd}/.spacemacs ~/.spacemacs
       '';
     };
+
+    sessionVariables = {
+      EDITOR = "emacs";
+    };
   };
 
   programs = {
@@ -58,6 +62,11 @@ in
 
     go = {
       enable = true;
+    };
+
+    home-manager = {
+      enable = true;
+      path = "…";
     };
 
     tmux = {
@@ -134,11 +143,6 @@ in
         bindkey '^R' history-incremental-pattern-search-backward
         bindkey '^F' history-incremental-pattern-search-forward
       '';
-    };
-
-    home-manager = {
-      enable = true;
-      path = "…";
     };
   };
 
