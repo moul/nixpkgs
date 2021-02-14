@@ -5,16 +5,46 @@ let
 in
 {
   home = {
-    packages = [
-      pkgs.curl
-      pkgs.docker
-      pkgs.fortune
-      pkgs.git
-      pkgs.htop
-      pkgs.hub
-      pkgs.mosh
-      pkgs.tmux
-      pkgs.wget
+    packages = with pkgs; [
+      ascii
+      aspellDicts.en
+      aspellDicts.en-computers
+      aspellDicts.en-science
+      aspellDicts.fr
+      cowsay
+      curl
+      docker
+      docker-buildx
+      docker-compose
+      ffmpeg
+      file
+      fortune
+      fortune
+      git
+      gnumake
+      gnupg
+      graphviz
+      htop
+      hub
+      kitty
+      lshw
+      lsof
+      mosh
+      nix-index
+      nix-prefetch-scripts
+      nmap
+      nodejs
+      openssl
+      pstree
+      screen
+      tcpdump
+      telnet
+      tmux
+      tree
+      unzip
+      wget
+      xorg.xeyes
+      youtube-dl
     ];
     #username = "moul";
     #homeDirectory = "/home/moul";
@@ -153,4 +183,10 @@ in
       enableSshSupport = true;
     };
   };
+
+  #virtualisation = {
+  #  docker = {
+  #    enable = true;
+  #  };
+  #};
 }
