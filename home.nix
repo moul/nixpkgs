@@ -31,6 +31,10 @@ in
   };
 
   programs = {
+    #bash = {
+    #  enable = true;
+    #};
+
     emacs = {
       enable = true;
       extraPackages = epkgs: [
@@ -104,6 +108,31 @@ in
         
         # don't rename windows automatically
         set-option -g allow-rename off
+      '';
+    };
+
+    zsh = {
+      enable = true;
+      enableAutosuggestions = true;
+      history = {
+        extended = true;
+      };
+      oh-my-zsh = {
+        enable = true;
+        plugins = [
+          "git-extras"
+          "git"
+          "gitfast"
+          "github"
+        ];
+        theme = "agnoster";
+        #theme = "frozencow";
+      };
+      loginExtra = ''
+        setopt extendedglob
+        source $HOME/.aliases
+        bindkey '^R' history-incremental-pattern-search-backward
+        bindkey '^F' history-incremental-pattern-search-forward
       '';
     };
 
