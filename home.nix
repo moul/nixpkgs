@@ -19,9 +19,11 @@ in
       bat
       cowsay
       curl
+      diff-so-fancy
       docker
       docker-buildx
       docker-compose
+      emacs-nox
       ffmpeg
       file
       fortune
@@ -35,6 +37,8 @@ in
           gopls
           golangci-lint
           go2nix
+          gocode
+          gofumpt
           # exclude bundle
           (gotools.overrideDerivation (oldAttrs: {
             excludedPackages = oldAttrs.excludedPackages + "\\|\\(bundle\\)";
@@ -46,6 +50,7 @@ in
       hub
       imagemagick
       ipfs
+      ispell
       jq
       kitty
       lshw
@@ -67,6 +72,7 @@ in
       wget
       #whois
       xorg.xeyes
+      yarn
       youtube-dl
     ];
     #username = "moul";
@@ -94,14 +100,6 @@ in
   programs = {
     bash = {
       enable = true;
-    };
-
-    emacs = {
-      enable = true;
-      extraPackages = epkgs: [
-        epkgs.nix-mode
-        epkgs.magit
-      ];
     };
 
     git = {

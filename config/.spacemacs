@@ -33,31 +33,31 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(csv
-     go
-     markdown
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
-     ;; `M-m f e R' (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
-     ;; auto-completion
-     ;; better-defaults
+     lsp
+     (go :variables
+         go-use-golangci-lint nil ;; disable golangci lint
+         go-backend 'lsp
+         go-format-before-save nil)
+     ;;markdown
+     auto-completion
+     better-defaults
      emacs-lisp
-     ;; git
+     git
      helm
      nixos
-     ;; lsp
-     ;; markdown
+     protobuf
+     sql
+     yaml
+     c-c++
+     org
      multiple-cursors
-     ;; org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
-     ;; spell-checking
-     ;; syntax-checking
-     ;; version-control
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom)
+     spell-checking
+     syntax-checking
+     version-control
      treemacs)
-
 
    ;; List of additional packages that will be installed without being wrapped
    ;; in a layer (generally the packages are installed only and should still be
@@ -67,7 +67,9 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(
+                                      disable-mouse
+                                      )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -509,6 +511,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (setq exec-path-from-shell-debug t)
   )
 
 (defun dotspacemacs/user-load ()
@@ -524,6 +527,43 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+
+  (windmove-default-keybindings)
+
+  ;; lsp
+  (require 'lsp)
+  (require 'lsp-mode)
+  ;;(add-hook 'go-mode-hook #'lsp-deferred)
+
+  ;; Set up before-save hooks to format buffer and add/delete imports.
+  ;; Make sure you don't have other gofmt/goimports hooks enabled.
+  ;;(defun lsp-go-install-save-hooks ()
+  ;;  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  ;;  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  ;;(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+  ;; tmp -> always, instead of per-hook
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t)
+
+  ;; experimental settings
+  (lsp-register-custom-settings
+   '(
+     ;; common
+     ("gopls.completeUnimported" t t)
+     ("gopls.staticcheck" t t)
+     ("gopls.gofumpt" t t)
+
+     ;; experimental
+     ("gopls.experimentalWorkspaceModule" t t)
+     ))
+
+  (spacemacs/toggle-highlight-current-line-globally-off)
+  ;;(setq gofmt-command "goimports")
+  ;;(setq go-format-before-save t)
+  (setq web-mode-set-engine "go")
+  (setq lsp-file-watch-threshold 2000)
+  (global-disable-mouse-mode)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
