@@ -28,6 +28,19 @@ in
       git
       gnumake
       gnupg
+      (buildEnv {
+        name = "golang";
+        paths = with super; [
+          go
+          gopls
+          golangci-lint
+          go2nix
+          # exclude bundle
+          (gotools.overrideDerivation (oldAttrs: {
+            excludedPackages = oldAttrs.excludedPackages + "\\|\\(bundle\\)";
+          }))
+        ];
+      })
       graphviz
       htop
       hub
@@ -40,6 +53,7 @@ in
       mosh
       nix-index
       nix-prefetch-scripts
+      nix-prefetch-github
       nmap
       nodejs
       openssl
@@ -71,6 +85,10 @@ in
     sessionVariables = {
       EDITOR = "emacs";
     };
+
+    sessionPath = [
+      "$HOME/.local/bin"
+    ];
   };
 
   programs = {
@@ -101,6 +119,7 @@ in
 
     go = {
       enable = true;
+      goBin = ".local/bin";
     };
 
     home-manager = {
@@ -146,18 +165,18 @@ in
         set -g status-left ""
         set -g status-left-length 100
         set -g status-right-length 100
-        set -g status-right '#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour121,bg=colour235] %l:%M %p  %d %b %Y  #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour222,bg=colour238] #H #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour232,bg=colour154] #(rainbarf --battery --remaining --no-rgb) '
-        
-        # messages
-        set -g message-style 'fg=colour232 bg=colour6 bold'
-        
-        # Enable mouse control (clickable windows, panes, resizable panes)
-        set -g mouse off
-        
-        # don't rename windows automatically
-        set-option -g allow-rename off
-      '';
-    };
+        set -g status-right '#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour121,b#g=colour235] %l:%M %p  %d %b %Y  #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]#[fg=colou#r22,bg=colour238] #H #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour232,bg=colour154] #(rainbarf --battery --remaining --no-rgb) '
+       
+       # messages
+       set -g message-style 'fg=colour232 bg=colour6 bold'
+       
+       # Enable mouse control (clickable windows, panes, resizable panes)
+       set -g mouse off
+       
+       # don't rename windows automatically
+       set-option -g allow-rename off
+     '';
+   };
 
     zsh = {
       enable = true;
