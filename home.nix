@@ -4,6 +4,11 @@ let
   configd = "~/.config/nixpkgs/config";
 in
 {
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+  };
   home = {
     packages = with pkgs; [
       ascii
@@ -11,6 +16,7 @@ in
       aspellDicts.en-computers
       aspellDicts.en-science
       aspellDicts.fr
+      bat
       cowsay
       curl
       docker
@@ -19,13 +25,15 @@ in
       ffmpeg
       file
       fortune
-      fortune
       git
       gnumake
       gnupg
       graphviz
       htop
       hub
+      imagemagick
+      ipfs
+      jq
       kitty
       lshw
       lsof
@@ -43,6 +51,7 @@ in
       tree
       unzip
       wget
+      #whois
       xorg.xeyes
       youtube-dl
     ];
@@ -65,9 +74,9 @@ in
   };
 
   programs = {
-    #bash = {
-    #  enable = true;
-    #};
+    bash = {
+      enable = true;
+    };
 
     emacs = {
       enable = true;
