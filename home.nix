@@ -100,6 +100,12 @@ in
   programs = {
     bash = {
       enable = true;
+      profileExtra = ''
+        # GVM
+        # requires:
+        #     bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+        source $HOME/.gvm/scripts/gvm
+      '';
     };
 
     git = {
@@ -127,28 +133,24 @@ in
 
     tmux = {
       enable = true;
-      extraConfig = '' # custom
+      extraConfig = ''
+        # custom
         bind-key r source-file ~/.tmux.conf \; display-message "~/.tmux.conf reloaded"
-        
         bind-key -n C-S-Left swap-window -t -1
         bind-key -n C-S-Right swap-window -t +1
-        
         # loud or quiet?
         set -g visual-activity off
         set -g visual-bell off
         set -g visual-silence off
         setw -g monitor-activity off
         set -g bell-action none
-        
         #  modes
         setw -g clock-mode-colour colour5
         setw -g mode-style 'fg=colour1 bg=colour18 bold'
-        
         # panes
         set -g pane-border-style 'fg=colour9 bg=colour0'
         set -g pane-active-border-style 'bg=colour5 fg=colour9'
         set -g display-panes-time 3000
-        
         # statusbar
         set -g status-position bottom
         set -g status-justify left
@@ -159,21 +161,17 @@ in
         setw -g window-status-style 'fg=colour9 bg=colour18'
         setw -g window-status-format ' #I#[fg=colour237]:#[fg=colour250]#W#[fg=colour244]#F '
         setw -g window-status-bell-style 'fg=colour255 bg=colour1 bold'
-        
         set -g status-left ""
         set -g status-left-length 100
         set -g status-right-length 100
-        set -g status-right '#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour121,b#g=colour235] %l:%M %p  %d %b %Y  #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]#[fg=colou#r22,bg=colour238] #H #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour232,bg=colour154] #(rainbarf --battery --remaining --no-rgb) '
-       
-       # messages
-       set -g message-style 'fg=colour232 bg=colour6 bold'
-       
-       # Enable mouse control (clickable windows, panes, resizable panes)
-       set -g mouse off
-       
-       # don't rename windows automatically
-       set-option -g allow-rename off
-     '';
+        set -g status-right '#[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour121,b#g=colour235] %l:%M %p  %d %b %Y  #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]#[fg=colou#r22,bg=colour238] #H #[fg=colour154,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour232,bg=colour154]  #(rainbarf --battery --remaining --no-rgb) '
+        # messages
+        set -g message-style 'fg=colour232 bg=colour6 bold'
+        # Enable mouse control (clickable windows, panes, resizable panes)
+        set -g mouse off
+        # don't rename windows automatically
+        set-option -g allow-rename off
+      '';
    };
 
     zsh = {
