@@ -62,6 +62,7 @@ in
       ispell
       jq
       kitty
+      libnotify
       lshw
       lsof
       mosh
@@ -217,6 +218,7 @@ in
 
     tmux = {
       enable = true;
+      shell = "${pkgs.zsh}/bin/zsh";
       extraConfig = ''
         # custom
         bind-key r source-file ~/.tmux.conf \; display-message "~/.tmux.conf reloaded"
@@ -256,7 +258,13 @@ in
         # don't rename windows automatically
         set-option -g allow-rename off
       '';
-   };
+    };
+
+    zoxide = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
 
     zsh = {
       enable = true;
@@ -312,12 +320,24 @@ in
       enable = true;
       defaultCacheTtl = 1800;
       enableSshSupport = true;
+      extraConfig = ''
+        allow-emacs-pinentry
+        allow-loopback-pinentry
+      '';
+      pinentryFlavor = "emacs";
     };
   };
 
   #virtualisation = {
   #  docker = {
   #    enable = true;
+  #  };
+  #};
+
+  #xsession = {
+  #  enable = true;
+  #  windowManager = {
+  #    command = "";
   #  };
   #};
 }
