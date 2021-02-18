@@ -20,6 +20,7 @@ in
       aspellDicts.fr
       assh
       bat
+      cachix
       coreutils
       cowsay
       curl
@@ -35,28 +36,10 @@ in
       file
       fortune
       fzf
-      gh
-      git
       gnumake
       gnupg
-      (buildEnv {
-        name = "golang";
-        paths = with super; [
-          go
-          gopls
-          golangci-lint
-          go2nix
-          gocode
-          gofumpt
-          # exclude bundle
-          (gotools.overrideDerivation (oldAttrs: {
-            excludedPackages = oldAttrs.excludedPackages + "\\|\\(bundle\\)";
-          }))
-        ];
-      })
       graphviz
       htop
-      hub
       imagemagick
       ipfs
       ispell
@@ -67,8 +50,10 @@ in
       lsof
       mosh
       nix-index
-      nix-prefetch-scripts
+      nix-info
       nix-prefetch-github
+      nix-prefetch-scripts
+      nixfmt
       nmap
       nodejs
       openssl
@@ -81,7 +66,6 @@ in
       tree
       unzip
       wget
-      #whois
       xorg.xeyes
       yarn
       youtube-dl
@@ -142,6 +126,10 @@ in
       enableZshIntegration = true;
     };
 
+    gh = {
+      gitProtocol = "ssh";
+    };
+
     git = {
       enable = true;
       userName = "Manfred Touron";
@@ -155,6 +143,16 @@ in
       };
       extraConfig = {
         pull.rebase = true;
+      };
+      package = pkgs.buildEnv {
+        name = "myGitEnv";
+        paths = with pkgs.gitAndTools; [
+          git
+          delta
+          gh
+          hub
+          tig
+        ];
       };
       delta = {
         enable = true;
@@ -180,6 +178,21 @@ in
     go = {
       enable = true;
       goBin = ".local/bin";
+      package = (pkgs.buildEnv {
+        name = "golang";
+        paths = with pkgs; [
+          go
+          gopls
+          golangci-lint
+          go2nix
+          gocode
+          gofumpt
+          # exclude bundle
+          (gotools.overrideDerivation (oldAttrs: {
+            excludedPackages = oldAttrs.excludedPackages + "\\|\\(bundle\\)";
+          }))
+        ];
+      });
     };
 
     gpg = {
