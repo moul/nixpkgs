@@ -1,6 +1,14 @@
 { config, pkgs, ... }:
 
 {
+  imports = [ <home-manager/nix-darwin> ];
+  home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
+  home-manager.users.moul = { pkgs, ... }: {
+    home.packages = [ pkgs.atool pkgs.httpie ];
+    programs.fish.enable = true;
+  };
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages =
