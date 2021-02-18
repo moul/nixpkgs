@@ -8,3 +8,10 @@ _setup:
 	nix-channel --update
 	nix-shell '<home-manager>' -A install
 	home-manager switch
+
+install-darwin:
+	curl -L https://nixos.org/nix/install > /tmp/nix-install
+	sh /tmp/nix-install --darwin-use-unencrypted-nix-store-volume
+	. /Users/moul/.nix-profile/etc/profile.d/nix.sh && nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
+	./result/bin/darwin-installer
+	rm -rf result /tmp/nix-install
