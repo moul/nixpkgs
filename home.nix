@@ -325,6 +325,12 @@ in
         ".." = "cd ..";
         cat = "${bat}/bin/bat";
       };
+      profileExtra = ''
+        # GVM
+        # requires:
+        #     bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+        source $HOME/.gvm/scripts/gvm
+      '';
     };
   };
 
