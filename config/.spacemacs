@@ -41,6 +41,7 @@ This function should only modify configuration layer settings."
      ;;markdown
      auto-completion
      better-defaults
+     docker
      emacs-lisp
      git
      helm

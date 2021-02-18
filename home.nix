@@ -1,3 +1,5 @@
+# https://rycee.gitlab.io/home-manager/options.html
+
 { config, pkgs, lib, ... }:
 
 let
@@ -16,17 +18,24 @@ in
       aspellDicts.en-computers
       aspellDicts.en-science
       aspellDicts.fr
+      assh
       bat
+      coreutils
       cowsay
       curl
       diff-so-fancy
       docker
       docker-buildx
       docker-compose
+      du-dust
       emacs-nox
+      exa
+      fd
       ffmpeg
       file
       fortune
+      fzf
+      gh
       git
       gnumake
       gnupg
@@ -62,6 +71,7 @@ in
       nmap
       nodejs
       openssl
+      procs
       pstree
       screen
       tcpdump
@@ -74,6 +84,7 @@ in
       xorg.xeyes
       yarn
       youtube-dl
+      zoxide
     ];
     #username = "moul";
     #homeDirectory = "/home/moul";
@@ -84,7 +95,7 @@ in
 
     activation = {
       afterWriteBoundary = config.lib.dag.entryAfter [ "writeBoundary"] ''
-        ln -sf ${configd}/.spacemacs ~/.spacemacs
+        $DRY_RUN_CMD ln -sf $VERBOSE_ARG ${configd}/.spacemacs ~/.spacemacs
       '';
     };
 
@@ -108,6 +119,19 @@ in
       '';
     };
 
+    bat = {
+      enable = true;
+      config = {
+        style = "plain";
+      };
+    };
+
+    fzf = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
+
     git = {
       enable = true;
       userName = "Manfred Touron";
@@ -116,8 +140,30 @@ in
       #  key = "";
       #  signByDefault = true;
       #};
+      aliases = {
+        co = "checkout";
+      };
       extraConfig = {
         pull.rebase = true;
+      };
+      delta = {
+        enable = true;
+      };
+      lfs = {
+        enable = true;
+      };
+      ignores = [
+        "*~"
+        "*.swp"
+        "*#"
+        ".#*"
+        ".DS_Store"
+      ];
+      extraConfig = {
+        core = {
+          whitespace = "trailing-space,space-before-tab";
+        };
+        url."git@github.com:".insteadOf = "https://github.com/";
       };
     };
 
@@ -176,10 +222,28 @@ in
 
     zsh = {
       enable = true;
+      dotDir = ".config/zsh";
+      enableCompletion = true;
       enableAutosuggestions = true;
       history = {
         extended = true;
       };
+      initExtra = ''
+        # ls
+        zstyle ':fzf-tab:complete:cd:*' fzf-preview '${pkgs.exa}/bin/exa --color=always --tree --level=1 $realpath'
+      '';
+      plugins = [
+        {
+          name = "zsh-nix-shell";
+          file = "nix-shell.plugin.zsh";
+          src = pkgs.fetchFromGitHub {
+            owner = "chisui";
+            repo = "zsh-nix-shell";
+            rev = "v0.1.0";
+            sha256 = "0snhch9hfy83d4amkyxx33izvkhbwmindy0zjjk28hih1a9l2jmx";
+          };
+        }
+      ];
       oh-my-zsh = {
         enable = true;
         plugins = [
@@ -197,6 +261,11 @@ in
         bindkey '^R' history-incremental-pattern-search-backward
         bindkey '^F' history-incremental-pattern-search-forward
       '';
+      shellAliases = with pkgs; {
+        ":q" = "exit";
+        ".." = "cd ..";
+        cat = "${bat}/bin/bat";
+      };
     };
   };
 
