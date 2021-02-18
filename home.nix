@@ -95,7 +95,10 @@ in
 
     activation = {
       afterWriteBoundary = config.lib.dag.entryAfter [ "writeBoundary"] ''
-        $DRY_RUN_CMD ln -sf $VERBOSE_ARG ${configd}/.spacemacs ~/.spacemacs
+        $DRY_RUN_CMD ln -sf $VERBOSE_ARG ${configd}/.spacemacs ~/.spacemacs;
+        mkdir -p ~/.ssh;
+        $DRY_RUN_CMD ln -sf $VERBOSE_ARG ${configd}/assh.yml ~/.ssh/assh.yml;
+        assh config build > ~/.ssh/config;
       '';
     };
 
@@ -106,6 +109,12 @@ in
     sessionPath = [
       "$HOME/.local/bin"
     ];
+  };
+
+  manual = {
+    manpages = {
+      enable = true;
+    };
   };
 
   programs = {
@@ -172,9 +181,38 @@ in
       goBin = ".local/bin";
     };
 
+    gpg = {
+      enable = true;
+    };
+
     home-manager = {
       enable = true;
       path = "…";
+    };
+
+    htop = {
+      enable = true;
+      hideKernelThreads = true;
+      hideThreads = true;
+      hideUserlandThreads = true;
+      treeView = true;
+      meters = {
+        left = ["LeftCPUs2" "Memory" "Swap" "Load" "Clock"];
+        right = ["RightCPUs2" "Tasks" "LoadAverage" "Uptime"];
+      };
+    };
+
+    man = {
+      enable = true;
+    };
+
+    #ssh = {
+    #  enable = true;
+    #  matchBlocks."*".proxyCommand = "assh connect --port=%p %h";
+    #};
+
+    kitty = {
+      enable = true;
     };
 
     tmux = {

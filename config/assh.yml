@@ -1,0 +1,34 @@
+hosts:
+  sshportal:
+    HostName: 127.0.0.1
+    Port: 2222
+    Hook: {}
+    User: admin
+
+  github.com:
+    Hook:
+      OnConnect: []
+
+  "*.127.0.0.1.xip.io":
+    user: moul
+
+defaults:
+  ControlMaster: auto
+  ControlPath: ~/.cache/ssh/%C.sock
+  ControlMasterMkdir: true
+  ControlPersist: yes
+  Compression: yes
+  LogLevel: ERROR
+  ServerAliveInterval: 5
+  ServerAliveCountMax: 18
+  #UseKeychain: yes
+  #AddKeysToAgent: yes
+  VisualHostKey: yes
+  HashKnownHosts: yes
+  VerifyHostKeyDNS: ask
+  Hooks:
+    BeforeConfigWrite: []
+    AfterConfigWrite: []
+    OnConnect: []
+    OnDisconnect: []
+    
