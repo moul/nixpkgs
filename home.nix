@@ -170,7 +170,11 @@ in
       extraConfig = {
         core = {
           whitespace = "trailing-space,space-before-tab";
+	  editor = "emacs";
         };
+	pull = {
+	  rebase = true;
+	};
         url."git@github.com:".insteadOf = "https://github.com/";
       };
     };
