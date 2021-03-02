@@ -141,9 +141,6 @@ in
       aliases = {
         co = "checkout";
       };
-      extraConfig = {
-        pull.rebase = true;
-      };
       package = pkgs.buildEnv {
         name = "myGitEnv";
         paths = with pkgs.gitAndTools; [
@@ -170,12 +167,13 @@ in
       extraConfig = {
         core = {
           whitespace = "trailing-space,space-before-tab";
-	  editor = "emacs";
+	        editor = "emacs";
         };
-	pull = {
-	  rebase = true;
-	};
+	      pull = {
+	        rebase = true;
+	      };
         url."git@github.com:".insteadOf = "https://github.com/";
+        url."ssh://git@git.vptech.eu".insteadOf = "https://git.vptech.eu";
       };
     };
 

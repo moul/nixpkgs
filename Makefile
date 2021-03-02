@@ -1,3 +1,6 @@
+apply:
+	home-manager switch
+
 test:
 	docker run -v "$(PWD):/root/dotfiles" -w /root/dotfiles -it --rm nixos/nix \
 	  nix-shell -p stow --run 'make _setup'
