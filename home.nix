@@ -344,9 +344,9 @@ in
 
   services = {
     gpg-agent = {
-      enable = true;
+      #enable = true;
       defaultCacheTtl = 1800;
-      enableSshSupport = true;
+      #enableSshSupport = true;
       extraConfig = ''
         allow-emacs-pinentry
         allow-loopback-pinentry
