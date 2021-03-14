@@ -561,7 +561,7 @@ before packages are loaded."
 
   (spacemacs/toggle-highlight-current-line-globally-off)
   ;;(setq gofmt-command "goimports")
-  ;;(setq go-format-before-save t)
+  (setq go-format-before-save t)
   (setq web-mode-set-engine "go")
   (setq lsp-file-watch-threshold 2000)
   (global-disable-mouse-mode)
