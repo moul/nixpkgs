@@ -93,7 +93,13 @@ in
 
     sessionPath = [
       "$HOME/.local/bin"
+      "$HOME/go/bin"
     ];
+
+    sessionVariablesExtra = ''
+      # unset __HM_SESS_VARS_SOURCED to prevent tmux caching
+      unset __HM_SESS_VARS_SOURCED
+    '';
   };
 
   manual = {
