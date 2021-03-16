@@ -173,7 +173,7 @@ in
       extraConfig = {
         core = {
           whitespace = "trailing-space,space-before-tab";
-	        editor = "emacs";
+	        editor = "emacs -Q";
         };
 	      pull = {
 	        rebase = true;
