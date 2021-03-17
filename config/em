@@ -27,10 +27,10 @@ VISIBLE=$([[ "$FRAMES" -gt 0 ]]; echo $?)
 # LAUNCH EMACS
 if [[ $RUNNING != 0 ]]; then
     # The daemon is not running, start the daemon and open a frame.
-    ${pkgs.emacs}/bin/emacsclient -nw -a '' -c "${ARGS[@]}" 2>/dev/null
+    exec ${pkgs.emacs}/bin/emacsclient -nw -a '' -c "${ARGS[@]}" 2>/dev/null
 elif [[ $VISIBLE != 0 ]]; then
     # There are no visible frames, open one.
-    ${pkgs.emacs}/bin/emacsclient -nw -c "${ARGS[@]}"
+    exec ${pkgs.emacs}/bin/emacsclient -nw -c "${ARGS[@]}"
 else
-    ${pkgs.emacs}/bin/emacsclient -nw "${ARGS[@]}"
+    exec ${pkgs.emacs}/bin/emacsclient -nw "${ARGS[@]}"
 fi
