@@ -1,21 +1,20 @@
 #!/bin/bash
 
-# Based on https://github.com/norswap/.emacs.d/blob/4b5173f88d8f8ce7a019398005b800239f0b5170/em
+# Inspired by https://github.com/norswap/.emacs.d/blob/4b5173f88d8f8ce7a019398005b800239f0b5170/em
 
 # Set to location of file to open if no files are specified.
 ARGS=("$@")
 ARGS=${ARGS:-"."}
 
 # Get the number of "displayed" frames, and check if emacs is running at all.
-FRAMES="$(emacsclient -e "(length (frame-list))" 2>/dev/null)"
+FRAMES="$(${pkgs.emacs}/bin/emacsclient -e "(length (frame-list))" 2>/dev/null)"
 RUNNING=$?
 FRAMES=${FRAMES:-0}
 
 # For some reason, we might end up with zombie emacs processes,
 # clean them up or it will mess up the rest of the logic.
 if [[ $RUNNING != 0 ]]; then
-    EMACS_LOCATION="$(readlink $(which emacs) || which emacs || norswap_not_found)"
-    pgrep -f "$EMACS_LOCATION" | awk '{ print $1 }' | xargs kill -9 2>/dev/null
+    pgrep -f "${pkgs.emacs}/bin/emacsclient" | awk '{ print $1 }' | xargs kill -9 2>/dev/null
 fi
 
 # Is emacs running with --daemon or --bg-daemon flag?
@@ -25,22 +24,13 @@ pgrep -if "emacs.*daemon" > /dev/null && FRAMES=$((FRAMES - 1))
 # Emacs is visible if there are visible frames.
 VISIBLE=$([[ "$FRAMES" -gt 0 ]]; echo $?)
 
-# Number of listed frames to be reached for a frame to be actually visible
-# (--daemon incurs a fake frame).
-# FRAMES=1; [[ $DAEMON == 0 ]] && FRAMES=$((FRAMES + 1))
-# TMP="$(emacsclient -e "(<= $FRAMES (length (frame-list)))" 2>/dev/null)"
-# Is there a visible frame?
-# [[ "$TMP" == t ]]; VISIBLE=$?
-
-################################################################################
 # LAUNCH EMACS
-
 if [[ $RUNNING != 0 ]]; then
     # The daemon is not running, start the daemon and open a frame.
-    emacsclient -nw -a '' -c "${ARGS[@]}" 2> /tmp/emacs-startup
+    ${pkgs.emacs}/bin/emacsclient -nw -a '' -c "${ARGS[@]}" 2>/dev/null
 elif [[ $VISIBLE != 0 ]]; then
     # There are no visible frames, open one.
-    emacsclient -nw -c "${ARGS[@]}"
+    ${pkgs.emacs}/bin/emacsclient -nw -c "${ARGS[@]}"
 else
-    emacsclient -nw "${ARGS[@]}"
+    ${pkgs.emacs}/bin/emacsclient -nw "${ARGS[@]}"
 fi

@@ -4,7 +4,7 @@
 
 let
   configd = "~/.config/nixpkgs/config";
-  em = pkgs.writeScriptBin "em" "${lib.readFile ./config/em}";
+  em = pkgs.writeScriptBin "em" (builtins.replaceStrings ["\${pkgs.emacs}"] ["${pkgs.emacs}"] (lib.readFile ./config/em));
 in
 {
   nixpkgs = {
