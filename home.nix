@@ -4,6 +4,7 @@
 
 let
   configd = "~/.config/nixpkgs/config";
+  em = pkgs.writeScriptBin "em" "${lib.readFile ./config/em}";
 in
 {
   nixpkgs = {
@@ -70,6 +71,7 @@ in
       yarn
       youtube-dl
       zoxide
+      em
     ];
     #username = "moul";
     #homeDirectory = "/home/moul";
