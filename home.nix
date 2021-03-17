@@ -91,6 +91,8 @@ in
 
     sessionVariables = {
       EDITOR = "em";
+      VISUAL = "em";
+      GIT_EDITOR = "em";
     };
 
     sessionPath = [
@@ -334,6 +336,7 @@ in
         ":q" = "exit";
         ".." = "cd ..";
         cat = "${bat}/bin/bat";
+        emacs = "em";
       };
       profileExtra = ''
         # GVM
