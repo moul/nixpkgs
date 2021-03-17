@@ -30,6 +30,7 @@ in
       docker-buildx
       docker-compose
       du-dust
+      em
       emacs-nox
       exa
       fd
@@ -71,7 +72,6 @@ in
       yarn
       youtube-dl
       zoxide
-      em
     ];
     #username = "moul";
     #homeDirectory = "/home/moul";
@@ -90,7 +90,7 @@ in
     };
 
     sessionVariables = {
-      EDITOR = "emacs";
+      EDITOR = "em";
     };
 
     sessionPath = [
@@ -175,11 +175,11 @@ in
       extraConfig = {
         core = {
           whitespace = "trailing-space,space-before-tab";
-	        editor = "emacs -Q";
+          editor = "em";
         };
-	      pull = {
-	        rebase = true;
-	      };
+        pull = {
+          rebase = true;
+        };
         url."git@github.com:".insteadOf = "https://github.com/";
         url."ssh://git@git.vptech.eu".insteadOf = "https://git.vptech.eu";
       };
