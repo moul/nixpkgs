@@ -337,6 +337,10 @@ in
         ".." = "cd ..";
         cat = "${bat}/bin/bat";
         emacs = "em";
+        # emacs typos :)
+        emasc = "emacs";
+        eamsc = "emacs";
+        emaccs = "emacs";
       };
       profileExtra = ''
         # GVM
