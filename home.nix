@@ -86,6 +86,10 @@ in
         mkdir -p ~/.ssh;
         $DRY_RUN_CMD ln -sf $VERBOSE_ARG ${configd}/assh.yml ~/.ssh/assh.yml;
         assh config build > ~/.ssh/config;
+        # FIXME: replace with niv/go2nix
+        pushd nixpkgs/config/go
+        make install
+        popd
       '';
     };
 
