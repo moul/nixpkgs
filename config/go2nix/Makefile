@@ -1,0 +1,2 @@
+generate:
+	vgo2nix

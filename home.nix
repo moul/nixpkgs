@@ -197,6 +197,7 @@ in
           gopls
           golangci-lint
           go2nix
+          vgo2nix
           gocode
           gofumpt
           # exclude bundle
