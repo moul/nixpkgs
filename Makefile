@@ -3,7 +3,7 @@ apply:
 
 test:
 	docker run -v "$(PWD):/root/dotfiles" -w /root/dotfiles -it --rm nixos/nix \
-	  nix-shell -p stow --run 'make _setup'
+		nix-shell -p stow --run 'make _setup'
 
 _setup:
 	source ~/.nix-profile/etc/profile.d/nix.sh
@@ -18,3 +18,6 @@ install-darwin:
 	. /Users/moul/.nix-profile/etc/profile.d/nix.sh && nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
 	./result/bin/darwin-installer
 	rm -rf result /tmp/nix-install
+
+upgrade:
+	nix-channel --update
