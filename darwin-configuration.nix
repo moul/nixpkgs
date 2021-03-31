@@ -5,7 +5,7 @@
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
   home-manager.users.moul = { pkgs, ... }: {
-    home.packages = [ pkgs.atool pkgs.httpie ];
+    home.packages = [ pkgs.atool pkgs.httpie pkgs.mosh pkgs.emacs ];
     programs.fish.enable = true;
   };
 
