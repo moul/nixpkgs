@@ -48,7 +48,7 @@ in
       jq
       kitty
       libnotify
-      lshw
+      #lshw
       lsof
       mosh
       nix-index
@@ -120,6 +120,9 @@ in
     bash = {
       enable = true;
       profileExtra = ''
+        # TMP FIX
+        export PATH=$PATH:~/.nix-profile/bin; for file in ~/.nix-profile/etc/profile.d/*.sh; do source $file; done
+
         # GVM
         # requires:
         #     bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
@@ -347,6 +350,9 @@ in
         emaccs = "emacs";
       };
       profileExtra = ''
+        # TMP FIX
+        export PATH=$PATH:~/.nix-profile/bin; for file in ~/.nix-profile/etc/profile.d/*.sh; do source $file; done
+
         # GVM
         # requires:
         #     bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
