@@ -13,6 +13,7 @@ _setup:
 	home-manager switch
 
 install-darwin:
+	xcode-select --install || true
 	curl -L https://nixos.org/nix/install > /tmp/nix-install
 	sh /tmp/nix-install --darwin-use-unencrypted-nix-store-volume
 	. /Users/moul/.nix-profile/etc/profile.d/nix.sh && nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer

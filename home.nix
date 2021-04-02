@@ -89,7 +89,7 @@ in
         assh config build > ~/.ssh/config;
         # FIXME: replace with niv/go2nix
         pushd nixpkgs/config/go
-        make install
+        if [ "$HOME/.nix-profile/bin/go" = "$(which go)" ]; then make install; fi
         popd
       '';
     };
