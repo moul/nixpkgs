@@ -42,6 +42,7 @@ in
       gnupg
       graphviz
       htop
+      httpie
       imagemagick
       ipfs
       ispell
