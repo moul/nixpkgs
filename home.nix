@@ -69,6 +69,7 @@ in
       tree
       unzip
       wget
+      xdg_utils
       xorg.xeyes
       yarn
       youtube-dl
@@ -359,6 +360,12 @@ in
         #     bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
         source $HOME/.gvm/scripts/gvm
       '';
+    };
+  };
+
+  xdg = {
+    configFile = {
+      "kitty/kitty.conf".source = ./config/kitty.conf;
     };
   };
 
