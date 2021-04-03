@@ -84,7 +84,7 @@ in
     #};
 
     activation = {
-      afterWriteBoundary = config.lib.dag.entryAfter [ "writeBoundary"] ''
+      customEndHook = config.lib.dag.entryAfter [ "reloadSystemd" "writeBoundary" "onFilesChange" "installPackages" ] ''
         $DRY_RUN_CMD ln -sf $VERBOSE_ARG ${configd}/.spacemacs ~/.spacemacs;
         mkdir -p ~/.ssh;
         $DRY_RUN_CMD ln -sf $VERBOSE_ARG ${configd}/assh.yml ~/.ssh/assh.yml;
