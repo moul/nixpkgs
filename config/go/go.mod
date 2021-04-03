@@ -7,4 +7,5 @@ require (
 	github.com/goreleaser/goreleaser v0.161.1
 	github.com/maruel/panicparse/v2 v2.1.1
 	golang.org/x/tools v0.1.0
+	honnef.co/go/tools v0.1.3
 )
