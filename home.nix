@@ -73,6 +73,7 @@ in
       xorg.xeyes
       yarn
       youtube-dl
+      zip
       zoxide
     ];
     #username = "moul";
