@@ -93,6 +93,8 @@ in
         pushd nixpkgs/config/go
         if [ "$HOME/.nix-profile/bin/go" = "$(which go)" ]; then make install; fi
         popd
+        mkdir -p ~/.npm-global
+        npm config set prefix ~/.npm-global
       '';
     };
 
@@ -105,6 +107,7 @@ in
     sessionPath = [
       "$HOME/.local/bin"
       "$HOME/go/bin"
+      "$HOME/.npm-global/bin"
     ];
 
     sessionVariablesExtra = ''
