@@ -95,6 +95,7 @@ in
         popd
         mkdir -p ~/.npm-global
         npm config set prefix ~/.npm-global
+        npm i -g tern prettier js-beautify eslint babel-eslint eslint-plugin-react
       '';
     };
 

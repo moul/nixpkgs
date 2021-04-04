@@ -33,8 +33,17 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     javascript
+     html
+     (typescript :variables
+                 javascript-backend 'tide
+                 typescript-fmt-tool 'prettier
+                 typescript-linter 'eslint)
+     (javascript :variables
+                 javascript-backend 'tide
+                 javascript-fmt-tool 'prettier
+                 node-add-modules-path t)
      markdown
+     react
      markdownpython
      csv
      lsp
@@ -74,6 +83,9 @@ This function should only modify configuration layer settings."
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
                                       disable-mouse
+                                      rjsx-mode
+                                      yasnippet-snippets
+                                      prettier-js
                                       )
 
    ;; A list of packages that cannot be updated.
