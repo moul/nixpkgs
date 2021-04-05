@@ -49,7 +49,6 @@ in
       jq
       kitty
       libnotify
-      #lshw
       lsof
       mosh
       nix-index
@@ -75,6 +74,13 @@ in
       youtube-dl
       zip
       zoxide
+    ] ++ lib.optionals stdenv.isDarwin [
+      cocoapods
+      jazzy
+      libffi
+      libffi.dev
+    ] ++ lib.optionals stdenv.isLinux [
+      lshw
     ];
     #username = "moul";
     #homeDirectory = "/home/moul";
