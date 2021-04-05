@@ -361,7 +361,11 @@ in
         emasc = "emacs";
         eamsc = "emacs";
         emaccs = "emacs";
-      };
+      } // (if pkgs.stdenv.isDarwin then {
+        ssh = "${kitty}/bin/kitty +kitten ssh";
+      } else {}) // (if pkgs.stdenv.isLinux then {
+
+      } else {});
       profileExtra = ''
         # TMP FIX
         export PATH=$PATH:~/.nix-profile/bin; for file in ~/.nix-profile/etc/profile.d/*.sh; do source $file; done
