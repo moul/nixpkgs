@@ -74,6 +74,7 @@ in
       nodejs
       openssl
       procs
+      protobuf
       pstree
       screen
       tcpdump
