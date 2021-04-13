@@ -73,6 +73,7 @@ in
       nmap
       nodejs
       openssl
+      pre-commit
       procs
       protobuf
       pstree
