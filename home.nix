@@ -113,7 +113,7 @@ in
         assh config build > ~/.ssh/config;
         # FIXME: replace with niv/go2nix
         pushd nixpkgs/config/go
-        if [ "$HOME/.nix-profile/bin/go" = "$(which go)" ]; then make install; fi
+        if [ "$HOME/.nix-profile/bin/go" = "$(which go)" ]; then GO="${pkgs.go}/bin/go" make install; fi
         popd
         mkdir -p ~/.npm-global
         npm config set prefix ~/.npm-global
