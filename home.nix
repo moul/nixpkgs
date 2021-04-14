@@ -5,6 +5,7 @@
 let
   configd = "~/.config/nixpkgs/config";
   em = pkgs.writeScriptBin "em" (builtins.replaceStrings ["\${pkgs.emacs}"] ["${pkgs.emacs}"] (lib.readFile ./config/em));
+  nerdsfontLight = (pkgs.nerdfonts.override { fonts = [ "Iosevka" "FiraCode" "Hack" ]; });
 in
 {
   nixpkgs.config = {
@@ -62,6 +63,7 @@ in
     libnotify
     lsof
     mosh
+    nerdsfontLight
     nix-index
     nix-info
     nix-prefetch-github
@@ -101,6 +103,8 @@ in
   #home.file = {
   #  ".spacemacs" = { source = spacemacs; };
   #};
+
+  fonts.fontconfig.enable = true;
 
   home.activation = {
     customEndHook = config.lib.dag.entryAfter [ "reloadSystemd" "writeBoundary" "onFilesChange" "installPackages" ] ''
