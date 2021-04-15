@@ -9,6 +9,9 @@ hosts:
     Hook:
       OnConnect: []
 
+  altgithub.com:
+    HostName: github.com
+
   "*.127.0.0.1.xip.io":
     user: moul
 

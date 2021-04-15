@@ -111,12 +111,22 @@ in
       $DRY_RUN_CMD ln -sf $VERBOSE_ARG ${configd}/assh.yml ~/.ssh/assh.yml;
       assh config build > ~/.ssh/config;
       # FIXME: replace with niv/go2nix
-      pushd nixpkgs/config/go
-      if [ "$HOME/.nix-profile/bin/go" = "$(which go)" ]; then GO="${pkgs.go}/bin/go" make install; fi
+      pushd ~/.config/nixpkgs/config/go
+      chmod 711 ~/.ssh
+      chmod 600 ~/.ssh/config || true
+      if [ ! -d ~/.emacs.d/.git ]; then
+        rm -rf ~/.emacs.d.old
+        mv ~/.emacs.d ~/.emacs.d.old || true
+        git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+      fi
+      if [ "$HOME/.nix-profile/bin/go" = "$(which go)" ]; then
+        GO="${pkgs.go}/bin/go" make install || true # sometimes it fails because we miss some env vars
+      fi
       popd
       mkdir -p ~/.npm-global
       npm config set prefix ~/.npm-global
       npm i -g tern prettier js-beautify eslint babel-eslint eslint-plugin-react
+      touch ~/.aliases
     '';
   };
 
@@ -213,7 +223,7 @@ in
       pull = {
         rebase = true;
       };
-      url."git@github.com:".insteadOf = "https://github.com/";
+      #url."git@github.com:".insteadOf = "https://github.com/";
       url."ssh://git@git.vptech.eu".insteadOf = "https://git.vptech.eu";
     };
   };
