@@ -1,5 +1,3 @@
-# https://rycee.gitlab.io/home-manager/options.html
-
 { config, pkgs, lib, ... }:
 
 let
