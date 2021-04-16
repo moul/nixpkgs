@@ -33,3 +33,4 @@ install-linux-no-root:
 	~/.nix/nix-user-chroot ~/.nix make _setup
 	echo "exec ~/.nix/nix-user-chroot ~/.nix zsh -l" > ~/nixsh
 	chmod 711 ~/nixsh
+	~/.nix/nix-user-chroot ~/.nix make apply
