@@ -31,6 +31,6 @@ install-linux-no-root:
 	chmod +x ~/.nix/nix-user-chroot
 	~/.nix/nix-user-chroot ~/.nix bash -c "curl -L https://nixos.org/nix/install | bash"
 	~/.nix/nix-user-chroot ~/.nix make _setup
-	echo "exec ~/.nix/nix-user-chroot ~/.nix zsh -l" > ~/nixsh
+	echo "exec ~/.nix/nix-user-chroot ~/.nix ~/.nix-profile/bin/zsh -l" > ~/nixsh
 	chmod 711 ~/nixsh
 	~/.nix/nix-user-chroot ~/.nix make apply
