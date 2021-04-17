@@ -9,7 +9,21 @@ in
   nixpkgs.config = {
     allowUnfree = true;
   };
-  home.language = {
+
+  home.language = (if pkgs.stdenv.isDarwin then {
+    base = "en-US.UTF-8";
+    address = "en-US.UTF-8";
+    collate = "en-US.UTF-8";
+    ctype = "en-US.UTF-8";
+    measurement = "en-US.UTF-8";
+    messages = "en-US.UTF-8";
+    monetary = "en-US.UTF-8";
+    name = "en-US.UTF-8";
+    numeric = "en-US.UTF-8";
+    paper = "en-US.UTF-8";
+    telephone = "en-US.UTF-8";
+    time = "en-US.UTF-8";
+  } else {
     base = "C.UTF-8";
     address = "C.UTF-8";
     collate = "C.UTF-8";
@@ -22,7 +36,7 @@ in
     paper = "C.UTF-8";
     telephone = "C.UTF-8";
     time = "C.UTF-8";
-  };
+  });
   home.packages = with pkgs; [
     ascii
     aspellDicts.en
