@@ -29,9 +29,11 @@ defaults:
   VisualHostKey: yes
   HashKnownHosts: yes
   VerifyHostKeyDNS: ask
+  SetEnv:
+    - LC_ALL=en-US.UTF-8
+    - LANG=en_US.UTF-8
   Hooks:
     BeforeConfigWrite: []
     AfterConfigWrite: []
     OnConnect: []
     OnDisconnect: []
-    
