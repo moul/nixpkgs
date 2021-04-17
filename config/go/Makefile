@@ -8,6 +8,9 @@ install:
 	$(GO) install github.com/goreleaser/goreleaser
 	$(GO) install github.com/daixiang0/gci
 	$(GO) install honnef.co/go/tools/staticcheck
+	$(GO) install moul.io/moulsay
+	$(GO) install moul.io/prefix/cmd/prefix
+	$(GO) install moul.io/retry
 
 clean:
 	rm -f $(GOBIN)/pp
