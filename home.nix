@@ -188,6 +188,10 @@ in
     };
   };
 
+  programs.command-not-found = {
+    enable = true;
+  };
+
   programs.fzf = {
     enable = true;
     enableBashIntegration = true;
