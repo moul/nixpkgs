@@ -93,6 +93,7 @@ in
     telnet
     tmux
     tree
+    tty-clock
     unzip
     wget
     xdg_utils
