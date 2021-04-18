@@ -315,6 +315,9 @@ in
     plugins = with pkgs; [
       tmuxPlugins.copycat
       tmuxPlugins.resurrect
+      tmuxPlugins.sensible
+      tmuxPlugins.prefix-highlight
+      # tmuxPlugins.tmux-update-display # not yet available on nix, but can be loaded with tpm
       tmuxPlugins.yank
       {
         plugin = tmuxPlugins.continuum;
