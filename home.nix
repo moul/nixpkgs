@@ -4,7 +4,7 @@ let
   configd = "~/.config/nixpkgs/config";
   em = pkgs.writeScriptBin "em" (builtins.replaceStrings ["\${pkgs.emacs}"] ["${pkgs.emacs}"] (lib.readFile ./config/em));
   nerdsfontLight = (pkgs.nerdfonts.override { fonts = [ "Iosevka" "FiraCode" "Hack" ]; });
-  tmuxConf = lib.readFile ./config/.tmux.conf;
+  #tmuxConf = lib.readFile ./config/.tmux.conf;
 in
 {
   nixpkgs.config = {
@@ -93,6 +93,7 @@ in
     tcpdump
     telnet
     tmux
+    tmuxinator
     tree
     tty-clock
     unzip
@@ -301,7 +302,24 @@ in
   programs.tmux = {
     enable = true;
     shell = "${pkgs.zsh}/bin/zsh";
-    extraConfig = tmuxConf;
+    keyMode = "emacs";
+    escapeTime = 20;
+    clock24 = true;
+    baseIndex = 1;
+    terminal = "screen-256color";
+    extraConfig = lib.strings.fileContents ./config/.tmux.conf;
+    plugins = with pkgs; [
+      tmuxPlugins.copycat
+      tmuxPlugins.resurrect
+      tmuxPlugins.yank
+      {
+        plugin = tmuxPlugins.continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '60' # minutes
+        '';
+      }
+    ];
   };
 
   programs.zoxide = {
