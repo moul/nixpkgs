@@ -1,7 +1,7 @@
 apply:
 	home-manager switch
 
-apply-nix: ./home-manager/
+apply-nix: home-manager/.git
 	nix-env -i
 
 test:
@@ -38,5 +38,6 @@ install-linux-no-root:
 	chmod 711 ~/nixsh
 	~/.nix/nix-user-chroot ~/.nix make apply
 
-./home-manager/:
+home-manager/.git:
 	git submodule init
+	git submodule update
