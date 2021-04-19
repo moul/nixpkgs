@@ -4,6 +4,7 @@ let
   configd = "~/.config/nixpkgs/config";
   em = pkgs.writeScriptBin "em" (builtins.replaceStrings ["\${pkgs.emacs}"] ["${pkgs.emacs}"] (lib.readFile ./config/em));
   nerdsfontLight = (pkgs.nerdfonts.override { fonts = [ "Iosevka" "FiraCode" "Hack" ]; });
+  theme = import ./theme.nix;
   #tmuxConf = lib.readFile ./config/.tmux.conf;
 in
 {
@@ -301,6 +302,35 @@ in
 
   programs.kitty = {
     enable = true;
+    extraConfig = lib.strings.concatStrings [
+      (lib.strings.fileContents ./config/kitty.conf)
+      ''
+        #
+        # THEME: ${theme.name}
+        #
+        background ${theme.background}
+        color0 ${theme.color0}
+        color1 ${theme.color1}
+        color2 ${theme.color2}
+        color3 ${theme.color3}
+        color4 ${theme.color4}
+        color5 ${theme.color5}
+        color6 ${theme.color6}
+        color7 ${theme.color7}
+        color8 ${theme.color8}
+        color9 ${theme.color9}
+        color10 ${theme.color10}
+        color11 ${theme.color11}
+        color12 ${theme.color12}
+        color13 ${theme.color13}
+        color14 ${theme.color14}
+        color15 ${theme.color15}
+        cursor ${theme.cursor}
+        foreground ${theme.foreground}
+        selection_background ${theme.selection}
+        selection_foreground ${theme.selected-text}
+      ''
+    ];
   };
 
   programs.tmux = {
@@ -402,7 +432,7 @@ in
   };
 
   xdg.configFile = {
-    "kitty/kitty.conf".source = ./config/kitty.conf;
+    #"kitty/kitty.conf".source = ./config/kitty.conf;
   };
 
   services.gpg-agent = {
