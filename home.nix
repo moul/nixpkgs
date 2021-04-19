@@ -57,7 +57,6 @@ in
     du-dust
     em
     emacs-nox
-    encfs
     exa
     fd
     ffmpeg
