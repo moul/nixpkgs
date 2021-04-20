@@ -47,6 +47,7 @@ in
     aspellDicts.fr
     assh
     bat
+    bazel
     cachix
     coreutils
     cowsay
