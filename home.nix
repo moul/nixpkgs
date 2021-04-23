@@ -98,6 +98,7 @@ in
     tmuxinator
     tree
     tty-clock
+    unixtools.watch
     unzip
     wget
     xdg_utils
