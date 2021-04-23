@@ -5,7 +5,7 @@ test:
 	docker run -v "$(PWD):/root/dotfiles" -w /root/dotfiles -it --rm nixos/nix \
 		nix-shell -p stow --run 'make _setup'
 
-SETENV = . ~/.nix-profile/etc/profile.d/nix.sh 
+SETENV = . ~/.nix-profile/etc/profile.d/nix.sh
 _setup:
 	ln -sf $(PWD) ~/.config/nixpkgs
 	$(SETENV); nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
@@ -34,3 +34,6 @@ install-linux-no-root:
 	echo "exec ~/.nix/nix-user-chroot ~/.nix ~/.nix-profile/bin/zsh -l" > ~/nixsh
 	chmod 711 ~/nixsh
 	~/.nix/nix-user-chroot ~/.nix make apply
+
+fmt:
+	nixfmt `find . ! -path './home-manager/*' ! -path './.git/*' -name "*.nix"`

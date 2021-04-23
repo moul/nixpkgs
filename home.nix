@@ -2,15 +2,15 @@
 
 let
   configd = "~/.config/nixpkgs/config";
-  em = pkgs.writeScriptBin "em" (builtins.replaceStrings ["\${pkgs.emacs}"] ["${pkgs.emacs}"] (lib.readFile ./config/em));
-  nerdsfontLight = (pkgs.nerdfonts.override { fonts = [ "Iosevka" "FiraCode" "Hack" ]; });
+  em = pkgs.writeScriptBin "em"
+    (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${pkgs.emacs}" ]
+      (lib.readFile ./config/em));
+  nerdsfontLight =
+    (pkgs.nerdfonts.override { fonts = [ "Iosevka" "FiraCode" "Hack" ]; });
   theme = import ./theme.nix;
   #tmuxConf = lib.readFile ./config/.tmux.conf;
-in
-{
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
+in {
+  nixpkgs.config = { allowUnfree = true; };
 
   home.language = (if pkgs.stdenv.isDarwin then {
     base = "en_US.UTF-8";
@@ -39,82 +39,78 @@ in
     telephone = "C.UTF-8";
     time = "C.UTF-8";
   });
-  home.packages = with pkgs; [
-    ascii
-    aspellDicts.en
-    aspellDicts.en-computers
-    aspellDicts.en-science
-    aspellDicts.fr
-    assh
-    bat
-    bazel
-    cachix
-    coreutils
-    cowsay
-    curl
-    diff-so-fancy
-    docker
-    docker-buildx
-    docker-compose
-    du-dust
-    em
-    emacs-nox
-    exa
-    fd
-    ffmpeg
-    file
-    fortune
-    fzf
-    gnumake
-    gnupg
-    graphviz
-    htop
-    httpie
-    imagemagick
-    ipfs
-    ispell
-    jq
-    kitty
-    libnotify
-    lsof
-    mosh
-    nerdsfontLight
-    nix-index
-    nix-info
-    nix-prefetch-github
-    nix-prefetch-scripts
-    nixfmt
-    nmap
-    nodejs
-    openssl
-    pre-commit
-    procs
-    protobuf
-    pstree
-    screen
-    tcpdump
-    telnet
-    tmux
-    tmuxinator
-    tree
-    tty-clock
-    unixtools.watch
-    unzip
-    wget
-    xdg_utils
-    xorg.xeyes
-    yarn
-    youtube-dl
-    zip
-    zoxide
-  ] ++ lib.optionals stdenv.isDarwin [
-    cocoapods
-    jazzy
-    libffi
-    libffi.dev
-  ] ++ lib.optionals stdenv.isLinux [
-    lshw
-  ];
+  home.packages = with pkgs;
+    [
+      ascii
+      aspellDicts.en
+      aspellDicts.en-computers
+      aspellDicts.en-science
+      aspellDicts.fr
+      assh
+      bat
+      bazel
+      cachix
+      coreutils
+      cowsay
+      curl
+      diff-so-fancy
+      docker
+      docker-buildx
+      docker-compose
+      du-dust
+      em
+      emacs-nox
+      exa
+      fd
+      ffmpeg
+      file
+      fortune
+      fzf
+      gnumake
+      gnupg
+      graphviz
+      htop
+      httpie
+      imagemagick
+      ipfs
+      ispell
+      jq
+      kitty
+      libnotify
+      lsof
+      mosh
+      nerdsfontLight
+      nixfmt
+      nix-index
+      nix-info
+      nix-prefetch-github
+      nix-prefetch-scripts
+      nixfmt
+      nmap
+      nodejs
+      openssl
+      pre-commit
+      procs
+      protobuf
+      pstree
+      screen
+      tcpdump
+      telnet
+      tmux
+      tmuxinator
+      tree
+      tty-clock
+      unixtools.watch
+      unzip
+      wget
+      xdg_utils
+      xorg.xeyes
+      yarn
+      youtube-dl
+      zip
+      zoxide
+    ] ++ lib.optionals stdenv.isDarwin [ cocoapods jazzy libffi libffi.dev ]
+    ++ lib.optionals stdenv.isLinux [ lshw ];
   #home.username = "moul";
   #home.homeDirectory = "/home/moul";
 
@@ -125,7 +121,12 @@ in
   fonts.fontconfig.enable = true;
 
   home.activation = {
-    customEndHook = config.lib.dag.entryAfter [ "reloadSystemd" "writeBoundary" "onFilesChange" "installPackages" ] ''
+    customEndHook = config.lib.dag.entryAfter [
+      "reloadSystemd"
+      "writeBoundary"
+      "onFilesChange"
+      "installPackages"
+    ] ''
       $DRY_RUN_CMD ln -sf $VERBOSE_ARG ${configd}/.spacemacs ~/.spacemacs;
       mkdir -p ~/.ssh;
       $DRY_RUN_CMD ln -sf $VERBOSE_ARG ${configd}/assh.yml ~/.ssh/assh.yml;
@@ -156,20 +157,15 @@ in
     GIT_EDITOR = "em";
   };
 
-  home.sessionPath = [
-    "$HOME/.local/bin"
-    "$HOME/go/bin"
-    "$HOME/.npm-global/bin"
-  ];
+  home.sessionPath =
+    [ "$HOME/.local/bin" "$HOME/go/bin" "$HOME/.npm-global/bin" ];
 
   home.sessionVariablesExtra = ''
     # unset __HM_SESS_VARS_SOURCED to prevent tmux caching
     unset __HM_SESS_VARS_SOURCED
   '';
 
-  manual.manpages = {
-    enable = true;
-  };
+  manual.manpages = { enable = true; };
 
   programs.bash = {
     enable = true;
@@ -186,14 +182,10 @@ in
 
   programs.bat = {
     enable = true;
-    config = {
-      style = "plain";
-    };
+    config = { style = "plain"; };
   };
 
-  programs.command-not-found = {
-    enable = true;
-  };
+  programs.command-not-found = { enable = true; };
 
   programs.fzf = {
     enable = true;
@@ -201,9 +193,7 @@ in
     enableZshIntegration = true;
   };
 
-  programs.gh = {
-    gitProtocol = "ssh";
-  };
+  programs.gh = { gitProtocol = "ssh"; };
 
   programs.git = {
     enable = true;
@@ -213,40 +203,20 @@ in
     #  key = "";
     #  signByDefault = true;
     #};
-    aliases = {
-      co = "checkout";
-    };
+    aliases = { co = "checkout"; };
     package = pkgs.buildEnv {
       name = "myGitEnv";
-      paths = with pkgs.gitAndTools; [
-        git
-        delta
-        gh
-        hub
-        tig
-      ];
+      paths = with pkgs.gitAndTools; [ git delta gh hub tig ];
     };
-    delta = {
-      enable = true;
-    };
-    lfs = {
-      enable = true;
-    };
-    ignores = [
-      "*~"
-      "*.swp"
-      "*#"
-      ".#*"
-      ".DS_Store"
-    ];
+    delta = { enable = true; };
+    lfs = { enable = true; };
+    ignores = [ "*~" "*.swp" "*#" ".#*" ".DS_Store" ];
     extraConfig = {
       core = {
         whitespace = "trailing-space,space-before-tab";
         editor = "em";
       };
-      pull = {
-        rebase = true;
-      };
+      pull = { rebase = true; };
       #url."git@github.com:".insteadOf = "https://github.com/";
       url."ssh://git@git.vptech.eu".insteadOf = "https://git.vptech.eu";
     };
@@ -272,9 +242,7 @@ in
     });
   };
 
-  programs.gpg = {
-    enable = true;
-  };
+  programs.gpg = { enable = true; };
 
   programs.home-manager = {
     enable = true;
@@ -288,14 +256,12 @@ in
     hideUserlandThreads = true;
     treeView = true;
     meters = {
-      left = ["LeftCPUs2" "Memory" "Swap" "Load" "Clock"];
-      right = ["RightCPUs2" "Tasks" "LoadAverage" "Uptime"];
+      left = [ "LeftCPUs2" "Memory" "Swap" "Load" "Clock" ];
+      right = [ "RightCPUs2" "Tasks" "LoadAverage" "Uptime" ];
     };
   };
 
-  programs.man = {
-    enable = true;
-  };
+  programs.man = { enable = true; };
 
   #ssh = {
   #  enable = true;
@@ -372,33 +338,24 @@ in
     dotDir = ".config/zsh";
     enableCompletion = true;
     enableAutosuggestions = true;
-    history = {
-      extended = true;
-    };
+    history = { extended = true; };
     initExtra = ''
       # ls
       zstyle ':fzf-tab:complete:cd:*' fzf-preview '${pkgs.exa}/bin/exa --color=always --tree --level=1 $realpath'
     '';
-    plugins = [
-      {
-        name = "zsh-nix-shell";
-        file = "nix-shell.plugin.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "chisui";
-          repo = "zsh-nix-shell";
-          rev = "v0.1.0";
-          sha256 = "0snhch9hfy83d4amkyxx33izvkhbwmindy0zjjk28hih1a9l2jmx";
-        };
-      }
-    ];
+    plugins = [{
+      name = "zsh-nix-shell";
+      file = "nix-shell.plugin.zsh";
+      src = pkgs.fetchFromGitHub {
+        owner = "chisui";
+        repo = "zsh-nix-shell";
+        rev = "v0.1.0";
+        sha256 = "0snhch9hfy83d4amkyxx33izvkhbwmindy0zjjk28hih1a9l2jmx";
+      };
+    }];
     oh-my-zsh = {
       enable = true;
-      plugins = [
-        "git-extras"
-        "git"
-        "gitfast"
-        "github"
-      ];
+      plugins = [ "git-extras" "git" "gitfast" "github" ];
       theme = "agnoster";
       #theme = "frozencow";
     };
@@ -408,20 +365,25 @@ in
       bindkey '^R' history-incremental-pattern-search-backward
       bindkey '^F' history-incremental-pattern-search-forward
     '';
-    shellAliases = with pkgs; {
-      ":q" = "exit";
-      ".." = "cd ..";
-      cat = "${bat}/bin/bat";
-      emacs = "em";
-      # emacs typos :)
-      emasc = "emacs";
-      eamsc = "emacs";
-      emaccs = "emacs";
-    } // (if pkgs.stdenv.isDarwin then {
-      ssh = "${kitty}/bin/kitty +kitten ssh";
-    } else {}) // (if pkgs.stdenv.isLinux then {
+    shellAliases = with pkgs;
+      {
+        ":q" = "exit";
+        ".." = "cd ..";
+        cat = "${bat}/bin/bat";
+        emacs = "em";
+        # emacs typos :)
+        emasc = "emacs";
+        eamsc = "emacs";
+        emaccs = "emacs";
+      } // (if pkgs.stdenv.isDarwin then {
+        ssh = "${kitty}/bin/kitty +kitten ssh";
+      } else
+        { }) // (if pkgs.stdenv.isLinux then
+          {
 
-    } else {});
+          }
+        else
+          { });
     profileExtra = ''
       # TMP FIX
       export PATH=$PATH:~/.nix-profile/bin; for file in ~/.nix-profile/etc/profile.d/*.sh; do source $file; done
