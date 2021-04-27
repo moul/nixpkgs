@@ -1,0 +1,21 @@
+name: Test on Docker
+on:
+  push:
+
+jobs:
+  test-on-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Pull Docker Image
+        run: docker pull nixos/nix
+      - name: Test on Docker
+        run: |
+          docker run \
+            -v "${PWD}:/root/dotfiles" \
+            -w "/root/dotfiles" \
+            nixos/nix \
+              nix-shell \
+                -p stow \
+                --run 'make _setup'
