@@ -56,6 +56,7 @@ This function should only modify configuration layer settings."
      ;;markdown
      auto-completion
      better-defaults
+     graphql
      docker
      emacs-lisp
      git
