@@ -1,9 +1,12 @@
 name: Test on Docker
 on:
   push:
+    branch: [main]
+    tags: ['v*']
+  pull_request:
 
 jobs:
-  test-on-docker:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo

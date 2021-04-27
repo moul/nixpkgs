@@ -5,14 +5,14 @@ test:
 	docker run -v "$(PWD):/root/dotfiles" -w /root/dotfiles -it --rm nixos/nix \
 		nix-shell -p stow --run 'make _setup'
 
-SETENV = . ~/.nix-profile/etc/profile.d/nix.sh
+SETENV ?= if [ -f ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi;
 _setup:
 	mkdir -p ~/.config
 	ln -sf $(PWD) ~/.config/nixpkgs
-	$(SETENV); nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-	$(SETENV); nix-channel --update
-	$(SETENV); nix-shell '<home-manager>' -A install
-	$(SETENV); home-manager switch
+	$(SETENV) nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+	$(SETENV) nix-channel --update
+	$(SETENV) nix-shell '<home-manager>' -A install
+	$(SETENV) home-manager switch
 
 install-darwin:
 	xcode-select --install || true
