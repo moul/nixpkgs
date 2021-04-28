@@ -94,6 +94,7 @@ in {
       protobuf
       pstree
       screen
+      sqlite
       tcpdump
       telnet
       tmux
