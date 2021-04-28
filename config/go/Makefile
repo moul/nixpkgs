@@ -15,3 +15,6 @@ install:
 
 clean:
 	rm -f $(GOBIN)/pp
+
+gomod2nix:
+	gomod2nix
