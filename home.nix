@@ -7,6 +7,12 @@ let
       (lib.readFile ./config/em));
   nerdsfontLight =
     (pkgs.nerdfonts.override { fonts = [ "Iosevka" "FiraCode" "Hack" ]; });
+  gomod2nix = pkgs.buildGoApplication {
+    name = "retry";
+    version = "latest";
+    src = "./";
+    modules = "./gomod2nix.toml";
+  };
   theme = import ./theme.nix;
   #tmuxConf = lib.readFile ./config/.tmux.conf;
 in {
@@ -66,6 +72,7 @@ in {
       file
       fortune
       fzf
+      gomod2nix
       gnumake
       gnupg
       graphviz
@@ -127,27 +134,34 @@ in {
       "onFilesChange"
       "installPackages"
     ] ''
-      $DRY_RUN_CMD ln -sf $VERBOSE_ARG ${configd}/.spacemacs ~/.spacemacs;
-      mkdir -p ~/.ssh;
-      $DRY_RUN_CMD ln -sf $VERBOSE_ARG ${configd}/assh.yml ~/.ssh/assh.yml;
+      # SSH
+      ln -sf ${configd}/assh.yml ~/.ssh/assh.yml;
       assh config build > ~/.ssh/config;
-      # FIXME: replace with niv/go2nix
-      pushd ~/.config/nixpkgs/config/go
       chmod 711 ~/.ssh
       chmod 600 ~/.ssh/config || true
+
+      # SPACEMACS
+      ln -sf ${configd}/.spacemacs ~/.spacemacs;
+      mkdir -p ~/.ssh;
       if [ ! -d ~/.emacs.d/.git ]; then
         rm -rf ~/.emacs.d.old
         mv ~/.emacs.d ~/.emacs.d.old || true
         git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
       fi
-      if [ "$HOME/.nix-profile/bin/go" = "$(which go)" ]; then
-        GO="${pkgs.go}/bin/go" make install || true # sometimes it fails because we miss some env vars
-      fi
-      popd
-      mkdir -p ~/.npm-global
-      npm config set prefix ~/.npm-global
-      npm i -g tern prettier js-beautify eslint babel-eslint eslint-plugin-react
-      touch ~/.aliases
+
+      # GO
+      # FIXME: replace with niv/go2nix
+      # pushd ~/.config/nixpkgs/config/go
+      # if [ "$HOME/.nix-profile/bin/go" = "$(which go)" ]; then
+      #   GO="${pkgs.go}/bin/go" make install || true # sometimes it fails because we miss some env vars
+      # fi
+      # popd
+
+      # NPM
+      #mkdir -p ~/.npm-global
+      #npm config set prefix ~/.npm-global
+      #npm i -g tern prettier js-beautify eslint babel-eslint eslint-plugin-react
+      #touch ~/.aliases
     '';
   };
 

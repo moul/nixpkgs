@@ -11,6 +11,10 @@ install:
 	$(GO) install moul.io/moulsay
 	$(GO) install moul.io/prefix/cmd/prefix
 	$(GO) install moul.io/retry
+	$(GO) install github.com/tweag/gomod2nix
 
 clean:
 	rm -f $(GOBIN)/pp
+
+gomod2nix:
+	gomod2nix

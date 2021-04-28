@@ -9,4 +9,5 @@ import (
 	_ "moul.io/moulsay"
 	_ "moul.io/prefix"
 	_ "moul.io/retry"
+	_ "github.com/tweag/gomod2nix"
 )
