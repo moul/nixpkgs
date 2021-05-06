@@ -66,6 +66,7 @@ in {
       file
       fortune
       fzf
+      gist
       gnumake
       gnupg
       graphviz
