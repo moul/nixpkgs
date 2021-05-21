@@ -4,6 +4,7 @@ on:
 
 jobs:
   test-on-docker:
+    if: false # disabled
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
@@ -18,4 +19,4 @@ jobs:
             nixos/nix \
               nix-shell \
                 -p stow \
-                --run 'make _setup'
+                --run 'make install-flake setup-cachix _setup USER=dockerTest'
