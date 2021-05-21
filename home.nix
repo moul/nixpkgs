@@ -115,10 +115,10 @@ in {
   #home.username = "moul";
   #home.homeDirectory = "/home/moul";
 
-  #home.file.".emacs.d" = {
-  #  source = pkgs.spacemacs;
-  #  recursive = true;
-  #};
+  home.file.".emacs.d" = {
+    source = pkgs.spacemacs;
+    recursive = true;
+  };
 
   fonts.fontconfig.enable = true;
 
@@ -131,11 +131,6 @@ in {
     ] ''
       # spacemacs
       ln -sf ${configd}/.spacemacs ~/.spacemacs;
-      if [ ! -d ~/.emacs.d/.git ]; then
-        rm -rf ~/.emacs.d.old
-        mv ~/.emacs.d ~/.emacs.d.old || true
-        git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-      fi
 
       # ssh
       mkdir -p ~/.ssh;
