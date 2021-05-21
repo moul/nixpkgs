@@ -4,6 +4,7 @@ on:
 
 jobs:
   test-on-docker:
+    if: false # disabled
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo

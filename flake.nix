@@ -85,7 +85,7 @@
         };
         dockerTest = inputs.home-manager.lib.homeManagerConfiguration {
           configuration = { pkgs, config, ... }: {
-            imports = [ homeManagerConfig ];
+            #imports = [ homeManagerConfig ];
             nixpkgs = nixpkgsConfig { mysystem= "x86_64-linux"; };
           };
           system = "x86_64-linux";
