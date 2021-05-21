@@ -83,8 +83,18 @@
           homeDirectory = "/home/moul";
           username = "moul";
         };
+        dockerTest = inputs.home-manager.lib.homeManagerConfiguration {
+          configuration = { pkgs, config, ... }: {
+            imports = [ homeManagerConfig ];
+            nixpkgs = nixpkgsConfig { mysystem= "x86_64-linux"; };
+          };
+          system = "x86_64-linux";
+          homeDirectory = "/root";
+          username = "root";
+        };
       };
       moul = self.homeConfigurations.moul.activationPackage;
+      dockerTest = self.homeConfigurations.dockerTest.activationPackage;
     } // flake-utils.lib.eachDefaultSystem (system: {
       legacyPackages = import nixpkgs {
         inherit system;

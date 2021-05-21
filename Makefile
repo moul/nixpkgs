@@ -3,7 +3,7 @@ apply:
 
 test:
 	docker run -v "$(PWD):/root/dotfiles" -w /root/dotfiles -it --rm nixos/nix \
-		nix-shell -p stow --run 'make _setup'
+		nix-shell -p stow --run 'make install-flake _setup USER=dockerTest'
 
 SETENV = . ~/.nix-profile/etc/profile.d/nix.sh
 _setup:
@@ -41,6 +41,12 @@ fmt:
 
 install-flake:
 	nix-env -iA nixpkgs.nixFlakes
+	nix-env -iA nixpkgs.curl
+	nix-env -iA nixpkgs.git
+	if [ ! -f ~/.config/nix/nix.conf ]; then \
+		mkdir -p ~/.config/nix; \
+		echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf; \
+	fi
 	curl -L https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20200804_ed52cf6/install | sh
 
 setup-cachix:
