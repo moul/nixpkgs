@@ -18,4 +18,4 @@ jobs:
             nixos/nix \
               nix-shell \
                 -p stow \
-                --run 'make install-flake _setup USER=dockerTest'
+                --run 'make install-flake setup-cachix _setup USER=dockerTest'

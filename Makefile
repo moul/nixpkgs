@@ -3,7 +3,7 @@ apply:
 
 test:
 	docker run -v "$(PWD):/root/dotfiles" -w /root/dotfiles -it --rm nixos/nix \
-		nix-shell -p stow --run 'make install-flake _setup USER=dockerTest'
+		nix-shell -p stow --run 'make install-flake setup-cachix _setup USER=dockerTest'
 
 SETENV = . ~/.nix-profile/etc/profile.d/nix.sh
 _setup:
@@ -50,4 +50,5 @@ install-flake:
 	curl -L https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20200804_ed52cf6/install | sh
 
 setup-cachix:
+	nix-env -iA cachix -f https://cachix.org/api/v1/install
 	cachix use nix-community
