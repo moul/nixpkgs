@@ -3,7 +3,7 @@
 let
   configd = "~/.config/nixpkgs/config";
   em = pkgs.writeScriptBin "em"
-    (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${pkgs.emacs}" ]
+    (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${pkgs.emacsGcc}" ]
       (lib.readFile ./config/em));
   nerdsfontLight =
     (pkgs.nerdfonts.override { fonts = [ "Iosevka" "FiraCode" "Hack" ]; });
@@ -115,8 +115,9 @@ in {
   #home.username = "moul";
   #home.homeDirectory = "/home/moul";
 
-  #home.file = {
-  #  ".spacemacs" = { source = spacemacs; };
+  #home.file.".emacs.d" = {
+  #  source = pkgs.spacemacs;
+  #  recursive = true;
   #};
 
   fonts.fontconfig.enable = true;
@@ -307,6 +308,11 @@ in {
         selection_foreground ${theme.selected-text}
       ''
     ];
+  };
+
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacsGcc;
   };
 
   programs.tmux = {

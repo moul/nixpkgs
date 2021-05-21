@@ -38,7 +38,7 @@
     emacs-overlay = { url = "github:nix-community/emacs-overlay"; };
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, flake-utils, emacs-overlay, ... }@inputs:
     let
       nixpkgsConfig = { mysystem }:
         with inputs; {
@@ -62,6 +62,9 @@
                 master = nixpkgs-master.legacyPackages.${system};
                 stable = nixpkgs-stable.legacyPackages.${system};
                 silicon = nixpkgs-silicon.legacyPackages.${mysystem};
+
+                spacemacs = inputs.spacemacs;
+                emacsGcc = (import emacs-overlay final prev).emacsGcc;
               })
           ];
         };

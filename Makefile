@@ -42,3 +42,6 @@ fmt:
 install-flake:
 	nix-env -iA nixpkgs.nixFlakes
 	curl -L https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20200804_ed52cf6/install | sh
+
+setup-cachix:
+	cachix use nix-community
