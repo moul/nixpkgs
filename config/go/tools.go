@@ -7,6 +7,7 @@ import (
 	_ "golang.org/x/tools/cover"
 	_ "honnef.co/go/tools/go/loader"
 	// _ "moul.io/moulsay"
+	_ "github.com/cespare/prettybench"
 	_ "moul.io/prefix"
 	_ "moul.io/retry"
 )

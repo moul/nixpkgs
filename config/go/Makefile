@@ -11,6 +11,7 @@ install:
 	#$(GO) install moul.io/moulsay
 	$(GO) install moul.io/prefix/cmd/prefix
 	$(GO) install moul.io/retry
+	$(GO) install github.com/cespare/prettybench
 
 clean:
 	rm -f $(GOBIN)/pp
