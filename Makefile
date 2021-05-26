@@ -52,3 +52,8 @@ install-flake:
 setup-cachix:
 	nix-env -iA cachix -f https://cachix.org/api/v1/install
 	cachix use nix-community
+
+regen-emacs:
+	raw-emacs --batch --load=~/.spacemacs -debug-init
+	#raw-emacs --eval='(configuration-layer/load)' --quit --debug-init
+	raw-emacs --no-site-file --batch --load=~/.spacemacs --eval="(package-initialize)"

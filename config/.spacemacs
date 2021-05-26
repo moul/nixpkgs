@@ -24,7 +24,7 @@ This function should only modify configuration layer settings."
 
    ;; If non-nil then Spacemacs will ask for confirmation before installing
    ;; a layer lazily. (default t)
-   dotspacemacs-ask-for-lazy-installation t
+   dotspacemacs-ask-for-lazy-installation nil
 
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
@@ -36,12 +36,15 @@ This function should only modify configuration layer settings."
      python
      rust
      html
+     spacemacs-editing
+     github
+     tmux
      (typescript :variables
-                 javascript-backend 'tide
+                 typescript-backend 'lsp
                  typescript-fmt-tool 'prettier
                  typescript-linter 'eslint)
      (javascript :variables
-                 javascript-backend 'tide
+                 javascript-backend 'lsp
                  javascript-fmt-tool 'prettier
                  node-add-modules-path t)
      markdown
@@ -52,7 +55,9 @@ This function should only modify configuration layer settings."
      (go :variables
          go-use-golangci-lint nil ;; disable golangci lint
          go-backend 'lsp
-         go-format-before-save nil)
+         go-format-before-save nil
+         godoc-at-point-function 'godoc-gogetdoc)
+     prettier
      ;;markdown
      auto-completion
      better-defaults
@@ -68,13 +73,18 @@ This function should only modify configuration layer settings."
      c-c++
      org
      multiple-cursors
+     themes-megapack
+     emoji
+     colors
+     deft
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
      spell-checking
      syntax-checking
      version-control
-     treemacs)
+     treemacs
+     )
 
    ;; List of additional packages that will be installed without being wrapped
    ;; in a layer (generally the packages are installed only and should still be
@@ -85,6 +95,7 @@ This function should only modify configuration layer settings."
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
+                                      achievements
                                       disable-mouse
                                       rjsx-mode
                                       yasnippet-snippets
@@ -250,7 +261,9 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(spacemacs
+                                  :separator wave
+                                  :separator-scale 1.5)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -560,13 +573,10 @@ before packages are loaded."
 
   ;; Set up before-save hooks to format buffer and add/delete imports.
   ;; Make sure you don't have other gofmt/goimports hooks enabled.
-  ;;(defun lsp-go-install-save-hooks ()
-  ;;  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  ;;  (add-hook 'before-save-hook #'lsp-organize-imports t t))
-  ;;(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
-  ;; tmp -> always, instead of per-hook
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t)
+  (defun lsp-go-install-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
   ;; experimental settings
   (lsp-register-custom-settings
@@ -580,6 +590,12 @@ before packages are loaded."
      ("gopls.experimentalWorkspaceModule" t t)
      ))
 
+  (setq ispell-program-name "aspell")
+
+  (custom-set-variables '(lsp-enable-file-watchers nil))
+
+  (xterm-mouse-mode -1)
+
   (spacemacs/toggle-highlight-current-line-globally-off)
   ;;(setq gofmt-command "goimports")
   (setq go-format-before-save t)
@@ -587,6 +603,7 @@ before packages are loaded."
   (setq lsp-file-watch-threshold 2000)
   (global-disable-mouse-mode)
 
+  (achievements-mode)
 
   ;; expo/react based on https://dev.to/viglioni/how-i-set-up-my-emacs-for-typescript-3eeh
   (setq-default typescript-indent-level 2)
@@ -618,7 +635,6 @@ before packages are loaded."
   (add-hook 'web-mode-hook 'company-mode)
   (add-hook 'web-mode-hook 'prettier-js-mode)
   (add-hook 'web-mode-hook #'turn-on-smartparens-mode t)
-
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
