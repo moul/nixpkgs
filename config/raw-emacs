@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ARGS=("$@")
+exec ${pkgs.emacs}/bin/emacs -nw "${ARGS[@]}"

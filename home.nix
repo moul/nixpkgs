@@ -5,6 +5,9 @@ let
   em = pkgs.writeScriptBin "em"
     (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${pkgs.emacsGcc}" ]
       (lib.readFile ./config/em));
+  raw-emacs = pkgs.writeScriptBin "raw-emacs"
+    (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${pkgs.emacsGcc}" ]
+      (lib.readFile ./config/raw-emacs));
   nerdsfontLight =
     (pkgs.nerdfonts.override { fonts = [ "Iosevka" "FiraCode" "Hack" ]; });
   theme = import ./theme.nix;
@@ -94,6 +97,7 @@ in {
       procs
       protobuf
       pstree
+      raw-emacs
       screen
       tcpdump
       telnet
