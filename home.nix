@@ -45,6 +45,7 @@ in {
   home.packages = with pkgs;
     [
       ascii
+      aspell
       aspellDicts.en
       aspellDicts.en-computers
       aspellDicts.en-science
