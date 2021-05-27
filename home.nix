@@ -260,13 +260,13 @@ in {
 
   programs.htop = {
     enable = true;
-    hideKernelThreads = true;
-    hideThreads = true;
-    hideUserlandThreads = true;
-    treeView = true;
-    meters = {
-      left = [ "LeftCPUs2" "Memory" "Swap" "Load" "Clock" ];
-      right = [ "RightCPUs2" "Tasks" "LoadAverage" "Uptime" ];
+    settings = {
+      hide_kernel_threads = true;
+      hide_threads = true;
+      hide_userland_threads = true;
+      tree_view = true;
+      left_metters = [ "LeftCPUs2" "Memory" "Swap" "Load" "Clock" ];
+      right_metters = [ "RightCPUs2" "Tasks" "LoadAverage" "Uptime" ];
     };
   };
 

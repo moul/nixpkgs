@@ -23,7 +23,8 @@ install-darwin:
 	rm -rf result /tmp/nix-install
 
 upgrade:
-	nix-channel --update
+	#nix-channel --update
+	nix flake update
 
 install-linux-no-root:
 	unshare --user --pid echo YES | grep -q YES
