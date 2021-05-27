@@ -22,7 +22,7 @@ install-darwin:
 	./result/bin/darwin-installer
 	rm -rf result /tmp/nix-install
 
-upgrade:
+update:
 	#nix-channel --update
 	nix flake update
 
@@ -65,3 +65,7 @@ diff:
 	current_version=`ls | grep home-manager- | sed 's/home-manager-\(.*\)-link/\1/' | sort -n | tail -n 1`; \
 	previous_version=`ls | grep home-manager- | sed 's/home-manager-\(.*\)-link/\1/' | sort -n | tail -n 2 | head -n 1`; \
 	nix-diff `nix-store -qd home-manager-$$previous_version-link home-manager-$$current_version-link`
+
+gc:
+	nix-env -p /nix/var/nix/profiles/system --delete-generations +1
+	nix-collect-garbage -d
