@@ -86,6 +86,7 @@ in {
       mosh
       nerdsfontLight
       nixfmt
+      nix-diff
       nix-index
       nix-info
       nix-prefetch-github

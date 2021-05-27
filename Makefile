@@ -58,3 +58,10 @@ regen-emacs:
 	raw-emacs --batch --load=~/.spacemacs -debug-init
 	#raw-emacs --eval='(configuration-layer/load)' --quit --debug-init
 	raw-emacs --no-site-file --batch --load=~/.spacemacs --eval="(package-initialize)"
+
+diff:
+	@set -e; \
+	cd /nix/var/nix/profiles/per-user/moul; \
+	current_version=`ls | grep home-manager- | sed 's/home-manager-\(.*\)-link/\1/' | sort -n | tail -n 1`; \
+	previous_version=`ls | grep home-manager- | sed 's/home-manager-\(.*\)-link/\1/' | sort -n | tail -n 2 | head -n 1`; \
+	nix-diff `nix-store -qd home-manager-$$previous_version-link home-manager-$$current_version-link`
