@@ -42,8 +42,8 @@ fmt:
 
 install-flake:
 	nix-env -iA nixpkgs.nixFlakes
-	nix-env -iA nixpkgs.curl
-	nix-env -iA nixpkgs.git
+	nix-env -iA nixpkgs.curl || true
+	nix-env -iA nixpkgs.git || true
 	if [ ! -f ~/.config/nix/nix.conf ]; then \
 		mkdir -p ~/.config/nix; \
 		echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf; \
