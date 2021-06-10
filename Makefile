@@ -26,6 +26,12 @@ update:
 	#nix-channel --update
 	nix flake update
 
+install-linux-root:
+	curl -L https://nixos.org/nix/install > /tmp/nix-install
+	sh /tmp/nix-install
+	make _setup
+
+
 install-linux-no-root:
 	unshare --user --pid echo YES | grep -q YES
 	mkdir -p -m 0755 ~/.nix
