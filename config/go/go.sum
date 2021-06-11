@@ -1162,6 +1162,8 @@ honnef.co/go/tools v0.0.1-2020.1.3/go.mod h1:X/FiERA/W4tHapMX5mGpAtMSVEeEUOyHaw9
 honnef.co/go/tools v0.0.1-2020.1.4/go.mod h1:X/FiERA/W4tHapMX5mGpAtMSVEeEUOyHaw9vFzvIQ3k=
 honnef.co/go/tools v0.1.4 h1:SadWOkti5uVN1FAMgxn165+Mw00fuQKyk4Gyn/inxNQ=
 honnef.co/go/tools v0.1.4/go.mod h1:NgwopIslSNH47DimFoV78dnkksY2EFtX0ajyb3K/las=
+honnef.co/go/tools v0.2.0 h1:ws8AfbgTX3oIczLPNPCu5166oBg9ST2vNs0rcht+mDE=
+honnef.co/go/tools v0.2.0/go.mod h1:lPVVZ2BS5TfnjLyizF7o7hv7j9/L+8cZY2hLyjP9cGY=
 moul.io/prefix v1.7.1 h1:c6MpJfnv4VmLq6RSXGJINH+7lqkY5+aQMHhAr/X7x5U=
 moul.io/prefix v1.7.1/go.mod h1:q+RCIosqaR5u0u1K2GAYxDAwrdLF+PQjQjV3dMxPpZE=
 moul.io/retry v0.7.0 h1:ax2JC9LwnbRJQqMpblKj9fMwSWgVs+KoIOHD+0xDCC4=
