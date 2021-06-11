@@ -71,7 +71,6 @@ in {
       fortune
       fzf
       gist
-      git-crypt
       gnumake
       gnupg
       graphviz
@@ -217,7 +216,25 @@ in {
     aliases = { co = "checkout"; };
     package = pkgs.buildEnv {
       name = "myGitEnv";
-      paths = with pkgs.gitAndTools; [ git delta gh hub tig ];
+      paths = with pkgs.gitAndTools; [
+        gitFull
+        delta
+        gh
+        hub
+        tig
+        git-crypt
+        git-bug
+        git-appraise
+        #git-pr-mirror
+        #git-remote-ipfs
+        lab
+        git-crypt
+        git-secrets
+        git-filter-repo
+        git-absorb
+        #git-get
+        stagit
+      ];
     };
     delta = { enable = true; };
     lfs = { enable = true; };

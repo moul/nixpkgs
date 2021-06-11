@@ -38,7 +38,8 @@
     emacs-overlay = { url = "github:nix-community/emacs-overlay"; };
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, emacs-overlay, ... }@inputs:
+  outputs =
+    { self, nixpkgs, home-manager, flake-utils, emacs-overlay, ... }@inputs:
     let
       nixpkgsConfig = { mysystem }:
         with inputs; {
@@ -86,7 +87,7 @@
         dockerTest = inputs.home-manager.lib.homeManagerConfiguration {
           configuration = { pkgs, config, ... }: {
             #imports = [ homeManagerConfig ];
-            nixpkgs = nixpkgsConfig { mysystem= "x86_64-linux"; };
+            nixpkgs = nixpkgsConfig { mysystem = "x86_64-linux"; };
           };
           system = "x86_64-linux";
           homeDirectory = "/root";
