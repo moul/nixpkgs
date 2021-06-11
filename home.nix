@@ -71,6 +71,7 @@ in {
       fortune
       fzf
       gist
+      git-crypt
       gnumake
       gnupg
       graphviz
