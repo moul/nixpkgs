@@ -186,7 +186,9 @@ in {
       # GVM
       # requires:
       #     bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-      source $HOME/.gvm/scripts/gvm
+      if [ -f $HOME/.gvm/scripts/gvm ]; then
+            source $HOME/.gvm/scripts/gvm
+      fi
     '';
   };
 
@@ -424,7 +426,9 @@ in {
       # GVM
       # requires:
       #     bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-      source $HOME/.gvm/scripts/gvm
+      if [ -f $HOME/.gvm/scripts/gvm ]; then
+            source $HOME/.gvm/scripts/gvm
+      fi
     '';
   };
 
