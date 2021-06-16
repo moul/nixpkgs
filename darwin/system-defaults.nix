@@ -1,5 +1,7 @@
 { ... }:
 
+# "https://github.com/LnL7/nix-darwin/blob/master/tests/system-defaults-write.nix"
+
 {
   # Global
   system.defaults.NSGlobalDomain = {
@@ -11,6 +13,7 @@
     KeyRepeat = 1;
     NSAutomaticCapitalizationEnabled = false;
     NSAutomaticPeriodSubstitutionEnabled = false;
+    #NSAutomaticWindowAnimationsEnabled = false;
     _HIHideMenuBar = true;
   };
 
@@ -29,6 +32,7 @@
     mru-spaces = false;
     tilesize = 25;
     orientation = "left";
+    autohide-delay = "0.2";
   };
 
   # Keyboard
