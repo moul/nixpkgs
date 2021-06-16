@@ -17,7 +17,7 @@ _setup:
 install-darwin:
 	xcode-select --install || true
 	curl -L https://nixos.org/nix/install > /tmp/nix-install
-	sh /tmp/nix-install --darwin-use-unencrypted-nix-store-volume
+	sh /tmp/nix-install --darwin-use-unencrypted-nix-store-volume --daemon
 	. /Users/moul/.nix-profile/etc/profile.d/nix.sh && nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
 	./result/bin/darwin-installer
 	rm -rf result /tmp/nix-install
@@ -75,6 +75,10 @@ diff:
 gc:
 	nix-env -p /nix/var/nix/profiles/system --delete-generations +1
 	nix-collect-garbage -d
+
+switch.osx-x86_64:
+	nix build .#darwinConfigurations.bootstrap-x86_64.system
+	./result/sw/bin/darwin-rebuild switch --verbose --flake .#osx-x86_64
 
 switch.osx-aarch64: ./result/sw/bin/darwin-rebuild
 	./result/sw/bin/darwin-rebuild switch --verbose --flake .#osx-aarch64
