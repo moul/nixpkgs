@@ -57,5 +57,6 @@
     AppleShowAllExtensions = true;
     QuitMenuItem = true;
     FXEnableExtensionChangeWarning = false;
+    CreateDesktop = false;
   };
 }
