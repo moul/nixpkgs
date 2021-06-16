@@ -13,7 +13,7 @@ let
   theme = import ./theme.nix;
   #tmuxConf = lib.readFile ./config/.tmux.conf;
 in {
-  nixpkgs.config = { allowUnfree = true; };
+  #nixpkgs.config = { allowUnfree = true; };
 
   home.language = (if pkgs.stdenv.isDarwin then {
     base = "en_US.UTF-8";

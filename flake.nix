@@ -8,9 +8,7 @@
     nixpkgs-stable-darwin = {
       url = "github:nixos/nixpkgs/nixpkgs-20.09-darwin";
     };
-    nixpkgs-silicon-darwin = {
-      url = "github:thefloweringash/nixpkgs/apple-silicon";
-    };
+    nixpkgs-silicon-darwin = { url = "github:nixos/nixpkgs/staging-next"; };
     nixos-stable = { url = "github:nixos/nixpkgs/nixos-20.09"; };
 
     # flake
@@ -41,14 +39,15 @@
   outputs = { self, nixpkgs, darwin, home-manager, flake-utils, emacs-overlay
     , ... }@inputs:
     let
+      defaultSystems = flake-utils.lib.defaultSystems ++ [ "aarch64-darwin" ];
       nixpkgsConfig = { mysystem }:
         with inputs; {
-          config = { allowUnfree = true; };
+          config = { allowUnfree = true; allowUnsupportedSystem = true; allowBroken = true; };
           overlays = [
             (final: prev:
               let
                 system = if mysystem == "aarch64-darwin" then
-                  "aarch64-darwin"
+                  "x86_64-darwin"
                 else
                   mysystem;
                 nixpkgs-stable = if system == "x86_64-darwin" then
@@ -81,10 +80,11 @@
           nixpkgs = nixpkgsConfig { mysystem = system; };
           nix.nixPath = { nixpkgs = "$HOME/nixpkgs/nixpkgs.nix"; };
           users.users.${user}.home = "/Users/${user}";
-          #home-manager.useGlobalPKgs = true;
-          #home-manager.users.${user} = homeManagerConfig;
+          home-manager.useGlobalPkgs = true;
+          home-manager.users.${user} = homeManagerConfig;
         }
       ];
+      linuxConfig = { imports = [ homeManagerConfig ./linux ]; };
       overlays = [ ];
     in {
       darwinConfigurations = {
@@ -129,7 +129,7 @@
       };
       moul = self.homeConfigurations.moul.activationPackage;
       dockerTest = self.homeConfigurations.dockerTest.activationPackage;
-    } // flake-utils.lib.eachDefaultSystem (system: {
+    } // flake-utils.lib.eachSystem defaultSystems (system: {
       legacyPackages = import nixpkgs {
         inherit system;
         inherit (nixpkgsConfig { mysystem = system; }) config overlays;

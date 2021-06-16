@@ -136,16 +136,16 @@
     },
     "nixpkgs-silicon-darwin": {
       "locked": {
-        "lastModified": 1621178885,
-        "narHash": "sha256-+aPTGGR5xjJRlSgSMw4brKmzfR07t1NCQXvzLXpMRFg=",
-        "owner": "thefloweringash",
+        "lastModified": 1623823481,
+        "narHash": "sha256-oPFAAC6ivvg8qbq/RgUkawlSdtLQJBHsCCLylnCI9uk=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "56fcbcd1543188fcc855df7e79fee0a8df259681",
+        "rev": "f060a3768b0e14318a0a17e6440c9f3c62192586",
         "type": "github"
       },
       "original": {
-        "owner": "thefloweringash",
-        "ref": "apple-silicon",
+        "owner": "nixos",
+        "ref": "staging-next",
         "repo": "nixpkgs",
         "type": "github"
       }
