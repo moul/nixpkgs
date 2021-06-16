@@ -40,7 +40,7 @@
   # Keyboard
   system.keyboard = {
     enableKeyMapping = true;
-    remapCapsLockToControl = true;
+    remapCapsLockToEscape = true;
   };
 
   # Login and lock screen
