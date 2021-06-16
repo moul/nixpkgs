@@ -70,7 +70,8 @@ diff:
 	cd /nix/var/nix/profiles/per-user/moul; \
 	current_version=`ls | grep home-manager- | sed 's/home-manager-\(.*\)-link/\1/' | sort -n | tail -n 1`; \
 	previous_version=`ls | grep home-manager- | sed 's/home-manager-\(.*\)-link/\1/' | sort -n | tail -n 2 | head -n 1`; \
-	nix-diff `nix-store -qd home-manager-$$previous_version-link home-manager-$$current_version-link`
+	nix-diff `nix-store -qd home-manager-$$previous_version-link home-manager-$$current_version-link`; \
+	echo "previous_version: $$previous_version, current_version: $$current_version"
 
 gc:
 	nix-env -p /nix/var/nix/profiles/system --delete-generations +1
@@ -85,6 +86,11 @@ switch.osx-aarch64: ./result/sw/bin/darwin-rebuild
 
 ./result/sw/bin/darwin-rebuild:
 	nix build .#darwinConfigurations.bootstrap-aarch64.system
+
+switch.linux-x86_64:
+	#nix build .#linuxConfigurations.bootstrap-x86_64.system
+	nix build .#linuxConfigurations.server-x86_64.activationPackage
+	./result/activate switch --verbose --flake .#linux-x86_64
 
 killall-osx:
 	@killall "Activity Monitor" || true

@@ -82,6 +82,7 @@ in {
       jq
       kitty
       libnotify
+      lorri
       lsof
       mosh
       nerdsfontLight

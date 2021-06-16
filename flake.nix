@@ -68,10 +68,10 @@
               })
           ];
         };
-      homeManagerConfig = with self.homeManagerModules; {
+      homeManagerCommonConfig = with self.homeManagerModules; {
         imports = [ ./home.nix ];
       };
-      nixDarwinConfig = { system, user }: [
+      darwinCommonConfig = { system, user }: [
         # self.darwinModules.services.emacsd
         # self.darwinModules.security.pam
         ./darwin
@@ -81,10 +81,10 @@
           nix.nixPath = { nixpkgs = "$HOME/nixpkgs/nixpkgs.nix"; };
           users.users.${user}.home = "/Users/${user}";
           home-manager.useGlobalPkgs = true;
-          home-manager.users.${user} = homeManagerConfig;
+          home-manager.users.${user} = homeManagerCommonConfig;
         }
       ];
-      linuxConfig = { imports = [ homeManagerConfig ./linux ]; };
+      linuxCommonConfig = { imports = [ homeManagerCommonConfig ./linux ]; };
       overlays = [ ];
     in {
       darwinConfigurations = {
@@ -100,22 +100,28 @@
             { nixpkgs = nixpkgsConfig { mysystem = "aarch64-darwin"; }; }
           ];
         };
-        osx-aarch64 = darwin.lib.darwinSystem {
-          modules = nixDarwinConfig {
+        desktop-aarch64 = darwin.lib.darwinSystem {
+          modules = darwinCommonConfig {
             system = "aarch64-darwin";
             user = "moul";
           };
         };
-      };
-      homeConfigurations = {
-        moul = inputs.home-manager.lib.homeManagerConfiguration {
-          configuration = { pkgs, config, ... }: {
-            imports = [ homeManagerConfig ];
-            nixpkgs = nixpkgsConfig { mysystem = "x86_64-linux"; };
+        desktop-x86_64 = darwin.lib.darwinSystem {
+          modules = darwinCommonConfig {
+            system = "x86-64-darwin";
+            user = "moul";
           };
+        };
+      };
+      linuxConfigurations = {
+        server-x86_64 = inputs.home-manager.lib.homeManagerConfiguration {
           system = "x86_64-linux";
           homeDirectory = "/home/moul";
           username = "moul";
+          configuration = { pkgs, config, ... }: {
+            imports = [ linuxCommonConfig ];
+            nixpkgs = nixpkgsConfig { mysystem = "x86_64-linux"; };
+          };
         };
         dockerTest = inputs.home-manager.lib.homeManagerConfiguration {
           configuration = { pkgs, config, ... }: {
@@ -127,8 +133,6 @@
           username = "root";
         };
       };
-      moul = self.homeConfigurations.moul.activationPackage;
-      dockerTest = self.homeConfigurations.dockerTest.activationPackage;
     } // flake-utils.lib.eachSystem defaultSystems (system: {
       legacyPackages = import nixpkgs {
         inherit system;
