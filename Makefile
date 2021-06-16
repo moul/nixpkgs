@@ -75,3 +75,9 @@ diff:
 gc:
 	nix-env -p /nix/var/nix/profiles/system --delete-generations +1
 	nix-collect-garbage -d
+
+switch.osx-aarch64: ./result/sw/bin/darwin-rebuild
+	./result/sw/bin/darwin-rebuild switch --verbose --flake .#osx-aarch64
+
+./result/sw/bin/darwin-rebuild:
+	nix build .#darwinConfigurations.bootstrap-aarch64.system

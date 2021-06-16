@@ -38,8 +38,8 @@
     emacs-overlay = { url = "github:nix-community/emacs-overlay"; };
   };
 
-  outputs =
-    { self, nixpkgs, home-manager, flake-utils, emacs-overlay, ... }@inputs:
+  outputs = { self, nixpkgs, darwin, home-manager, flake-utils, emacs-overlay
+    , ... }@inputs:
     let
       nixpkgsConfig = { mysystem }:
         with inputs; {
@@ -48,7 +48,7 @@
             (final: prev:
               let
                 system = if mysystem == "aarch64-darwin" then
-                  "x86_64-darwin"
+                  "aarch64-darwin"
                 else
                   mysystem;
                 nixpkgs-stable = if system == "x86_64-darwin" then
@@ -72,8 +72,41 @@
       homeManagerConfig = with self.homeManagerModules; {
         imports = [ ./home.nix ];
       };
+      nixDarwinConfig = { system, user }: [
+        # self.darwinModules.services.emacsd
+        # self.darwinModules.security.pam
+        ./darwin
+        home-manager.darwinModules.home-manager
+        {
+          nixpkgs = nixpkgsConfig { mysystem = system; };
+          nix.nixPath = { nixpkgs = "$HOME/nixpkgs/nixpkgs.nix"; };
+          users.users.${user}.home = "/Users/${user}";
+          #home-manager.useGlobalPKgs = true;
+          #home-manager.users.${user} = homeManagerConfig;
+        }
+      ];
       overlays = [ ];
     in {
+      darwinConfigurations = {
+        bootstrap-x86_64 = darwin.lib.darwinSystem {
+          modules = [
+            ./darwin/bootstrap.nix
+            { nixpkgs = nixpkgsConfig { mysystem = "x86_64-darwin"; }; }
+          ];
+        };
+        bootstrap-aarch64 = darwin.lib.darwinSystem {
+          modules = [
+            ./darwin/bootstrap.nix
+            { nixpkgs = nixpkgsConfig { mysystem = "aarch64-darwin"; }; }
+          ];
+        };
+        osx-aarch64 = darwin.lib.darwinSystem {
+          modules = nixDarwinConfig {
+            system = "aarch64-darwin";
+            user = "moul";
+          };
+        };
+      };
       homeConfigurations = {
         moul = inputs.home-manager.lib.homeManagerConfiguration {
           configuration = { pkgs, config, ... }: {
