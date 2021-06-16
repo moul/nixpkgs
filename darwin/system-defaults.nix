@@ -1,6 +1,7 @@
 { ... }:
 
-# "https://github.com/LnL7/nix-darwin/blob/master/tests/system-defaults-write.nix"
+# https://github.com/LnL7/nix-darwin/blob/master/tests/system-defaults-write.nix
+# https://gist.github.com/dannysmith/9369950
 
 {
   # Global
@@ -9,10 +10,11 @@
     AppleMetricUnits = 1;
     AppleShowScrollBars = "Automatic";
     AppleTemperatureUnit = "Celsius";
-    InitialKeyRepeat = 15;
-    KeyRepeat = 1;
+    InitialKeyRepeat = 12;
+    KeyRepeat = 0;
     NSAutomaticCapitalizationEnabled = false;
     NSAutomaticPeriodSubstitutionEnabled = false;
+    "com.apple.springing.delay" = "0.0";
     #NSAutomaticWindowAnimationsEnabled = false;
     _HIHideMenuBar = true;
   };

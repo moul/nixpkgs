@@ -81,3 +81,21 @@ switch.osx-aarch64: ./result/sw/bin/darwin-rebuild
 
 ./result/sw/bin/darwin-rebuild:
 	nix build .#darwinConfigurations.bootstrap-aarch64.system
+
+killall-osx:
+	@killall "Activity Monitor" || true
+	@killall "Address Book" || true
+	@killall "Calendar" || true
+	@killall "Contacts" || true
+	@killall "cfprefsd" || true
+	@killall "Dock" || true
+	@killall "Finder" || true
+	@killall "Mail" || true
+	@killall "Messages" || true
+	@killall "Safari" || true
+	@killall "SizeUp" || true
+	@killall "SystemUIServer" || true
+	@killall "Terminal" || true
+	@killall "Transmission" || true
+	@killall "Twitter" || true
+	@killall "iCal" || true
