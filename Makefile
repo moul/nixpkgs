@@ -1,9 +1,69 @@
-apply:
-	home-manager switch
+#
+# PUBLIC
+#
+
+all: switch
+
+# smart switch
+HOST ?= $(shell hostname)
+ifeq ($(HOST),moul-mini-1.local)                    # mac, m1, desktop
+switch: _info switch.desktop-aarch64
+
+else ifeq ($(HOST),fwrz)                            # linux, x86_64, server
+switch: _info switch.linux-x86_64
+
+else ifeq ($(HOST),manfred-imac-2.local)            # mac, x86_64, desktop
+switch: _info switch.desktop-x86_64
+
+else ifeq ($(HOST),manfred-spacegray-3.local)       # mac, x86_64, desktop
+switch: _info switch.desktop-x86_64
+
+else ifeq ($(HOST),moul-vp-linux)                   # linux, x86_64, desktop
+switch: _info switch.linux-x86_64
+
+else
+switch:
+	$(error "unknown hostname: $(HOST), you can call a switch.SOMETHING rule manually.")
+endif
+# end
 
 test:
 	docker run -v "$(PWD):/root/dotfiles" -w /root/dotfiles -it --rm nixos/nix \
 		nix-shell -p stow --run 'make install-flake setup-cachix _setup USER=dockerTest'
+
+fmt:
+	nixfmt `find . ! -path './home-manager/*' ! -path './.git/*' -name "*.nix"`
+
+diff:
+	@set -e; \
+	cd /nix/var/nix/profiles/per-user/moul; \
+	current_version=`ls | grep home-manager- | sed 's/home-manager-\(.*\)-link/\1/' | sort -n | tail -n 1`; \
+	previous_version=`ls | grep home-manager- | sed 's/home-manager-\(.*\)-link/\1/' | sort -n | tail -n 2 | head -n 1`; \
+	nix-diff `nix-store -qd home-manager-$$previous_version-link home-manager-$$current_version-link`; \
+	echo "previous_version: $$previous_version, current_version: $$current_version"
+
+gc:
+	nix-env -p /nix/var/nix/profiles/system --delete-generations +1
+	nix-collect-garbage -d
+
+update:
+	#nix-channel --update
+	nix flake update
+
+#
+# INTERNAL
+#
+
+_info:
+	@echo ============
+	@echo = INFO
+	@echo ============
+	@sh -xc " \
+		hostname || true; \
+		uname -a || true; \
+		nix --version || true; \
+		id || true; \
+	"
 
 SETENV = . ~/.nix-profile/etc/profile.d/nix.sh
 _setup:
@@ -22,10 +82,6 @@ install-darwin:
 	./result/bin/darwin-installer
 	rm -rf result /tmp/nix-install
 
-update:
-	#nix-channel --update
-	nix flake update
-
 install-linux-root:
 	curl -L https://nixos.org/nix/install > /tmp/nix-install
 	sh /tmp/nix-install
@@ -42,9 +98,6 @@ install-linux-no-root:
 	echo "exec ~/.nix/nix-user-chroot ~/.nix ~/.nix-profile/bin/zsh -l" > ~/nixsh
 	chmod 711 ~/nixsh
 	~/.nix/nix-user-chroot ~/.nix make apply
-
-fmt:
-	nixfmt `find . ! -path './home-manager/*' ! -path './.git/*' -name "*.nix"`
 
 install-flake:
 	nix-env -iA nixpkgs.nixFlakes
@@ -65,27 +118,24 @@ regen-emacs:
 	#raw-emacs --eval='(configuration-layer/load)' --quit --debug-init
 	raw-emacs --no-site-file --batch --load=~/.spacemacs --eval="(package-initialize)"
 
-diff:
-	@set -e; \
-	cd /nix/var/nix/profiles/per-user/moul; \
-	current_version=`ls | grep home-manager- | sed 's/home-manager-\(.*\)-link/\1/' | sort -n | tail -n 1`; \
-	previous_version=`ls | grep home-manager- | sed 's/home-manager-\(.*\)-link/\1/' | sort -n | tail -n 2 | head -n 1`; \
-	nix-diff `nix-store -qd home-manager-$$previous_version-link home-manager-$$current_version-link`; \
-	echo "previous_version: $$previous_version, current_version: $$current_version"
-
-gc:
-	nix-env -p /nix/var/nix/profiles/system --delete-generations +1
-	nix-collect-garbage -d
-
 switch.desktop-x86_64:
+	@echo ============
+	@echo = SWITCH: MAC, X86_64, DESKTOP
+	@echo ============
 	nix build .#darwinConfigurations.bootstrap-x86_64.system
 	./result/sw/bin/darwin-rebuild switch --verbose --flake .#desktop-x86_64
 
 switch.desktop-aarch64:
+	@echo ============
+	@echo = SWITCH: MAC, AARCH64, DESKTOP
+	@echo ============
 	nix build .#darwinConfigurations.bootstrap-aarch64.system
 	./result/sw/bin/darwin-rebuild switch --verbose --flake .#desktop-aarch64
 
 switch.linux-x86_64:
+	@echo ============
+	@echo = SWITCH: LINUX, X86_64, SERVER/DESKTOP
+	@echo ============
 	#nix build .#linuxConfigurations.bootstrap-x86_64.system
 	nix build .#linuxConfigurations.server-x86_64.activationPackage
 	./result/activate switch --verbose --flake .#linux-x86_64
