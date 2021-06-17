@@ -11,12 +11,12 @@
     AppleShowScrollBars = "Automatic";
     AppleTemperatureUnit = "Celsius";
     InitialKeyRepeat = 12;
-    KeyRepeat = 0;
+    KeyRepeat = 1;
     NSAutomaticCapitalizationEnabled = false;
     NSAutomaticPeriodSubstitutionEnabled = false;
     "com.apple.springing.delay" = "0.0";
     #NSAutomaticWindowAnimationsEnabled = false;
-    _HIHideMenuBar = true;
+    _HIHideMenuBar = false;
   };
 
   # Firewall
