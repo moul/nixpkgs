@@ -107,3 +107,10 @@ killall-osx:
 	@killall "Transmission" || true
 	@killall "Twitter" || true
 	@killall "iCal" || true
+
+fix-darwin-daemon-permissions:
+	sudo chown -R root:nixbld /nix
+	sudo chmod 1777 /nix/var/nix/profiles/per-user
+	sudo chown -R $$USER:staff /nix/var/nix/profiles/per-user/$$USER
+	sudo mkdir -m 1777 -p /nix/var/nix/gcroots/per-user
+	sudo chown -R $$USER:staff /nix/var/nix/gcroots/per-user/$$USER
