@@ -6,20 +6,20 @@ all: switch
 
 # smart switch
 HOST ?= $(shell hostname)
-ifeq ($(HOST),moul-mini-1.local)                    # mac, m1, desktop
-switch: _info switch.desktop-aarch64
+ifneq ($(filter $(HOST),moul-mini-1.lan moul-mini-1.local),)   # mac, m1, desktop
+switch: _info switch.desktop-aarch64 _install-go-lazy
 
 else ifeq ($(HOST),fwrz)                            # linux, x86_64, server
-switch: _info switch.linux-x86_64
+switch: _info switch.linux-x86_64 _install-go-lazy
 
 else ifeq ($(HOST),manfred-imac-2.local)            # mac, x86_64, desktop
-switch: _info switch.desktop-x86_64
+switch: _info switch.desktop-x86_64 _install-go-lazy
 
 else ifeq ($(HOST),manfred-spacegray-3.local)       # mac, x86_64, desktop
-switch: _info switch.desktop-x86_64
+switch: _info switch.desktop-x86_64 _install-go-lazy
 
 else ifeq ($(HOST),moul-vp-linux)                   # linux, x86_64, desktop
-switch: _info switch.linux-x86_64
+switch: _info switch.linux-x86_64 _install-go-lazy
 
 else
 switch:
@@ -53,6 +53,13 @@ update:
 #
 # INTERNAL
 #
+
+RETRY_BIN ?= $(shell go env GOBIN)/retry
+_install-go-lazy: $(RETRY_BIN)
+$(RETRY_BIN): install-go
+
+install-go:
+	cd config/go; make install
 
 _info:
 	@echo ============
