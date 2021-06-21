@@ -42,7 +42,11 @@
       defaultSystems = flake-utils.lib.defaultSystems ++ [ "aarch64-darwin" ];
       nixpkgsConfig = { mysystem }:
         with inputs; {
-          config = { allowUnfree = true; allowUnsupportedSystem = true; allowBroken = true; };
+          config = {
+            allowUnfree = true;
+            allowUnsupportedSystem = true;
+            allowBroken = true;
+          };
           overlays = [
             (final: prev:
               let

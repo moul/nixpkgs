@@ -32,9 +32,9 @@
     autohide = true;
     expose-group-by-app = false;
     mru-spaces = false;
-    tilesize = 25;
-    orientation = "left";
-    autohide-delay = "0.2";
+    #tilesize = 25;
+    orientation = "bottom";
+    autohide-delay = "0.1";
   };
 
   # Keyboard
