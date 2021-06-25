@@ -15,7 +15,7 @@ switch: _info switch.linux-x86_64 _install-go-lazy
 else ifeq ($(HOST),manfred-imac-2.local)            # mac, x86_64, desktop
 switch: _info switch.desktop-x86_64 _install-go-lazy
 
-else ifeq ($(HOST),manfred-spacegray-3.local)       # mac, x86_64, desktop
+else ifneq ($(filter $(HOST),manfred-spacegray-3.local manfred-spacegray.lan),)   # mac, x86_64, desktop
 switch: _info switch.desktop-x86_64 _install-go-lazy
 
 else ifeq ($(HOST),moul-vp-linux)                   # linux, x86_64, desktop
