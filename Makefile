@@ -125,11 +125,11 @@ setup-cachix:
 
 cachix-push:
 	# FIXME: skip useless commands
-	nix path-info .#linuxConfigurations.server-x86_64.activationPackage | cachix push moul || true
-	nix path-info .#darwinConfigurations.bootstrap-x86_64.system | cachix push moul || true
-	nix path-info .#darwinConfigurations.bootstrap-aarch64.system | cachix push moul || true
-	nix path-info .#darwinConfigurations.desktop-x86_64.system | cachix push moul || true
-	nix path-info .#darwinConfigurations.desktop-aarch64.system | cachix push moul || true
+	-nix path-info '.#linuxConfigurations.server-x86_64.activationPackage' | cachix push moul || true
+	-nix path-info '.#darwinConfigurations.bootstrap-x86_64.system' | cachix push moul || true
+	-nix path-info '.#darwinConfigurations.bootstrap-aarch64.system' | cachix push moul || true
+	-nix path-info '.#darwinConfigurations.desktop-x86_64.system' | cachix push moul || true
+	-nix path-info '.#darwinConfigurations.desktop-aarch64.system' | cachix push moul || true
 
 regen-emacs:
 	raw-emacs --batch --load=~/.spacemacs -debug-init
