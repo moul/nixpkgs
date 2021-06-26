@@ -92,8 +92,9 @@ install-darwin:
 install-linux-root:
 	curl -L https://nixos.org/nix/install > /tmp/nix-install
 	sh /tmp/nix-install
-	make _setup
-
+	mkdir -p ~/.config
+	ln -sf $(PWD) ~/.config/nixpkgs
+	$(SETENV); make install-flake
 
 install-linux-no-root:
 	unshare --user --pid echo YES | grep -q YES
