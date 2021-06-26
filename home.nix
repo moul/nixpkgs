@@ -86,6 +86,7 @@ in {
       lsof
       mosh
       nerdsfontLight
+      ngrok
       nixfmt
       nix-diff
       nix-index
