@@ -120,6 +120,11 @@ install-flake:
 setup-cachix:
 	nix-env -iA cachix -f https://cachix.org/api/v1/install
 	cachix use nix-community
+	cachix use moul
+	#cachix authtoken XXX
+
+cachix-push:
+	nix path-info .#linuxConfigurations.server-x86_64.activationPackage | cachix push moul
 
 regen-emacs:
 	raw-emacs --batch --load=~/.spacemacs -debug-init
