@@ -54,9 +54,10 @@ update:
 # INTERNAL
 #
 
-RETRY_BIN ?= $(shell go env GOBIN)/retry
+RETRY_BIN ?= $(shell which go >/dev/null >>/dev/null && go env GOBIN)/retry
 _install-go-lazy: $(RETRY_BIN)
-$(RETRY_BIN): install-go
+$(RETRY_BIN):
+	make install-go
 
 install-go:
 	cd config/go; make install
