@@ -15,6 +15,15 @@ hosts:
   "*.127.0.0.1.xip.io":
     user: moul
 
+  fwrz2.m.42.am:
+    user: moul
+
+  zrwf.m.42.am:
+    user: moul
+
+  obelix.m.42.am:
+    user: moul
+
 defaults:
   ControlMaster: auto
   ControlPath: ~/.cache/ssh/%C.sock
