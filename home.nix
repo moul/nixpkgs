@@ -54,6 +54,7 @@ in {
       bat
       bazel
       cachix
+      code-server
       coreutils
       cowsay
       curl
