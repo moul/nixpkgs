@@ -53,6 +53,7 @@ in {
       assh
       bat
       bazel
+      bind
       cachix
       code-server
       coreutils
