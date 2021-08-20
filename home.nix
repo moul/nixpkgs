@@ -105,6 +105,7 @@ in {
       pstree
       raw-emacs
       screen
+      socat
       tcpdump
       telnet
       tmux
