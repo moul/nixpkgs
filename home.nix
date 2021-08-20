@@ -120,6 +120,10 @@ in {
       youtube-dl
       zip
       zoxide
+
+      # tmp
+      python
+      ruby
     ] ++ lib.optionals stdenv.isDarwin [ cocoapods jazzy libffi libffi.dev ]
     ++ lib.optionals stdenv.isLinux [ lshw ];
   #home.username = "moul";
