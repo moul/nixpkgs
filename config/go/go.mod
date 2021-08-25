@@ -5,7 +5,7 @@ go 1.16
 require (
 	github.com/cespare/prettybench v0.0.0-20150116022406-03b8cfe5406c
 	github.com/daixiang0/gci v0.2.8
-	github.com/goreleaser/goreleaser v0.169.0
+	github.com/goreleaser/goreleaser v0.176.0
 	github.com/maruel/panicparse/v2 v2.1.1
 	golang.org/x/tools v0.1.4
 	honnef.co/go/tools v0.2.0
