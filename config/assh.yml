@@ -24,6 +24,10 @@ hosts:
   obelix.m.42.am:
     user: moul
 
+  octopi:
+    user: pi
+    HostName: octopi.42.am.beta.tailscale.net
+
 defaults:
   ControlMaster: auto
   ControlPath: ~/.cache/ssh/%C.sock
