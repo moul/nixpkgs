@@ -8,7 +8,7 @@ require (
 	github.com/goreleaser/goreleaser v0.184.0
 	github.com/maruel/panicparse/v2 v2.2.0
 	golang.org/x/tools v0.1.7
-	honnef.co/go/tools v0.2.1
+	honnef.co/go/tools v0.2.2
 	moul.io/prefix v1.7.1
 	moul.io/retry v0.7.0
 )
