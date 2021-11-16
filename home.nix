@@ -119,6 +119,7 @@ in {
       xorg.xeyes
       yarn
       youtube-dl
+      yq
       zip
       zoxide
 
