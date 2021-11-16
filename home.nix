@@ -400,7 +400,15 @@ in {
     }];
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git-extras" "git" "gitfast" "github" ];
+      plugins = [
+        "git-extras"
+        "git"
+        "gitfast"
+        "github"
+        "ssh-agent"
+        "tig"
+        "tmux"
+      ];
       theme = "agnoster";
       #theme = "frozencow";
     };
