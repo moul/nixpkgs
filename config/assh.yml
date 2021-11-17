@@ -26,7 +26,8 @@ hosts:
 
   octopi:
     user: pi
-    HostName: octopi.42.am.beta.tailscale.net
+    HostName: octopi.local
+    #HostName: octopi.42.am.beta.tailscale.net
 
 defaults:
   ControlMaster: auto
