@@ -126,6 +126,8 @@ in {
       # tmp
       python
       ruby
+      watchman
+      cocoapods
     ] ++ lib.optionals stdenv.isDarwin [ cocoapods jazzy libffi libffi.dev ]
     ++ lib.optionals stdenv.isLinux [ lshw ];
   #home.username = "moul";
