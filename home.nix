@@ -128,6 +128,8 @@ in {
       ruby
       watchman
       cocoapods
+      rustc
+      cargo
     ] ++ lib.optionals stdenv.isDarwin [ cocoapods jazzy libffi libffi.dev ]
     ++ lib.optionals stdenv.isLinux [ lshw ];
   #home.username = "moul";
