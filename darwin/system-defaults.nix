@@ -35,6 +35,9 @@
     #tilesize = 25;
     orientation = "bottom";
     autohide-delay = "0.1";
+    static-only = false;
+    show-process-indicators = true;
+    show-recents = true;
   };
 
   # Keyboard
