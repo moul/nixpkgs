@@ -122,6 +122,12 @@
 	    user = "moul2";
 	  };
 	};
+	mini2-renato = darwin.lib.darwinSystem {
+	  modules = darwinCommonConfig {
+	    system = "aarch64-darwin";
+	    user = "renato";
+	  };
+	};
       };
       linuxConfigurations = {
         server-x86_64 = inputs.home-manager.lib.homeManagerConfiguration {
