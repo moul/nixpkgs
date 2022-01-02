@@ -116,6 +116,12 @@
             user = "moul";
           };
         };
+	mini1-moul2 = darwin.lib.darwinSystem {
+	  modules = darwinCommonConfig {
+	    system = "aarch64-darwin";
+	    user = "moul2";
+	  };
+	};
       };
       linuxConfigurations = {
         server-x86_64 = inputs.home-manager.lib.homeManagerConfiguration {
