@@ -155,6 +155,10 @@ switch.mini1-moul2:
 	nix build .#darwinConfigurations.bootstrap-aarch64.system
 	./result/sw/bin/darwin-rebuild switch --verbose --flake .#mini1-moul2
 
+switch.mini2-renato:
+	nix build .#darwinConfigurations.bootstrap-aarch64.system
+	./result/sw/bin/darwin-rebuild switch --verbose --flake .#mini2-renato
+
 switch.linux-x86_64:
 	@echo ============
 	@echo = SWITCH: LINUX, X86_64, SERVER/DESKTOP
