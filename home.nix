@@ -119,6 +119,7 @@ in {
       xdg_utils
       xorg.xeyes
       yarn
+      yarn2nix
       youtube-dl
       yq
       zip
