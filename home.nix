@@ -99,6 +99,7 @@ in {
       nmap
       nodejs
       openssl
+      parallel
       pre-commit
       procs
       protobuf
