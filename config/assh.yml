@@ -29,6 +29,9 @@ hosts:
     HostName: octopi.local
     #HostName: octopi.42.am.beta.tailscale.net
 
+  "*.pathwar.net":
+    user: pathwar
+
 defaults:
   ControlMaster: auto
   ControlPath: ~/.cache/ssh/%C.sock
