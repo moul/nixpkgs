@@ -15,13 +15,7 @@ hosts:
   "*.127.0.0.1.xip.io":
     user: moul
 
-  fwrz2.m.42.am:
-    user: moul
-
-  zrwf.m.42.am:
-    user: moul
-
-  obelix.m.42.am:
+  "*.m.42.am":
     user: moul
 
   octopi:
@@ -31,6 +25,10 @@ hosts:
 
   "*.pathwar.net":
     user: pathwar
+
+  "*.pathwar42.fr":
+    user: root
+    port: 4222
 
 defaults:
   ControlMaster: auto
