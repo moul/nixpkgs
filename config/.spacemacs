@@ -575,7 +575,7 @@ before packages are loaded."
   (require 'lsp-mode)
   ;;(add-hook 'go-mode-hook #'lsp-deferred)
 
-  (add-to-list 'auto-mode-alist '("\\.gno\\'" . go-mode-hook))
+  (add-to-list 'auto-mode-alist '("\\.gno\\'" . go-mode))
 
   ;; Set up before-save hooks to format buffer and add/delete imports.
   ;; Make sure you don't have other gofmt/goimports hooks enabled.
