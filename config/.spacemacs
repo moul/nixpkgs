@@ -32,7 +32,8 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(php
+   '(octave
+     php
      swift
      ruby
      python
@@ -573,6 +574,8 @@ before packages are loaded."
   (require 'lsp)
   (require 'lsp-mode)
   ;;(add-hook 'go-mode-hook #'lsp-deferred)
+
+  (add-to-list 'auto-mode-alist '("\\.gno\\'" . go-mode-hook))
 
   ;; Set up before-save hooks to format buffer and add/delete imports.
   ;; Make sure you don't have other gofmt/goimports hooks enabled.
