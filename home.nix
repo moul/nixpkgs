@@ -449,6 +449,9 @@ in {
       # TMP FIX
       export PATH=$PATH:~/.nix-profile/bin; for file in ~/.nix-profile/etc/profile.d/*.sh; do source $file; done
 
+      # GNO
+      export GNO_HOME=~/.gno
+
       # GVM
       # requires:
       #     bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
