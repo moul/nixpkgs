@@ -107,7 +107,7 @@ in {
       raw-emacs
       screen
       socat
-      solc
+      #solc
       tcpdump
       telnet
       tmux
