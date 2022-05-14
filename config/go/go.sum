@@ -656,6 +656,8 @@ github.com/maruel/panicparse/v2 v2.2.0 h1:4/Pd1VuUKlxD7+Dwx9sm49vgAr/tTMexKSh6uP
 github.com/maruel/panicparse/v2 v2.2.0/go.mod h1:pMxsKyCewnV3xPaFvvT9NfwvDTcIx2Xqg0qL5Gq0SjM=
 github.com/maruel/panicparse/v2 v2.2.1 h1:VXY1afcZVisbGdNIRQV15vmM7K40pTCiou0b/xwtOBU=
 github.com/maruel/panicparse/v2 v2.2.1/go.mod h1:WizmeHJfpyKYYKGInKv8ax8jh7DJnQE5yFDuzFfHzIU=
+github.com/maruel/panicparse/v2 v2.2.2 h1:4Gu/Z5oLpJCE/0/NwxrUkyn7alpqOQdJAUuchB2OoJU=
+github.com/maruel/panicparse/v2 v2.2.2/go.mod h1:WizmeHJfpyKYYKGInKv8ax8jh7DJnQE5yFDuzFfHzIU=
 github.com/matryer/is v1.2.0/go.mod h1:2fLPjFQM9rhQ15aVEtbuwhJinnOqrmgXPNdZsdwlWXA=
 github.com/matryer/is v1.4.0/go.mod h1:8I/i5uYgLzgsgEloJE1U6xx5HkBQpAZvepWuujKwMRU=
 github.com/mattn/go-colorable v0.0.9/go.mod h1:9vuHe8Xs5qXnSaW/c/ABM9alt+Vo+STaOChaDxuIBZU=
