@@ -66,6 +66,7 @@ in {
       du-dust
       em
       emacs-nox
+      entr
       exa
       fd
       ffmpeg
