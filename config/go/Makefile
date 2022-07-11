@@ -12,6 +12,7 @@ install:
 	-$(GO) install moul.io/prefix/cmd/prefix
 	-$(GO) install moul.io/retry
 	-$(GO) install github.com/cespare/prettybench
+	-$(GO) install github.com/gfanton/loon
 
 clean:
 	rm -f $(GOBIN)/pp
