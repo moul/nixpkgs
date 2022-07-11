@@ -116,7 +116,8 @@ install-flake:
 		mkdir -p ~/.config/nix; \
 		echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf; \
 	fi
-	curl -L https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20200804_ed52cf6/install | sh
+	#curl -L https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20200804_ed52cf6/install | sh
+	curl -L https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.10.0pre20220706_f6316b4/install | sh
 
 setup-cachix:
 	nix-env -iA cachix -f https://cachix.org/api/v1/install
