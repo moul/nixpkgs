@@ -13,6 +13,7 @@ install:
 	-$(GO) install moul.io/retry
 	-$(GO) install github.com/cespare/prettybench
 	-$(GO) install github.com/gfanton/loon
+	-$(GO) install github.com/gnolang/gno/cmd/gnokey
 
 clean:
 	rm -f $(GOBIN)/pp
