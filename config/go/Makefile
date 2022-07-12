@@ -14,6 +14,7 @@ install:
 	-$(GO) install github.com/cespare/prettybench
 	-$(GO) install github.com/gfanton/loon
 	-$(GO) install github.com/gnolang/gno/cmd/gnokey
+	-$(GO) install berty.tech/berty/v2/go/cmd/rdvp
 
 clean:
 	rm -f $(GOBIN)/pp
