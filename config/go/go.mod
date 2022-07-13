@@ -3,7 +3,7 @@ module moul.io/nixpkgs/config/go
 go 1.18
 
 require (
-	berty.tech/berty/v2 v2.417.0
+	berty.tech/berty/v2 v2.418.0
 	github.com/cespare/prettybench v0.1.0
 	github.com/daixiang0/gci v0.3.2
 	github.com/gfanton/loon v1.0.0
