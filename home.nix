@@ -234,6 +234,7 @@ in {
     #  key = "";
     #  signByDefault = true;
     #};
+    # TODO: support advanced diff: https://gist.github.com/kbaird/2654115
     aliases = { co = "checkout"; };
     package = pkgs.buildEnv {
       name = "myGitEnv";

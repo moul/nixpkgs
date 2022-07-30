@@ -1,7 +1,5 @@
 bazil.org/fuse v0.0.0-20200117225306-7b5117fecadc h1:utDghgcjE8u+EBjHOgYT+dJPcnDF05KqWMBcjuJy510=
 bazil.org/fuse v0.0.0-20200117225306-7b5117fecadc/go.mod h1:FbcW6z/2VytnFDhZfumh8Ss8zxHE6qpMP5sHTRe0EaM=
-berty.tech/berty/v2 v2.417.0 h1:aqxkFT5Eww4O0M8kG40T5c+0qqoV8Kv1b8mQSYt0XuM=
-berty.tech/berty/v2 v2.417.0/go.mod h1:ywIZ3JQ/b0nZSPovx8Ud5regI2afJ+K6d+4+6ZdI1TY=
 berty.tech/berty/v2 v2.418.0 h1:j9G+n4oQGtsNOfwu1/1+jitz34f+uVEuhvvT99rZ4fk=
 berty.tech/berty/v2 v2.418.0/go.mod h1:ywIZ3JQ/b0nZSPovx8Ud5regI2afJ+K6d+4+6ZdI1TY=
 berty.tech/go-ipfs-log v1.8.0/go.mod h1:fhe//ai9/3IUyYlDlnsCuNIZXMERXZelYm66dxesLhs=
