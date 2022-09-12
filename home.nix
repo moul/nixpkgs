@@ -452,7 +452,7 @@ in {
       export PATH=$PATH:~/.nix-profile/bin; for file in ~/.nix-profile/etc/profile.d/*.sh; do source $file; done
 
       # GNO
-      export GNO_HOME=$HOME
+      export GNO_HOME=$HOME/.gno
 
       # GVM
       # requires:
