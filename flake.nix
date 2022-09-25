@@ -96,6 +96,21 @@
         };
         bootstrap-arm = bootstrap-x86.override { system = "aarch64-darwin"; };
 
+        musca = darwinSystem {
+          system = "x86_64-darwin";
+          modules = nixDarwinCommonModules ++ [
+            {
+              users.primaryUser = primaryUserInfo;
+              networking.computerName = "Manfred, Musca";
+              networking.hostName = "moul-musca";
+              networking.knownNetworkServices = [
+                "Wi-Fi"
+                "USB 10/100/1000 LAN"
+              ];
+            }
+          ];
+        };
+
         x86-macbook = darwinSystem {
           system = "x86_64-darwin";
           modules = nixDarwinCommonModules ++ [
@@ -110,7 +125,7 @@
             }
           ];
         };
-	
+
         m1-macbook = darwinSystem {
           system = "aarch64-darwin";
           modules = nixDarwinCommonModules ++ [
