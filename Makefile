@@ -8,4 +8,7 @@ darwin-bootstrap-a:
 
 darwin-bootstrap-b:
 	nix-env -iA nixpkgs.nixVersions.stable
-	nix --experimental-features 'nix-command flakes' build .#darwinConfigurations.macbook.system
+
+m1-macbook x86-macbook:
+	nix --experimental-features 'nix-command flakes' build .#darwinConfigurations.$@.system
+	./result/sw/bin/darwin-rebuild switch --flake .#$@
