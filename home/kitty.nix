@@ -9,10 +9,7 @@
   # General config ----------------------------------------------------------------------------- {{{
 
   programs.kitty.settings = {
-    font_family = "Iosevka Term Regular";
-    bold_font = "Iosevka Term Heavy";
-    italic_font = "Iosevka Term Italic";
-    bold_italic_font = "Iosevka Term Heavy Italic";
+    font_family = "Iosevka Nerd Font";
     font_size = "12.0";
     adjust_line_height = "100%";
     adjust_column_width = "100%";
@@ -35,6 +32,22 @@
   programs.kitty.extraConfig = ''
     font_features PragmataProMonoLiga-Italic +ss06
     font_features PragmataProMonoLiga-BoldItalic +ss07
+    clear_all_shortcuts yes
+    rectangle_select_modifiers   no_op
+    kitty_mod                    cmd
+    map cmd+c                    copy_to_clipboard
+    map cmd+v                    paste_from_clipboard
+    map cmd+u                    input_unicode_character
+    map cmd+enter                toggle_fullscreen
+    map cmd+f                    show_scrollback
+
+    map cmd+0                    change_font_size all 0
+    map cmd+shift+equals         change_font_size all +1.0
+    map cmd+shift+minus          change_font_size all -1.0
+
+    map cmd+0x1d                 change_font_size all 0
+    map cmd+0x18                 change_font_size all +1.0
+    map cmd+0x1b                 change_font_size all -1.0
   '';
 
   programs.kitty.extras.useSymbolsFromNerdFont = "JetBrainsMono Nerd Font";
