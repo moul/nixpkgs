@@ -25,11 +25,6 @@
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.zoxide.enable
   programs.zoxide.enable = true;
 
-  # Tmux.
-  programs.tmux.enable = true;
-  programs.tmux.terminal = "screen-256color";
-  programs.tmux.keyMode = "emacs";
-
   home.packages = with pkgs; [
     # Some basics
     abduco # lightweight session management
@@ -38,10 +33,10 @@
     browsh # in terminal browser
     coreutils
     curl
+    (nerdfonts.override { fonts = ["Iosevka" "FiraCode" "Hack"]; })
     du-dust # fancy version of `du`
     entr
     exa # fancy version of `ls`
-    emacs
     fd # fancy version of `find`
     htop # fancy version of `top`
     hyperfine # benchmarking tool
@@ -52,7 +47,6 @@
     ripgrep # better version of `grep`
     tealdeer # rust implementation of `tldr`
     thefuck
-    tmux
     unrar # extract RAR archives
     wget
     xz # extract XZ archives

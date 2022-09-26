@@ -22,6 +22,69 @@
 { config, ... }:
 
 {
+  colors.ManfredTouron-dark = {
+    colors = {
+      color0 = "#000000";
+      color1 = "#ff0000";
+      color2 = "#51ff0f";
+      color3 = "#e7a800";
+      color4 = "#3950d7";
+      color5 = "#d336b1";
+      color6 = "#66b2ff";
+      color7 = "#cecece";
+      color8 = "#4e4e4e";
+      color9 = "#ff008b";
+      color10 = "#62c750";
+      color11 = "#f4ff00";
+      color12 = "#70a5ed";
+      color13 = "#b867e6";
+      color14 = "#00d4fc";
+      color15 = "#ffffff";
+    };
+
+    namedColors = {
+      # Solarized names
+      base03 = "color0";
+      base02 = "color8";
+      base01 = "color10";
+      base00 = "color11";
+      base0 = "color12";
+      base1 = "color14";
+      base2 = "color7";
+      base3 = "color15";
+      yellow = "color3";
+      orange = "color9";
+      red = "color1";
+      magenta = "color5";
+      violet = "color13";
+      blue = "color4";
+      cyan = "color6";
+      green = "color2";
+    };
+
+    terminal = {
+      bg = "base03";
+      fg = "base0";
+      cursorBg = "blue";
+      cursorFg = "base3";
+      selectionBg = "base1";
+      selectionFg = "base3";
+    };
+
+    pkgThemes.kitty = {
+      url_color = "blue";
+      tab_bar_background = "base2";
+      active_tab_background = "green";
+      active_tab_foreground = "base3";
+      inactive_tab_background = "base01";
+      inactive_tab_foreground = "base3";
+    };
+  };
+
+  colors.ManfredTouron-light = {
+    inherit (config.colors.ManfredTouron-dark) colors namedColors terminal pkgThemes;
+  };
+  
   colors.solarized-light = {
     colors = {
       color0 = "#073642";

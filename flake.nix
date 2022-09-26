@@ -206,22 +206,6 @@
           prefmanager = inputs.prefmanager.packages.${prev.stdenv.system}.default;
         };
 
-        # Overlay that adds various additional utility functions to `vimUtils`
-        vimUtils = import ./overlays/vimUtils.nix;
-
-        # Overlay that adds some additional Neovim plugins
-        vimPlugins = final: prev:
-          let
-            inherit (self.overlays.vimUtils final prev) vimUtils;
-          in
-          {
-            vimPlugins = prev.vimPlugins.extend (_: _:
-              vimUtils.buildVimPluginsFromFlakeInputs inputs [
-                # Add flake input name here
-              ]
-            );
-          };
-
         # Overlay useful on Macs with Apple Silicon
         apple-silicon = _: prev: optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
           # Add access to x86 packages system is running Apple Silicon
@@ -259,14 +243,14 @@
         moul-git-aliases = import ./home/git-aliases.nix;
         moul-gh-aliases = import ./home/gh-aliases.nix;
         moul-kitty = import ./home/kitty.nix;
-        moul-neovim = import ./home/neovim.nix;
+	moul-emacs = import ./home/emacs.nix;
+	moul-tmux = import ./home/tmux.nix;
         moul-packages = import ./home/packages.nix;
         moul-starship = import ./home/starship.nix;
         moul-starship-symbols = import ./home/starship-symbols.nix;
 
         # Modules I've created
         colors = import ./modules/home/colors;
-        programs-neovim-extras = import ./modules/home/programs/neovim/extras.nix;
         programs-kitty-extras = import ./modules/home/programs/kitty/extras.nix;
         home-user-info = { lib, ... }: {
           options.home.user-info =

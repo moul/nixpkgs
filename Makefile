@@ -18,3 +18,4 @@ darwin-bootstrap-b:
 moul-musca:
 	nix --experimental-features 'nix-command flakes' build .#darwinConfigurations.$@.system
 	./result/sw/bin/darwin-rebuild switch --flake .#$@
+	@echo Done.

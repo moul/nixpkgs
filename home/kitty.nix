@@ -9,10 +9,13 @@
   # General config ----------------------------------------------------------------------------- {{{
 
   programs.kitty.settings = {
-    # https://fsd.it/shop/fonts/pragmatapro/
-    font_family = "PragmataPro Mono Liga";
-    font_size = "14.0";
-    adjust_line_height = "140%";
+    font_family = "Iosevka Term Regular";
+    bold_font = "Iosevka Term Heavy";
+    italic_font = "Iosevka Term Italic";
+    bold_italic_font = "Iosevka Term Heavy Italic";
+    font_size = "12.0";
+    adjust_line_height = "100%";
+    adjust_column_width = "100%";
     disable_ligatures = "cursor"; # disable ligatures when cursor is on them
 
     # Window layout
@@ -42,8 +45,8 @@
     enable = true;
 
     # Background dependent colors
-    dark = config.colors.solarized-dark.pkgThemes.kitty;
-    light = config.colors.solarized-light.pkgThemes.kitty;
+    dark = config.colors.ManfredTouron-dark.pkgThemes.kitty;
+    light = config.colors.ManfredTouron-light.pkgThemes.kitty;
   };
 
   programs.fish.functions.set-term-colors = {

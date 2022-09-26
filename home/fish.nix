@@ -43,7 +43,7 @@ in
     set-shell-colors = {
       body = ''
         # Set LS_COLORS
-        set -xg LS_COLORS (${pkgs.vivid}/bin/vivid generate solarized-$term_background)
+        set -xg LS_COLORS (${pkgs.vivid}/bin/vivid generate Solarized-$term_background)
 
         # Set color variables
         if test "$term_background" = light
