@@ -51,6 +51,7 @@
     wget
     xz # extract XZ archives
     jq
+    unixtools.watch
 
     # Useful nix related tools
     cachix # adding/managing alternative binary caches hosted by Cachix
