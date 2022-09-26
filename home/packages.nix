@@ -38,6 +38,7 @@
     entr
     exa # fancy version of `ls`
     fd # fancy version of `find`
+    hub
     htop # fancy version of `top`
     hyperfine # benchmarking tool
     mosh # wrapper for `ssh` that better and not dropping connections

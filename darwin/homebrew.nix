@@ -40,36 +40,35 @@ in
 
   # Prefer installing application from the Mac App Store
   homebrew.masApps = {
-    # "1Blocker" = 1365531024;
-    # "1Password" = 1333542190;
-    # "1Password for Safari" = 1569813296;
-    # "Accelerate for Safari" = 1459809092;
-    # "Apple Configurator 2" = 1037126344;
+    "iStat Menus" = 1319778037;
+    "Microsoft Remote Desktop" = 1295203466;
+    "Pixelmator Pro" = 1289583905;
+    "WiFi Explorer" = 494803304;
+    "Yubico Authenticator" = 1497506650;
+    "one sec" = 1532875441;
+    Backtrack = 1477089520;
+    Controller = 1198176727;
     DaisyDisk = 411643860;
-    # "Dark Mode for Safari" = 1397180934;
     Deliveries = 290986013;
     Fantastical = 975937182;
-    # "Gemini 2" = 1090488118;
-    # "iMazing Profile Editor" = 1487860882;
+    GarageBand = 682658836;
+    iMovie = 408981434;
     Keynote = 409183694;
-    # MindNode = 1289197285;
+    Monodraw = 920404675;
+    NextDNS = 1464122853;
     Numbers = 409203825;
     Pages = 409201541;
-    # Patterns = 429449079;
-    # "Pixelmator Classic" = 407963104;
-    "Pixelmator Pro" = 1289583905;
-    # "Save to Raindrop.io" = 1549370672;
+    Pocket = 568494494;
+    Screens = 1224268771;
     Slack = 803453959;
+    Tailscale = 1475387142;
+    Transmit = 1436522307;
     Twitter = 1482454543;
-    # SiteSucker = 442168834;
-    # "Things 3" = 904280696;
-    # TripMode = 1513400665;
-    # Ulysses = 1225570693;
-    # Vimari = 1480933944;
-    "WiFi Explorer" = 494803304;
-    # TODO: Re-enable once macOS Ventura officially launches
-    # Xcode = 497799835;
-    "Yubico Authenticator" = 1497506650;
+    Canva = 897446215;
+    Infuse = 1136220934;
+    Trello = 1278508951;
+    #Logic Pro = ;
+    #Micro Moog = ;
   };
 
   # If an app isn't available in the Mac App Store, or the version in the App Store has
@@ -121,6 +120,7 @@ in
   # For cli packages that aren't currently available for macOS in `nixpkgs`.Packages should be
   # installed in `../home/default.nix` whenever possible.
   homebrew.brews = [
+    "mas"
     #"hub"
     #"golang"
     #"mosh"
