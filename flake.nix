@@ -49,7 +49,7 @@
       primaryUserInfo = {
         username = "moul";
         fullName = "Manfred Touron";
-        email = "computer@manfred.team";
+        email = "94029+moul@users.noreply.github.com";
         nixConfigDirectory = "/Users/moul/.config/nixpkgs";
       };
 

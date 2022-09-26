@@ -36,6 +36,7 @@
     du-dust # fancy version of `du`
     entr
     exa # fancy version of `ls`
+    emacs
     fd # fancy version of `find`
     htop # fancy version of `top`
     hyperfine # benchmarking tool
