@@ -32,4 +32,4 @@ ifeq ($(UNAME_S),Darwin)
 	-nix path-info ".#darwinConfigurations.$(HOSTNAME).system" | cachix push moul || true
 endif
 	nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | cachix push moul
-
+	@echo Done.
