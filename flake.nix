@@ -1,5 +1,5 @@
 {
-  description = "Malo’s Nix system configs, and some other useful stuff.";
+  description = "moul’s Nix system configs, and some other useful stuff.";
 
   inputs = {
     # Package sets
@@ -47,10 +47,10 @@
       homeManagerStateVersion = "22.11";
 
       primaryUserInfo = {
-        username = "malo";
-        fullName = "Malo Bourgon";
-        email = "mbourgon@gmail.com";
-        nixConfigDirectory = "/Users/malo/.config/nixpkgs";
+        username = "moul";
+        fullName = "Manfred Touron";
+        email = "computer@manfred.team";
+        nixConfigDirectory = "/Users/moul/.config/nixpkgs";
       };
 
       # Modules shared by most `nix-darwin` personal configurations.
@@ -100,7 +100,10 @@
           system = "x86_64-darwin";
           modules = nixDarwinCommonModules ++ [
             {
-              users.primaryUser = primaryUserInfo;
+              users.primaryUser = primaryUserInfo // {
+	        username = "manfredtouron";
+		nixConfigDirectory = "/Users/manfredtouron/.config/nixpkgs";
+	      };
               networking.computerName = "Manfred, Musca";
               networking.hostName = "moul-musca";
               networking.knownNetworkServices = [
@@ -158,8 +161,8 @@
 
       # Config I use with Linux cloud VMs
       # Build and activate on new system with:
-      # `nix build .#homeConfigurations.malo.activationPackage; ./result/activate`
-      homeConfigurations.malo = home-manager.lib.homeManagerConfiguration {
+      # `nix build .#homeConfigurations.moul.activationPackage; ./result/activate`
+      homeConfigurations.moul = home-manager.lib.homeManagerConfiguration {
         pkgs = import inputs.nixpkgs-unstable {
           system = "x86_64-linux";
           inherit (nixpkgsConfig) config overlays;
@@ -236,10 +239,10 @@
 
       darwinModules = {
         # My configurations
-        malo-bootstrap = import ./darwin/bootstrap.nix;
-        malo-defaults = import ./darwin/defaults.nix;
-        malo-general = import ./darwin/general.nix;
-        malo-homebrew = import ./darwin/homebrew.nix;
+        moul-bootstrap = import ./darwin/bootstrap.nix;
+        moul-defaults = import ./darwin/defaults.nix;
+        moul-general = import ./darwin/general.nix;
+        moul-homebrew = import ./darwin/homebrew.nix;
 
         # Modules I've created
         programs-nix-index = import ./modules/darwin/programs/nix-index.nix;
@@ -248,17 +251,17 @@
 
       homeManagerModules = {
         # My configurations
-        malo-colors = import ./home/colors.nix;
-        malo-config-files = import ./home/config-files.nix;
-        malo-fish = import ./home/fish.nix;
-        malo-git = import ./home/git.nix;
-        malo-git-aliases = import ./home/git-aliases.nix;
-        malo-gh-aliases = import ./home/gh-aliases.nix;
-        malo-kitty = import ./home/kitty.nix;
-        malo-neovim = import ./home/neovim.nix;
-        malo-packages = import ./home/packages.nix;
-        malo-starship = import ./home/starship.nix;
-        malo-starship-symbols = import ./home/starship-symbols.nix;
+        moul-colors = import ./home/colors.nix;
+        moul-config-files = import ./home/config-files.nix;
+        moul-fish = import ./home/fish.nix;
+        moul-git = import ./home/git.nix;
+        moul-git-aliases = import ./home/git-aliases.nix;
+        moul-gh-aliases = import ./home/gh-aliases.nix;
+        moul-kitty = import ./home/kitty.nix;
+        moul-neovim = import ./home/neovim.nix;
+        moul-packages = import ./home/packages.nix;
+        moul-starship = import ./home/starship.nix;
+        moul-starship-symbols = import ./home/starship-symbols.nix;
 
         # Modules I've created
         colors = import ./modules/home/colors;
@@ -272,7 +275,7 @@
       # }}}
 
       # Add re-export `nixpkgs` packages with overlays.
-      # This is handy in combination with `nix registry add my /Users/malo/.config/nixpkgs`
+      # This is handy in combination with `nix registry add my /Users/moul/.config/nixpkgs`
     } // flake-utils.lib.eachDefaultSystem (system: {
       legacyPackages = import inputs.nixpkgs-unstable {
         inherit system;

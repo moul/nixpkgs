@@ -34,6 +34,7 @@
     coreutils
     curl
     du-dust # fancy version of `du`
+    entr
     exa # fancy version of `ls`
     fd # fancy version of `find`
     htop # fancy version of `top`
@@ -45,24 +46,11 @@
     ripgrep # better version of `grep`
     tealdeer # rust implementation of `tldr`
     thefuck
+    tmux
     unrar # extract RAR archives
     wget
     xz # extract XZ archives
-
-    # Dev stuff
-    # (agda.withPackages (p: [ p.standard-library ]))
-    cloc # source code line counter
-    google-cloud-sdk
-    haskellPackages.cabal-install
-    haskellPackages.hoogle
-    haskellPackages.hpack
-    haskellPackages.implicit-hie
-    haskellPackages.stack
-    idris2
     jq
-    nodePackages.typescript
-    nodejs-16_x
-    s3cmd
 
     # Useful nix related tools
     cachix # adding/managing alternative binary caches hosted by Cachix
