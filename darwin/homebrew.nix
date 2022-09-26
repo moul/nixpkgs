@@ -60,6 +60,7 @@ in
     "Pixelmator Pro" = 1289583905;
     # "Save to Raindrop.io" = 1549370672;
     Slack = 803453959;
+    Twitter = 1482454543;
     # SiteSucker = 442168834;
     # "Things 3" = 904280696;
     # TripMode = 1513400665;

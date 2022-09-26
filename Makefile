@@ -2,7 +2,7 @@ HOSTNAME ?= `hostname`
 UNAME_S := $(shell uname -s)
 
 
-all: switch
+all: switch cachix-push
 
 switch:
 	@echo "Trying to guess what to do..."
