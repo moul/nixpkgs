@@ -96,7 +96,8 @@
         };
         bootstrap-arm = bootstrap-x86.override { system = "aarch64-darwin"; };
 
-        musca = darwinSystem {
+	# Specific Computers
+        moul-musca = darwinSystem {
           system = "x86_64-darwin";
           modules = nixDarwinCommonModules ++ [
             {
@@ -104,7 +105,7 @@
 	        username = "manfredtouron";
 		nixConfigDirectory = "/Users/manfredtouron/.config/nixpkgs";
 	      };
-              networking.computerName = "Manfred, Musca";
+              networking.computerName = "Manfred (Musca)";
               networking.hostName = "moul-musca";
               networking.knownNetworkServices = [
                 "Wi-Fi"

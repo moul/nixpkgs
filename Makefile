@@ -1,3 +1,9 @@
+all: switch
+
+switch:
+	@echo "Trying to guess what to do..."
+	@sh -xec "make `hostname`"
+
 help:
 	@echo "read the Makefile"
 
@@ -9,6 +15,6 @@ darwin-bootstrap-a:
 darwin-bootstrap-b:
 	nix-env -iA nixpkgs.nixVersions.stable
 
-musca:
+moul-musca:
 	nix --experimental-features 'nix-command flakes' build .#darwinConfigurations.$@.system
 	./result/sw/bin/darwin-rebuild switch --flake .#$@

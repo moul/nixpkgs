@@ -25,6 +25,11 @@
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.zoxide.enable
   programs.zoxide.enable = true;
 
+  # Tmux.
+  programs.tmux.enable = true;
+  programs.tmux.terminal = "screen-256color";
+  programs.tmux.keyMode = "emacs";
+
   home.packages = with pkgs; [
     # Some basics
     abduco # lightweight session management
