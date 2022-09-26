@@ -41,7 +41,9 @@ in
   # Prefer installing application from the Mac App Store
   homebrew.masApps = {
     "iStat Menus" = 1319778037;
+    "Logic Pro" = 634148309;
     "Microsoft Remote Desktop" = 1295203466;
+    #"Model 15" = 1041465860;
     "Pixelmator Pro" = 1289583905;
     "WiFi Explorer" = 494803304;
     "Yubico Authenticator" = 1497506650;
@@ -67,8 +69,6 @@ in
     Canva = 897446215;
     Infuse = 1136220934;
     Trello = 1278508951;
-    #Logic Pro = ;
-    #Micro Moog = ;
   };
 
   # If an app isn't available in the Mac App Store, or the version in the App Store has
