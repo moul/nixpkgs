@@ -9,6 +9,8 @@ in {
   # Emacs
   programs.emacs.enable = true;
 
+  # home.packages = with pkgs; [ em ];
+
   # General config ----------------------------------------------------------------------------- {{{
 
   # TODO: emacs-nox

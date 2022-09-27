@@ -1,6 +1,13 @@
 { config, lib, pkgs, ... }:
 
-{
+let
+    em = pkgs.writeScriptBin "em"
+    (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${pkgs.emacsNativeComp}" ]
+      (lib.readFile ./../configs/em));
+  raw-emacs = pkgs.writeScriptBin "raw-emacs"
+    (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${pkgs.emacsNativeComp}" ]
+      (lib.readFile ./../configs/raw-emacs));
+in {
   # Bat, a substitute for cat.
   # https://github.com/sharkdp/bat
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.bat.enable
@@ -26,6 +33,10 @@
   programs.zoxide.enable = true;
 
   home.packages = with pkgs; [
+    # custom
+    em
+    raw-emacs
+
     # Some basics
     abduco # lightweight session management
     ascii

@@ -97,8 +97,14 @@ in
 
   # Fish configuration ------------------------------------------------------------------------- {{{
 
-  # Aliases
+
   programs.fish.shellAliases = with pkgs; {
+    # Emacs
+    emacs = "em";
+    emasc = "emacs";
+    eamsc = "emacs";
+    emaccs = "emacs";
+
     # Nix related
     drb = "darwin-rebuild build --flake ${nixConfigDirectory}";
     drs = "darwin-rebuild switch --flake ${nixConfigDirectory}";
