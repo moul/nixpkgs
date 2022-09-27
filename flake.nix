@@ -43,17 +43,17 @@
         overlays = attrValues self.overlays ++ [
           # Sub in x86 version of packages that don't build on Apple Silicon yet
           (final: prev:
-	      (optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
+        (optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
                 inherit (final.pkgs-x86)
                   idris2;
-	  }))
+    }))
         ] ++ [
-	  (final: prev:
-	    let
-	    in {
-	      emacsNativeComp = (import emacs-overlay final prev).emacsNativeComp;
-	      spacemacs = inputs.spacemacs;
-	    })
+    (final: prev:
+      let
+      in {
+        emacsNativeComp = (import emacs-overlay final prev).emacsNativeComp;
+        spacemacs = inputs.spacemacs;
+      })
         ];
       };
 
@@ -109,15 +109,15 @@
         };
         bootstrap-arm = bootstrap-x86.override { system = "aarch64-darwin"; };
 
-	# Specific Computers
+  # Specific Computers
         moul-musca = darwinSystem {
           system = "x86_64-darwin";
           modules = nixDarwinCommonModules ++ [
             {
               users.primaryUser = primaryUserInfo // {
-	        username = "manfredtouron";
-		nixConfigDirectory = "/Users/manfredtouron/.config/nixpkgs";
-	      };
+          username = "manfredtouron";
+    nixConfigDirectory = "/Users/manfredtouron/.config/nixpkgs";
+        };
               networking.computerName = "Manfred (Musca)";
               networking.hostName = "moul-musca";
               networking.knownNetworkServices = [
@@ -176,21 +176,23 @@
       # Config I use with Linux cloud VMs
       # Build and activate on new system with:
       # `nix build .#homeConfigurations.moul.activationPackage; ./result/activate`
-      homeConfigurations.moul = home-manager.lib.homeManagerConfiguration {
-        pkgs = import inputs.nixpkgs-unstable {
-          system = "x86_64-linux";
-          inherit (nixpkgsConfig) config overlays;
-        };
-        modules = attrValues self.homeManagerModules ++ singleton ({ config, ...}: {
-          home.username = config.home.user-info.username;
-          home.homeDirectory = "/home/${config.home.username}";
-          home.stateVersion = homeManagerStateVersion;
-          home.user-info = primaryUserInfo // {
-            nixConfigDirectory = "${config.home.homeDirectory}/.config/nixpkgs";
+      homeConfigurations = rec {
+        fwrz = home-manager.lib.homeManagerConfiguration {
+          pkgs = import inputs.nixpkgs-unstable {
+            system = "x86_64-linux";
+            inherit (nixpkgsConfig) config overlays;
           };
-        });
+          modules = attrValues self.homeManagerModules ++ singleton ({ config, ...}: {
+            home.username = config.home.user-info.username;
+            home.homeDirectory = "/home/${config.home.username}";
+            home.stateVersion = homeManagerStateVersion;
+            home.user-info = primaryUserInfo // {
+              nixConfigDirectory = "${config.home.homeDirectory}/.config/nixpkgs";
+            };
+          });
+        };
       };
-      # }}}
+        # }}}
 
       # Non-system outputs --------------------------------------------------------------------- {{{
 
@@ -256,10 +258,10 @@
         moul-git-aliases = import ./home/git-aliases.nix;
         moul-gh-aliases = import ./home/gh-aliases.nix;
         moul-kitty = import ./home/kitty.nix;
-	moul-emacs = import ./home/emacs.nix;
-	moul-ssh = import ./home/ssh.nix;
-	moul-tmux = import ./home/tmux.nix;
-	moul-xdg = import ./home/xdg.nix;
+  moul-emacs = import ./home/emacs.nix;
+  moul-ssh = import ./home/ssh.nix;
+  moul-tmux = import ./home/tmux.nix;
+  moul-xdg = import ./home/xdg.nix;
         moul-packages = import ./home/packages.nix;
         moul-starship = import ./home/starship.nix;
         moul-starship-symbols = import ./home/starship-symbols.nix;

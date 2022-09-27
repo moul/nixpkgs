@@ -13,7 +13,7 @@ in {
 
   # TODO: emacs-nox
   # TODO: emacs server
-  programs.emacs.package = pkgs.emacsNativeComp;
+#  programs.emacs.package = pkgs.emacsNativeComp;
 
   # Spacemacs
   home.file.".emacs.d" = {

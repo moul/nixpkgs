@@ -52,7 +52,7 @@ This function should only modify configuration layer settings."
                  node-add-modules-path t)
      markdown
      react
-     markdownpython
+     ;;markdownpython
      csv
      lsp
      (go :variables
@@ -565,8 +565,8 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-  ;;(global-set-key (kbd "C-x C-c") 'spacemacs/prompt-kill-emacs)
-  (global-set-key (kbd "C-x C-c") 'spacemacs/frame-killer)
+  (global-set-key (kbd "C-x C-c") 'spacemacs/prompt-kill-emacs)
+  ;;(global-set-key (kbd "C-x C-c") 'spacemacs/frame-killer)
 
   (windmove-default-keybindings)
 
@@ -637,7 +637,7 @@ before packages are loaded."
       (lambda () (pcase (file-name-extension buffer-file-name)
        ("tsx" ('tide-setup-hook))
        (_ (my-web-mode-hook)))))
-  (flycheck-add-mode 'typescript-tslint 'web-mode)
+  ;;(flycheck-add-mode 'typescript-tslint 'web-mode)
   (add-hook 'web-mode-hook 'company-mode)
   (add-hook 'web-mode-hook 'prettier-js-mode)
   (add-hook 'web-mode-hook #'turn-on-smartparens-mode t)

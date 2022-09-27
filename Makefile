@@ -24,6 +24,11 @@ moul-musca:
 	./result/sw/bin/darwin-rebuild switch --flake .#$@
 	@echo Done.
 
+fwrz:
+	nix --experimental-features 'nix-command flakes' build .#homeConfigurations.$@.activationPackage
+	./result/activate
+	@echo Done.
+
 cachix-push:
 ifeq ($(UNAME_S),Linux)
 	-nix path-info ".#linuxConfigurations.$(HOSTNAME).activationPackage" | cachix push moul || true
