@@ -233,7 +233,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-startup-buffer-responsive t
 
    ;; Default major mode for a new empty buffer. Possible values are mode
-   ;; names such as `text-mode'; and `nil' to use Fundamental mode.
+    ;; names such as `text-mode'; and `nil' to use Fundamental mode.
    ;; (default `text-mode')
    dotspacemacs-new-empty-buffer-major-mode 'text-mode
 

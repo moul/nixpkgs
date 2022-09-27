@@ -281,7 +281,25 @@
         "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "prefmanager": "prefmanager"
+        "prefmanager": "prefmanager",
+        "spacemacs": "spacemacs"
+      }
+    },
+    "spacemacs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1664203286,
+        "narHash": "sha256-M5xr4pRpiKbyg68oADrCHGLdiB3cFnzkmh9WHFTI/Mw=",
+        "owner": "syl20bnr",
+        "repo": "spacemacs",
+        "rev": "4688cd7dcea36ee346d1aafba7f0638f4d816c28",
+        "type": "github"
+      },
+      "original": {
+        "owner": "syl20bnr",
+        "ref": "develop",
+        "repo": "spacemacs",
+        "type": "github"
       }
     }
   },

@@ -22,6 +22,10 @@
     prefmanager.inputs.flake-compat.follows = "flake-compat";
     prefmanager.inputs.flake-utils.follows = "flake-utils";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+    spacemacs = {
+      url = "github:syl20bnr/spacemacs/develop";
+      flake = false;
+    };
   };
 
   outputs = { self, darwin, home-manager, flake-utils, emacs-overlay, ... }@inputs:
@@ -47,7 +51,8 @@
 	  (final: prev:
 	    let
 	    in {
-	      emacsGcc = (import emacs-overlay final prev).emacsGcc;
+	      emacsNativeComp = (import emacs-overlay final prev).emacsNativeComp;
+	      spacemacs = inputs.spacemacs;
 	    })
         ];
       };
@@ -252,7 +257,9 @@
         moul-gh-aliases = import ./home/gh-aliases.nix;
         moul-kitty = import ./home/kitty.nix;
 	moul-emacs = import ./home/emacs.nix;
+	moul-ssh = import ./home/ssh.nix;
 	moul-tmux = import ./home/tmux.nix;
+	moul-xdg = import ./home/xdg.nix;
         moul-packages = import ./home/packages.nix;
         moul-starship = import ./home/starship.nix;
         moul-starship-symbols = import ./home/starship-symbols.nix;
