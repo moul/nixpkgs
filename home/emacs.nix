@@ -25,12 +25,11 @@ in {
     ln -sf ${configsd}/.spacemacs ~/.spacemacs;
 
     # setup .emacs cache dir (TODO: find a nix idiomatic way).
-    mkdir -p ${config.xdg.cacheHome}/emacs/.cache;
-    mkdir -p ${config.xdg.cacheHome}/emacs/elpa;
-    sudo rm -f ~/.emacs.d/.cache;
-    sudo rm -f ~/.emacs.d/elpa;
-    sudo ln -s ${config.xdg.cacheHome}/emacs/.cache/ ~/.emacs.d/.cache;
-    sudo ln -s ${config.xdg.cacheHome}/emacs/elpa/ ~/.emacs.d/elpa;
+    for dir in .cache elpa; do
+      mkdir -p ${config.xdg.cacheHome}/emacs/$dir;
+      sudo mv ~/.emacs.d/$dir ~/.emacs.d/$dir.old;
+      sudo ln -s ${config.xdg.cacheHome}/emacs/$dir/ ~/.emacs.d/$dir;
+    done
   '';
 }
 
