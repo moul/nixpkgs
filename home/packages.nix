@@ -54,6 +54,7 @@
     file
     fzf
     gist
+    git-crypt
     gnumake
     gnupg
     graphviz
