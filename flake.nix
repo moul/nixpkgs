@@ -21,9 +21,10 @@
     prefmanager.inputs.nixpkgs.follows = "nixpkgs-unstable";
     prefmanager.inputs.flake-compat.follows = "flake-compat";
     prefmanager.inputs.flake-utils.follows = "flake-utils";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
-  outputs = { self, darwin, home-manager, flake-utils, ... }@inputs:
+  outputs = { self, darwin, home-manager, flake-utils, emacs-overlay, ... }@inputs:
     let
       # Some building blocks ------------------------------------------------------------------- {{{
 
@@ -37,10 +38,17 @@
         };
         overlays = attrValues self.overlays ++ [
           # Sub in x86 version of packages that don't build on Apple Silicon yet
-          (final: prev: (optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-            inherit (final.pkgs-x86)
-              idris2;
-          }))
+          (final: prev:
+	      (optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
+                inherit (final.pkgs-x86)
+                  idris2;
+	  }))
+        ] ++ [
+	  (final: prev:
+	    let
+	    in {
+	      emacsGcc = (import emacs-overlay final prev).emacsGcc;
+	    })
         ];
       };
 

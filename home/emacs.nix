@@ -8,5 +8,7 @@
 
   # TODO: emacs-nox
   # TODO: emacs server
-  # programs.emacs.package = pkgs.emacsGcc;
+  programs.emacs.package = pkgs.emacsGcc;
 }
+
+# TODO: centralize here: "em", and "emacs-nox"
