@@ -10,7 +10,8 @@
 
   programs.tmux.terminal = "screen-256color";
   programs.tmux.keyMode = "emacs";
-  # programs.tmux.shell = "${pkgs.zsh}/bin/zsh";
+  #programs.tmux.shell = "${pkgs.zsh}/bin/zsh";
+  programs.tmux.shell = "${pkgs.fish}/bin/fish";
   programs.tmux.escapeTime = 20;
   programs.tmux.clock24 = true;
   programs.tmux.baseIndex = 1;
@@ -70,4 +71,5 @@
 
   # reload, with:
   #   source-file ~/.config/tmux/tmux.conf
-}
+
+ }
