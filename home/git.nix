@@ -14,7 +14,7 @@
     commit.gpgsign = true;
     gpg.format = "ssh";
     gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
-
+    init.defaultBranch = "main";
   };
 
   programs.git.ignores = [ ".DS_Store" ];
