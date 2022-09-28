@@ -13,6 +13,7 @@
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "moul.cachix.org-1:jcmTECmIfe9zam+p4sP3RhEXmH7QTTChd9ax/vo1CYs="
+      "moul2.cachix.org-1:Skk3CKj8duDH5yH+8k8msB/OELtftqdIqH1b6YuWe94="
     ];
 
     trusted-users = [ "@admin" ];
