@@ -17,7 +17,7 @@ in {
   #  '';
   #};
 
-  home.activation.sshHook = config.lib.dag.entryAfter [
+  home.activation.asshGenerate = config.lib.dag.entryAfter [
     "reloadSystemd"
     "writeBoundary"
     "onFilesChange"
@@ -26,7 +26,7 @@ in {
     # ssh
     mkdir -p ~/.ssh;
     ln -sf ${configsd}/assh.yml ~/.ssh/assh.yml;
-    ${pkgs.assh}/bin/assh config build > ~/.ssh/config;
+    ${pkgs.assh}/bin/assh config build > ~/.ssh/config || true; # FIXME: remove the `|| true` (breaks the CI)
     chmod 711 ~/.ssh
     chmod 600 ~/.ssh/config || true
   '';

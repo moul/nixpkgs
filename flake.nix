@@ -177,6 +177,22 @@
               };
             });
         };
+        githubCi = home-manager.lib.homeManagerConfiguration {
+          pkgs = import inputs.nixpkgs-unstable {
+            system = "x86_64-linux";
+            inherit (nixpkgsConfig) config overlays;
+          };
+          modules = attrValues self.homeManagerModules ++ singleton
+            ({ config, ... }: {
+              home.username = "runner";
+              home.homeDirectory = "/home/${config.home.username}";
+              home.stateVersion = homeManagerStateVersion;
+              home.user-info = primaryUserInfo // {
+                nixConfigDirectory =
+                  "${config.home.homeDirectory}/.config/nixpkgs";
+              };
+            });
+        };
       };
       # }}}
 

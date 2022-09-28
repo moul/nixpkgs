@@ -23,7 +23,7 @@ in {
     #resursive = true;
   };
 
-  home.activation.customEndHook = config.lib.dag.entryAfter [
+  home.activation.emacsdPopulate = config.lib.dag.entryAfter [
     "reloadSystemd"
     "writeBoundary"
     "onFilesChange"
