@@ -265,6 +265,7 @@
         moul-kitty = import ./home/kitty.nix;
         moul-emacs = import ./home/emacs.nix;
         moul-ssh = import ./home/ssh.nix;
+        moul-go = import ./home/go.nix;
         moul-shell = import ./home/shell.nix;
         moul-tmux = import ./home/tmux.nix;
         moul-xdg = import ./home/xdg.nix;

@@ -13,10 +13,12 @@
     init.defaultBranch = "main";
   } // (if pkgs.stdenv.isDarwin then {
     gpg.format = "ssh";
-    user.signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+r9TcD4g/DVW5/9W9grjD700PJccMonLEWnB+v++42";
+    user.signingKey =
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+r9TcD4g/DVW5/9W9grjD700PJccMonLEWnB+v++42";
     gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
     commit.gpgsign = true;
-  } else {});
+  } else
+    { });
 
   programs.git.ignores = [ ".DS_Store" ];
 
