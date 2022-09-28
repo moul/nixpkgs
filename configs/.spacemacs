@@ -565,8 +565,8 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-  (global-set-key (kbd "C-x C-c") 'spacemacs/prompt-kill-emacs)
-  ;;(global-set-key (kbd "C-x C-c") 'spacemacs/frame-killer)
+  ;;(global-set-key (kbd "C-x C-c") 'spacemacs/prompt-kill-emacs)
+  (global-set-key (kbd "C-x C-c") 'spacemacs/frame-killer)
 
   (windmove-default-keybindings)
 

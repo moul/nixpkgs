@@ -34,5 +34,3 @@ in {
     done
   '';
 }
-
-# TODO: centralize here: "em", and "emacs-nox"

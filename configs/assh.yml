@@ -1,0 +1,57 @@
+hosts:
+  sshportal:
+    HostName: 127.0.0.1
+    Port: 2222
+    Hook: {}
+    User: admin
+
+  github.com:
+    Hook:
+      OnConnect: []
+
+  altgithub.com:
+    HostName: github.com
+
+  "*.127.0.0.1.xip.io":
+    user: moul
+
+  "*.m.42.am":
+    user: moul
+
+  octopi:
+    user: pi
+    HostName: octopi.local
+    #HostName: octopi.42.am.beta.tailscale.net
+
+  "*.pathwar.net":
+    user: pathwar
+
+  "*.pathwar42.fr":
+    user: root
+    port: 4222
+
+defaults:
+  ControlMaster: auto
+  ControlPath: ~/.cache/ssh/%C.sock
+  ControlMasterMkdir: true
+  ControlPersist: yes
+  ForwardAgent: yes
+  Compression: yes
+  IdentityAgent: '"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"'
+  LogLevel: ERROR
+  ServerAliveInterval: 30
+  ServerAliveCountMax: 3
+  #UseKeychain: yes
+  #AddKeysToAgent: yes
+  VisualHostKey: yes
+  HashKnownHosts: yes
+  UseKnownHostsFile: ~/.ssh/known_hosts
+  VerifyHostKeyDNS: ask
+  SetEnv:
+    - LC_ALL=en-US.UTF-8
+    - LANG=en_US.UTF-8
+  Hooks:
+    BeforeConfigWrite: []
+    AfterConfigWrite: []
+    OnConnect: []
+    OnDisconnect: []
