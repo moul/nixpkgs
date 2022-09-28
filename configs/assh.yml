@@ -35,14 +35,17 @@ defaults:
   ControlPath: ~/.cache/ssh/%C.sock
   ControlMasterMkdir: true
   ControlPersist: yes
+  ForwardAgent: yes
   Compression: yes
+  IdentityAgent: '"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"'
   LogLevel: ERROR
-  ServerAliveInterval: 5
-  ServerAliveCountMax: 18
+  ServerAliveInterval: 30
+  ServerAliveCountMax: 3
   #UseKeychain: yes
   #AddKeysToAgent: yes
   VisualHostKey: yes
   HashKnownHosts: yes
+  UseKnownHostsFile: ~/.ssh/known_hosts
   VerifyHostKeyDNS: ask
   SetEnv:
     - LC_ALL=en-US.UTF-8

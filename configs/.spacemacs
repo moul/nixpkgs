@@ -52,7 +52,7 @@ This function should only modify configuration layer settings."
                  node-add-modules-path t)
      markdown
      react
-     markdownpython
+     ;;markdownpython
      csv
      lsp
      (go :variables
@@ -233,7 +233,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-startup-buffer-responsive t
 
    ;; Default major mode for a new empty buffer. Possible values are mode
-   ;; names such as `text-mode'; and `nil' to use Fundamental mode.
+    ;; names such as `text-mode'; and `nil' to use Fundamental mode.
    ;; (default `text-mode')
    dotspacemacs-new-empty-buffer-major-mode 'text-mode
 
@@ -637,7 +637,7 @@ before packages are loaded."
       (lambda () (pcase (file-name-extension buffer-file-name)
        ("tsx" ('tide-setup-hook))
        (_ (my-web-mode-hook)))))
-  (flycheck-add-mode 'typescript-tslint 'web-mode)
+  ;;(flycheck-add-mode 'typescript-tslint 'web-mode)
   (add-hook 'web-mode-hook 'company-mode)
   (add-hook 'web-mode-hook 'prettier-js-mode)
   (add-hook 'web-mode-hook #'turn-on-smartparens-mode t)

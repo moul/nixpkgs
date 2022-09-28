@@ -2,7 +2,7 @@
 
 let
   configd = "~/.config/nixpkgs/config";
-  em = pkgs.writeScriptBin "em"
+  em = pkgs.writeScriptBin "em
     (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${pkgs.emacsGcc}" ]
       (lib.readFile ./config/em));
   raw-emacs = pkgs.writeScriptBin "raw-emacs"
@@ -434,7 +434,7 @@ in {
         ".." = "cd ..";
         cat = "${bat}/bin/bat";
         emacs = "em";
-        # emacs typos :)
+        # em
         emasc = "emacs";
         eamsc = "emacs";
         emaccs = "emacs";
