@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let
-    configsd = "~/go/src/moul.io/nixpkgs/configs";
+let configsd = "~/go/src/moul.io/nixpkgs/configs";
 in {
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.ssh.enable
 
@@ -18,12 +17,17 @@ in {
   #  '';
   #};
 
-  home.activation.sshHook = config.lib.dag.entryAfter ["reloadSystemd" "writeBoundary" "onFilesChange" "installPackages"] ''
-      # ssh
-      mkdir -p ~/.ssh;
-      ln -sf ${configsd}/assh.yml ~/.ssh/assh.yml;
-      ${pkgs.assh}/bin/assh config build > ~/.ssh/config;
-      chmod 711 ~/.ssh
-      chmod 600 ~/.ssh/config || true
+  home.activation.sshHook = config.lib.dag.entryAfter [
+    "reloadSystemd"
+    "writeBoundary"
+    "onFilesChange"
+    "installPackages"
+  ] ''
+    # ssh
+    mkdir -p ~/.ssh;
+    ln -sf ${configsd}/assh.yml ~/.ssh/assh.yml;
+    ${pkgs.assh}/bin/assh config build > ~/.ssh/config;
+    chmod 711 ~/.ssh
+    chmod 600 ~/.ssh/config || true
   '';
 }

@@ -51,7 +51,5 @@
   };
 
   # Finder
-  system.defaults.finder = {
-    FXEnableExtensionChangeWarning = true;
-  };
+  system.defaults.finder = { FXEnableExtensionChangeWarning = true; };
 }

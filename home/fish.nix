@@ -3,9 +3,8 @@
 let
   inherit (lib) elem optionalString;
   inherit (config.home.user-info) nixConfigDirectory;
-in
 
-{
+in {
   # Fish Shell
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.fish.enable
   programs.fish.enable = true;
@@ -85,11 +84,11 @@ in
         end
       '' + optionalString config.programs.neovim.enable ''
 
-      # Set `background` of all running Neovim instances.
-      for server in (${pkgs.neovim-remote}/bin/nvr --serverlist)
-        ${pkgs.neovim-remote}/bin/nvr -s --nostart --servername $server \
-          -c "set background=$term_background" &
-      end
+        # Set `background` of all running Neovim instances.
+        for server in (${pkgs.neovim-remote}/bin/nvr --serverlist)
+          ${pkgs.neovim-remote}/bin/nvr -s --nostart --servername $server \
+            -c "set background=$term_background" &
+        end
       '';
       onVariable = "term_background";
     };
@@ -97,7 +96,6 @@ in
   # }}}
 
   # Fish configuration ------------------------------------------------------------------------- {{{
-
 
   programs.fish.shellAliases = with pkgs; {
     # Emacs

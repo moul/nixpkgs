@@ -23,7 +23,12 @@ in {
     #resursive = true;
   };
 
-  home.activation.customEndHook = config.lib.dag.entryAfter ["reloadSystemd" "writeBoundary" "onFilesChange" "installPackages"] ''
+  home.activation.customEndHook = config.lib.dag.entryAfter [
+    "reloadSystemd"
+    "writeBoundary"
+    "onFilesChange"
+    "installPackages"
+  ] ''
     ln -sf ${configsd}/.spacemacs ~/.spacemacs;
 
     # setup .emacs cache dir (TODO: find a nix idiomatic way).

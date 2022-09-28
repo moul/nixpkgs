@@ -82,9 +82,10 @@
   };
 
   colors.ManfredTouron-light = {
-    inherit (config.colors.ManfredTouron-dark) colors namedColors terminal pkgThemes;
+    inherit (config.colors.ManfredTouron-dark)
+      colors namedColors terminal pkgThemes;
   };
-  
+
   colors.solarized-light = {
     colors = {
       color0 = "#073642";
@@ -158,9 +159,7 @@
 
     pkgThemes.kitty = {
       inherit (config.colors.solarized-light.pkgThemes.kitty)
-        url_color
-        active_tab_background
-        active_tab_foreground
+        url_color active_tab_background active_tab_foreground
         inactive_tab_background;
 
       tab_bar_background = "base02";

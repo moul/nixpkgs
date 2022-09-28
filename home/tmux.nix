@@ -72,4 +72,4 @@
   # reload, with:
   #   source-file ~/.config/tmux/tmux.conf
 
- }
+}

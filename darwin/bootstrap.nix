@@ -19,12 +19,12 @@
 
     auto-optimise-store = true;
 
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+    experimental-features = [ "nix-command" "flakes" ];
 
-    extra-platforms = lib.mkIf (pkgs.system == "aarch64-darwin") [ "x86_64-darwin" "aarch64-darwin" ];
+    extra-platforms = lib.mkIf (pkgs.system == "aarch64-darwin") [
+      "x86_64-darwin"
+      "aarch64-darwin"
+    ];
   };
 
   nix.configureBuildUsers = true;
@@ -32,15 +32,10 @@
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
 
-
   # Shells -----------------------------------------------------------------------------------------
 
   # Add shells installed by nix to /etc/shells file
-  environment.shells = with pkgs; [
-    bashInteractive
-    fish
-    zsh
-  ];
+  environment.shells = with pkgs; [ bashInteractive fish zsh ];
 
   # Make Fish the default shell
   programs.fish.enable = true;

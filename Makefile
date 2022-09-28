@@ -29,6 +29,9 @@ fwrz:
 	./result/activate
 	@echo Done.
 
+fmt:
+	nixfmt `find . ! -path './old/*' ! -path './.git/*' -name "*.nix"`
+
 cachix-push:
 ifeq ($(UNAME_S),Linux)
 	-nix path-info ".#homeConfigurations.$(HOSTNAME).activationPackage" | cachix push moul || true

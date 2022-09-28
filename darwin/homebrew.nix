@@ -2,11 +2,11 @@
 
 let
   inherit (lib) mkIf;
-  mkIfCaskPresent = cask: mkIf (lib.any (x: x.name == cask) config.homebrew.casks);
+  mkIfCaskPresent = cask:
+    mkIf (lib.any (x: x.name == cask) config.homebrew.casks);
   brewEnabled = config.homebrew.enable;
-in
 
-{
+in {
   environment.shellInit = mkIf brewEnabled ''
     eval "$(${config.homebrew.brewPrefix}/brew shellenv)"
   '';
@@ -115,7 +115,7 @@ in
 
   # Configuration related to casks
   environment.variables.SSH_AUTH_SOCK = mkIfCaskPresent "1password-cli"
-    "/Users/${config.users.primaryUser.username}/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock";
+    "/Users/${config.users.primaryUser.username}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
 
   # For cli packages that aren't currently available for macOS in `nixpkgs`.Packages should be
   # installed in `../home/default.nix` whenever possible.

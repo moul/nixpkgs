@@ -15,7 +15,10 @@
     home-manager.inputs.utils.follows = "flake-utils";
 
     # Other sources
-    flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
     flake-utils.url = "github:numtide/flake-utils";
     prefmanager.url = "github:malob/prefmanager";
     prefmanager.inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -28,32 +31,32 @@
     };
   };
 
-  outputs = { self, darwin, home-manager, flake-utils, emacs-overlay, ... }@inputs:
+  outputs =
+    { self, darwin, home-manager, flake-utils, emacs-overlay, ... }@inputs:
     let
       # Some building blocks ------------------------------------------------------------------- {{{
 
       inherit (darwin.lib) darwinSystem;
-      inherit (inputs.nixpkgs-unstable.lib) attrValues makeOverridable optionalAttrs singleton;
+      inherit (inputs.nixpkgs-unstable.lib)
+        attrValues makeOverridable optionalAttrs singleton;
 
       # Configuration for `nixpkgs`
       nixpkgsConfig = {
-        config = {
-          allowUnfree = true;
-        };
+        config = { allowUnfree = true; };
         overlays = attrValues self.overlays ++ [
           # Sub in x86 version of packages that don't build on Apple Silicon yet
           (final: prev:
-        (optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-                inherit (final.pkgs-x86)
-                  idris2;
-    }))
+            (optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
+              inherit (final.pkgs-x86) idris2;
+            }))
         ] ++ [
-    (final: prev:
-      let
-      in {
-        emacsNativeComp = (import emacs-overlay final prev).emacsNativeComp;
-        spacemacs = inputs.spacemacs;
-      })
+          (final: prev:
+            let
+            in {
+              emacsNativeComp =
+                (import emacs-overlay final prev).emacsNativeComp;
+              spacemacs = inputs.spacemacs;
+            })
         ];
       };
 
@@ -70,18 +73,16 @@
       nixDarwinCommonModules = attrValues self.darwinModules ++ [
         # `home-manager` module
         home-manager.darwinModules.home-manager
-        (
-          { config, ... }:
-          let
-            inherit (config.users) primaryUser;
-          in
-          {
+        ({ config, ... }:
+          let inherit (config.users) primaryUser;
+          in {
             nixpkgs = nixpkgsConfig;
             # Hack to support legacy worklows that use `<nixpkgs>` etc.
             # nix.nixPath = { nixpkgs = "${primaryUser.nixConfigDirectory}/nixpkgs.nix"; };
             nix.nixPath = { nixpkgs = "${inputs.nixpkgs-unstable}"; };
             # `home-manager` config
-            users.users.${primaryUser.username}.home = "/Users/${primaryUser.username}";
+            users.users.${primaryUser.username}.home =
+              "/Users/${primaryUser.username}";
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.${primaryUser.username} = {
@@ -91,12 +92,10 @@
             };
             # Add a registry entry for this flake
             nix.registry.my.flake = self;
-          }
-        )
+          })
       ];
       # }}}
-    in
-    {
+    in {
 
       # System outputs ------------------------------------------------------------------------- {{{
 
@@ -109,53 +108,38 @@
         };
         bootstrap-arm = bootstrap-x86.override { system = "aarch64-darwin"; };
 
-  # Specific Computers
+        # Specific Computers
         moul-musca = darwinSystem {
           system = "x86_64-darwin";
-          modules = nixDarwinCommonModules ++ [
-            {
-              users.primaryUser = primaryUserInfo // {
-          username = "manfredtouron";
-    nixConfigDirectory = "/Users/manfredtouron/.config/nixpkgs";
-        };
-              networking.computerName = "Manfred (Musca)";
-              networking.hostName = "moul-musca";
-              networking.knownNetworkServices = [
-                "Wi-Fi"
-                "USB 10/100/1000 LAN"
-              ];
-            }
-          ];
+          modules = nixDarwinCommonModules ++ [{
+            users.primaryUser = primaryUserInfo // {
+              username = "manfredtouron";
+              nixConfigDirectory = "/Users/manfredtouron/.config/nixpkgs";
+            };
+            networking.computerName = "Manfred (Musca)";
+            networking.hostName = "moul-musca";
+            networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
+          }];
         };
 
         x86-macbook = darwinSystem {
           system = "x86_64-darwin";
-          modules = nixDarwinCommonModules ++ [
-            {
-              users.primaryUser = primaryUserInfo;
-              networking.computerName = "Manfred x86 MacBook";
-              networking.hostName = "ManfredX86MacBook";
-              networking.knownNetworkServices = [
-                "Wi-Fi"
-                "USB 10/100/1000 LAN"
-              ];
-            }
-          ];
+          modules = nixDarwinCommonModules ++ [{
+            users.primaryUser = primaryUserInfo;
+            networking.computerName = "Manfred x86 MacBook";
+            networking.hostName = "ManfredX86MacBook";
+            networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
+          }];
         };
 
         m1-macbook = darwinSystem {
           system = "aarch64-darwin";
-          modules = nixDarwinCommonModules ++ [
-            {
-              users.primaryUser = primaryUserInfo;
-              networking.computerName = "Manfred M1 MacBook";
-              networking.hostName = "ManfredM1MacBook";
-              networking.knownNetworkServices = [
-                "Wi-Fi"
-                "USB 10/100/1000 LAN"
-              ];
-            }
-          ];
+          modules = nixDarwinCommonModules ++ [{
+            users.primaryUser = primaryUserInfo;
+            networking.computerName = "Manfred M1 MacBook";
+            networking.hostName = "ManfredM1MacBook";
+            networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
+          }];
         };
 
         # Config with small modifications needed/desired for CI with GitHub workflow
@@ -182,17 +166,19 @@
             system = "x86_64-linux";
             inherit (nixpkgsConfig) config overlays;
           };
-          modules = attrValues self.homeManagerModules ++ singleton ({ config, ...}: {
-            home.username = config.home.user-info.username;
-            home.homeDirectory = "/home/${config.home.username}";
-            home.stateVersion = homeManagerStateVersion;
-            home.user-info = primaryUserInfo // {
-              nixConfigDirectory = "${config.home.homeDirectory}/.config/nixpkgs";
-            };
-          });
+          modules = attrValues self.homeManagerModules ++ singleton
+            ({ config, ... }: {
+              home.username = config.home.user-info.username;
+              home.homeDirectory = "/home/${config.home.username}";
+              home.stateVersion = homeManagerStateVersion;
+              home.user-info = primaryUserInfo // {
+                nixConfigDirectory =
+                  "${config.home.homeDirectory}/.config/nixpkgs";
+              };
+            });
         };
       };
-        # }}}
+      # }}}
 
       # Non-system outputs --------------------------------------------------------------------- {{{
 
@@ -218,22 +204,25 @@
         };
 
         prefmanager = _: prev: {
-          prefmanager = inputs.prefmanager.packages.${prev.stdenv.system}.default;
+          prefmanager =
+            inputs.prefmanager.packages.${prev.stdenv.system}.default;
         };
 
         # Overlay useful on Macs with Apple Silicon
-        apple-silicon = _: prev: optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-          # Add access to x86 packages system is running Apple Silicon
-          pkgs-x86 = import inputs.nixpkgs-unstable {
-            system = "x86_64-darwin";
-            inherit (nixpkgsConfig) config;
+        apple-silicon = _: prev:
+          optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
+            # Add access to x86 packages system is running Apple Silicon
+            pkgs-x86 = import inputs.nixpkgs-unstable {
+              system = "x86_64-darwin";
+              inherit (nixpkgsConfig) config;
+            };
           };
-        };
 
         # Overlay to include node packages listed in `./pkgs/node-packages/package.json`
         # Run `nix run my#nodePackages.node2nix -- -14` to update packages.
         nodePackages = _: prev: {
-          nodePackages = prev.nodePackages // import ./pkgs/node-packages { pkgs = prev; };
+          nodePackages = prev.nodePackages
+            // import ./pkgs/node-packages { pkgs = prev; };
         };
       };
 
@@ -271,8 +260,9 @@
         colors = import ./modules/home/colors;
         programs-kitty-extras = import ./modules/home/programs/kitty/extras.nix;
         home-user-info = { lib, ... }: {
-          options.home.user-info =
-            (self.darwinModules.users-primaryUser { inherit lib; }).options.users.primaryUser;
+          options.home.user-info = (self.darwinModules.users-primaryUser {
+            inherit lib;
+          }).options.users.primaryUser;
         };
       };
       # }}}

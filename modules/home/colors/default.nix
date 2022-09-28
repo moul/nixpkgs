@@ -1,12 +1,10 @@
 { lib, ... }:
 
-let
-  inherit (lib) mkOption types;
-in
-{
+let inherit (lib) mkOption types;
+in {
   options = {
     colors = mkOption {
-      default = {};
+      default = { };
       type = types.attrsOf (types.submodule (import ./colorscheme.nix));
     };
   };

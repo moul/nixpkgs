@@ -1,10 +1,8 @@
 { lib, ... }:
 
-let
-  inherit (lib) mkOption types;
-in
+let inherit (lib) mkOption types;
 
-{
+in {
   options.users.primaryUser = {
     username = mkOption {
       type = with types; nullOr string;
