@@ -29,11 +29,12 @@ jobs:
         extra_nix_config: |
           access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
-    #- name: Setup Cachix
-    #  uses: cachix/cachix-action@v10
-    #  with:
-    #    name: moul2
-    #    authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+    - name: Setup Cachix
+      uses: cachix/cachix-action@v10
+      with:
+        name: moul2
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        skipPush: true
 
     - name: If scheduled, update inputs
       if: ${{ github.event_name == 'schedule' && success() }}
@@ -77,12 +78,12 @@ jobs:
         extra_nix_config: |
           access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
-    # FIXME: enable cachix
-    #- name: Setup Cachix
-    #  uses: cachix/cachix-action@v10
-    #  with:
-    #    name: moul2
-    #    authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+    - name: Setup Cachix
+      uses: cachix/cachix-action@v10
+      with:
+        name: moul2
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        skipPush: true
 
     - name: Build and switch to home-manager env
       run: |
