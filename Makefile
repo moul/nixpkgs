@@ -31,7 +31,7 @@ fwrz:
 
 cachix-push:
 ifeq ($(UNAME_S),Linux)
-	-nix path-info ".#linuxConfigurations.$(HOSTNAME).activationPackage" | cachix push moul || true
+	-nix path-info ".#homeConfigurations.$(HOSTNAME).activationPackage" | cachix push moul || true
 endif
 ifeq ($(UNAME_S),Darwin)
 	-nix path-info ".#darwinConfigurations.$(HOSTNAME).system" | cachix push moul || true
