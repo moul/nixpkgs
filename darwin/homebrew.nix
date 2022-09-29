@@ -48,6 +48,7 @@ in {
     "WiFi Explorer" = 494803304;
     "Yubico Authenticator" = 1497506650;
     "one sec" = 1532875441;
+    "Grammarly: Writing App" = 1462114288;
     Backtrack = 1477089520;
     Controller = 1198176727;
     DaisyDisk = 411643860;
