@@ -167,6 +167,7 @@
       # `nix build .#homeConfigurations.moul.activationPackage; ./result/activate`
       homeConfigurations = rec {
         fwrz = home-manager.lib.homeManagerConfiguration {
+          extraSpecialArgs = { inherit inputs; };
           pkgs = import inputs.nixpkgs-unstable {
             system = "x86_64-linux";
             inherit (nixpkgsConfig) config overlays;
@@ -183,6 +184,7 @@
             });
         };
         githubCi = home-manager.lib.homeManagerConfiguration {
+          extraSpecialArgs = { inherit inputs; };
           pkgs = import inputs.nixpkgs-unstable {
             system = "x86_64-linux";
             inherit (nixpkgsConfig) config overlays;
@@ -254,7 +256,6 @@
         moul-general = import ./darwin/general.nix;
         moul-homebrew = import ./darwin/homebrew.nix;
 
-        # Modules I've created
         programs-nix-index = import ./modules/darwin/programs/nix-index.nix;
         users-primaryUser = import ./modules/darwin/users.nix;
       };

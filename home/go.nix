@@ -6,7 +6,8 @@ in {
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.go.enable
   # home.sessionVariables = { GOROOT = [ "${unstable.go.out}/share/go" ]; };
 
-  home.packages = with pkgs; [ delve golangci-lint gopls gotags go-tools ];
+  home.packages = with pkgs; [ delve golangci-lint gopls gotags ];
+  # go-tools
 
   programs.go = {
     enable = true;
