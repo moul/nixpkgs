@@ -110,6 +110,22 @@
         "type": "github"
       }
     },
+    "gotools": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1664407277,
+        "narHash": "sha256-sECgSkET5wfYDGlkRsEn9SqrTXKn5n4oR9Mn7bi2im8=",
+        "ref": "refs/heads/master",
+        "rev": "199742a5a6ce5eea240b95050127c1b464df7368",
+        "revCount": 6845,
+        "type": "git",
+        "url": "https://go.googlesource.com/tools"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://go.googlesource.com/tools"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": "nixpkgs_2",
@@ -276,6 +292,7 @@
         "emacs-overlay": "emacs-overlay",
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils_2",
+        "gotools": "gotools",
         "home-manager": "home-manager",
         "nixos-stable": "nixos-stable",
         "nixpkgs-master": "nixpkgs-master",

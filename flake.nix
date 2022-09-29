@@ -25,6 +25,10 @@
     prefmanager.inputs.flake-compat.follows = "flake-compat";
     prefmanager.inputs.flake-utils.follows = "flake-utils";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+    gotools = {
+      url = "git+https://go.googlesource.com/tools";
+      flake = false;
+    };
     spacemacs = {
       url = "github:syl20bnr/spacemacs/develop";
       flake = false;
@@ -76,6 +80,7 @@
         ({ config, ... }:
           let inherit (config.users) primaryUser;
           in {
+            home-manager.extraSpecialArgs = { inherit inputs; };
             nixpkgs = nixpkgsConfig;
             # Hack to support legacy worklows that use `<nixpkgs>` etc.
             # nix.nixPath = { nixpkgs = "${primaryUser.nixConfigDirectory}/nixpkgs.nix"; };
