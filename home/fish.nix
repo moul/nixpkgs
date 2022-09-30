@@ -130,6 +130,10 @@ in {
   programs.fish.shellInit = ''
     set -U fish_term24bit 1
     ${optionalString pkgs.stdenv.isDarwin "set-background-to-macOS"}
+    # Max open files limit
+    ulimit -n 16384
+    # Max processes limit
+    ulimit -u 2048
   '';
 
   programs.fish.interactiveShellInit = ''
@@ -151,7 +155,62 @@ in {
     set -g fish_color_operator     green     # color of parameter expansion operators like '*' and '~'
     set -g fish_color_escape       red       # color of character escapes like '\n' and and '\x70'
     set -g fish_color_cancel       red       # color of the '^C' indicator on a canceled command
+
+    #set -U fish_color_command 6CB6EB --bold
+    #set -U fish_color_redirection DEB974
+    #set -U fish_color_operator DEB974
+    #set -U fish_color_end C071D8 --bold
+    #set -U fish_color_error EC7279 --bold
+      # Fish prompt and style
   '';
-  # }}}
+  #set -U fish_color_param 6CB6EB
+
+  programs.starship.enable = true;
+  programs.starship.settings = {
+    add_newline = true;
+    command_timeout = 1000;
+    cmd_duration = {
+      format = " [$duration]($style) ";
+      style = "bold #EC7279";
+      show_notifications = true;
+    };
+    directory = { truncate_to_repo = false; };
+    nix_shell = { format = " [$symbol$state]($style) "; };
+    battery = {
+      full_symbol = "🔋 ";
+      charging_symbol = "⚡️ ";
+      discharging_symbol = "💀 ";
+    };
+    git_branch = {
+      format = "[$symbol$branch]($style) ";
+      symbol = " ";
+    };
+    gcloud = {
+      format = "[$symbol$active]($style) ";
+      symbol = "  ";
+    };
+    aws = { symbol = "  "; };
+    buf = { symbol = " "; };
+    c = { symbol = " "; };
+    conda = { symbol = " "; };
+    dart = { symbol = " "; };
+    directory = { read_only = " "; };
+    docker_context = { symbol = " "; };
+    elixir = { symbol = " "; };
+    elm = { symbol = " "; };
+    golang = { symbol = " "; };
+    haskell = { symbol = " "; };
+    hg_branch = { symbol = " "; };
+    java = { symbol = " "; };
+    julia = { symbol = " "; };
+    memory_usage = { symbol = " "; };
+    nim = { symbol = " "; };
+    nix_shell = { symbol = " "; };
+    nodejs = { symbol = " "; };
+    package = { symbol = " "; };
+    python = { symbol = " "; };
+    spack = { symbol = "🅢 "; };
+    rust = { symbol = " "; };
+  };
 }
 # vim: foldmethod=marker
