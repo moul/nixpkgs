@@ -82,6 +82,7 @@ in {
     "docker"
     "ipfs"
     "keybase"
+    "notion"
     "nvidia-geforce-now"
     "raycast"
     "superhuman"
