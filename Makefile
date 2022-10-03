@@ -14,6 +14,9 @@ help:
 update:
 	nix flake update
 
+gc:
+	nix-collect-garbage -d
+
 darwin-bootstrap-a:
 	xcode-select --install || true
 	curl -L https://nixos.org/nix/install | sh
