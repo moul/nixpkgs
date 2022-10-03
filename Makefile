@@ -17,6 +17,9 @@ update:
 gc:
 	nix-collect-garbage -d
 
+repair:
+	nix-store --verify --repair --check-contents
+
 darwin-bootstrap-a:
 	xcode-select --install || true
 	curl -L https://nixos.org/nix/install | sh
