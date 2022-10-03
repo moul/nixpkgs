@@ -11,6 +11,9 @@ switch:
 help:
 	@echo "read the Makefile"
 
+update:
+	nix flake update
+
 darwin-bootstrap-a:
 	xcode-select --install || true
 	curl -L https://nixos.org/nix/install | sh
