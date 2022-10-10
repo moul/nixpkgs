@@ -49,6 +49,8 @@ in {
     "Yubico Authenticator" = 1497506650;
     "one sec" = 1532875441;
     "Grammarly: Writing App" = 1462114288;
+    "Canva: Design, Photo & Video" = 897446215;
+    Actions = 1586435171;
     Backtrack = 1477089520;
     Controller = 1198176727;
     DaisyDisk = 411643860;
@@ -82,6 +84,8 @@ in {
     "docker"
     "ipfs"
     "keybase"
+    "krisp"
+    "loom"
     "notion"
     "nvidia-geforce-now"
     "raycast"
