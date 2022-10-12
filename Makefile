@@ -33,7 +33,7 @@ moul-musca:
 	./result/sw/bin/darwin-rebuild switch --flake .#$@
 	@echo Done.
 
-fwrz:
+fwrz zrwf:
 	nix --experimental-features 'nix-command flakes' build .#homeConfigurations.$@.activationPackage
 	./result/activate
 	@echo Done.
