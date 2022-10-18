@@ -1,4 +1,4 @@
-HOSTNAME ?= `hostname`
+HOSTNAME ?= `hostname | sed s/\\.local//`
 UNAME_S := $(shell uname -s)
 DARWIN_HOSTS = moul-musca moul-volans
 LINUX_HOSTS = fwrz zrwf
