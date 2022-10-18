@@ -1,6 +1,7 @@
 HOSTNAME ?= `hostname`
 UNAME_S := $(shell uname -s)
-
+DARWIN_HOSTS = moul-musca moul-volans
+LINUX_HOSTS = fwrz zrwf
 
 all: switch cachix-push
 
@@ -31,12 +32,12 @@ darwin-bootstrap-a:
 linux-bootstrap-b darwin-bootstrap-b:
 	nix-env -iA nixpkgs.nixVersions.stable
 
-moul-musca:
+$(DARWIN_HOSTS):
 	nix --experimental-features 'nix-command flakes' build .#darwinConfigurations.$@.system
 	./result/sw/bin/darwin-rebuild switch --flake .#$@
 	@echo Done.
 
-fwrz zrwf:
+$(LINUX_HOSTS):
 	nix --experimental-features 'nix-command flakes' build .#homeConfigurations.$@.activationPackage
 	./result/activate
 	@echo Done.
