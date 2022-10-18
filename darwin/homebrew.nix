@@ -95,7 +95,6 @@ in {
     "nvidia-geforce-now"
     "raycast"
     "superhuman"
-    "texts"
     "vlc"
     # "amethyst"
     # "anki"
