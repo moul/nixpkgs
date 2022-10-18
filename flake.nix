@@ -127,7 +127,7 @@
           }];
         };
 
-        moul-musca = darwinSystem {
+        moul-volans = darwinSystem {
           system = "x86_64-darwin";
           modules = nixDarwinCommonModules ++ [{
             users.primaryUser = primaryUserInfo // {
