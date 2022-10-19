@@ -38,7 +38,7 @@ darwin-cleanup:
 	sudo mv /etc/profile.backup-before-nix /etc/profile || true
 	sudo mv /etc/bashrc.backup-before-nix /etc/bashrc || true
 	sudo mv /etc/zshrc.backup-before-nix /etc/zshrc || true
-	sudo rm -rf /etc/nix /nix /var/root/.nix-profile /var/root/.nix-defexpr /var/root/.nix-channels /Users/$USER/.nix-profile /Users/$USER/.nix-defexpr /Users/$USER/.nix-channels || true
+	sudo rm -rf /etc/nix /nix /var/root/.nix-profile /var/root/.nix-defexpr /var/root/.nix-channels /Users/$(USER)/.nix-profile /Users/$(USER)/.nix-defexpr /Users/$(USER)/.nix-channels || true
 
 
 
