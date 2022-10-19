@@ -140,6 +140,19 @@
           }];
         };
 
+        moul-pyxis = darwinSystem {
+          system = "aarch64-darwin";
+          modules = nixDarwinCommonModules ++ [{
+            users.primaryUser = primaryUserInfo // {
+              username = "moul";
+              nixConfigDirectory = "/Users/moul/.config/nixpkgs";
+            };
+            networking.computerName = "Manfred (Pyxis)";
+            networking.hostName = "moul-pyxis";
+            networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
+          }];
+        };
+
         x86-macbook = darwinSystem {
           system = "x86_64-darwin";
           modules = nixDarwinCommonModules ++ [{
