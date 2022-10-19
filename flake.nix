@@ -140,15 +140,41 @@
           }];
         };
 
-        moul-pyxis = darwinSystem {
-          system = "aarch64-darwin";
+        moul-triangulum = darwinSystem {
+          system = "x86_64-darwin";
           modules = nixDarwinCommonModules ++ [{
             users.primaryUser = primaryUserInfo // {
               username = "moul";
               nixConfigDirectory = "/Users/moul/.config/nixpkgs";
             };
+            networking.computerName = "Manfred (Triangulum)";
+            networking.hostName = "moul-triangulum";
+            networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
+          }];
+        };
+
+        moul-pyxis = darwinSystem {
+          system = "aarch64-darwin";
+          modules = nixDarwinCommonModules ++ [{
+            users.primaryUser = primaryUserInfo // {
+              username = "moul2";
+              nixConfigDirectory = "/Users/moul2/.config/nixpkgs";
+            };
             networking.computerName = "Manfred (Pyxis)";
             networking.hostName = "moul-pyxis";
+            networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
+          }];
+        };
+
+        moul-scutum = darwinSystem {
+          system = "aarch64-darwin";
+          modules = nixDarwinCommonModules ++ [{
+            users.primaryUser = primaryUserInfo // {
+              username = "renato";
+              nixConfigDirectory = "/Users/renato/.config/nixpkgs";
+            };
+            networking.computerName = "Renato (Scutum)";
+            networking.hostName = "moul-scutum";
             networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
           }];
         };
