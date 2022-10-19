@@ -29,6 +29,19 @@ darwin-bootstrap-a:
 	curl -L https://nixos.org/nix/install | sh
 	@echo "Done. Run a new shell and type 'make darwin-bootstrap-b"
 
+darwin-cleanup:
+	@echo -n "Are you sure? [y/N] " && read ans && [ $${ans:-N} = y ]
+	@echo -n "Are you really sure? [y/N] " && read ans && [ $${ans:-N} = y ]
+	@echo -n "Are you really really sure? [y/N] " && read ans && [ $${ans:-N} = y ]
+	sudo launchctl unload /Library/LaunchDaemons/org.nixos.nix-daemon.plist || true
+	sudo rm /Library/LaunchDaemons/org.nixos.nix-daemon.plist || true
+	sudo mv /etc/profile.backup-before-nix /etc/profile || true
+	sudo mv /etc/bashrc.backup-before-nix /etc/bashrc || true
+	sudo mv /etc/zshrc.backup-before-nix /etc/zshrc || true
+	sudo rm -rf /etc/nix /nix /var/root/.nix-profile /var/root/.nix-defexpr /var/root/.nix-channels /Users/$USER/.nix-profile /Users/$USER/.nix-defexpr /Users/$USER/.nix-channels || true
+
+
+
 linux-bootstrap-b darwin-bootstrap-b:
 	nix-env -iA nixpkgs.nixVersions.stable
 
