@@ -40,19 +40,15 @@ in {
 
   # Prefer installing application from the Mac App Store
   homebrew.masApps = {
-    "iStat Menus" = 1319778037;
-    "Logic Pro" = 634148309;
-    "Microsoft Remote Desktop" = 1295203466;
-    #"Model 15" = 1041465860;
-    "Pixelmator Pro" = 1289583905;
-    "WiFi Explorer" = 494803304;
-    "Yubico Authenticator" = 1497506650;
-    "one sec" = 1532875441;
-    "Grammarly: Writing App" = 1462114288;
-    "Canva: Design, Photo & Video" = 897446215;
-    Actions = 1586435171;
+    iStatMenus = 1319778037;
+    LogicPro = 634148309;
+    MicrosoftRemoteDesktop = 1295203466;
+    #Model15 = 1041465860;
+    PixelmatorPro = 1289583905;
+    WiFiExplorer = 494803304;
+    YubicoAuthenticator = 1497506650;
+    Grammarly = 1462114288;
     Backtrack = 1477089520;
-    Controller = 1198176727;
     DaisyDisk = 411643860;
     Deliveries = 290986013;
     Fantastical = 975937182;
@@ -70,8 +66,13 @@ in {
     Transmit = 1436522307;
     Twitter = 1482454543;
     Canva = 897446215;
-    Infuse = 1136220934;
     Trello = 1278508951;
+
+    # FIXME: optionals if darwin >= 12
+    #Infuse = 1136220934;
+    #Actions = 1586435171;
+    #oneSec = 1532875441;
+    #Controller = 1198176727;
   };
 
   # If an app isn't available in the Mac App Store, or the version in the App Store has

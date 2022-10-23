@@ -140,6 +140,19 @@
           }];
         };
 
+	moul-fornax = darwinSystem {
+          system = "x86_64-darwin";
+          modules = nixDarwinCommonModules ++ [{
+            users.primaryUser = primaryUserInfo // {
+              username = "moul";
+              nixConfigDirectory = "/Users/moul/.config/nixpkgs";
+            };
+            networking.computerName = "Manfred (Fornax)";
+            networking.hostName = "moul-fornax";
+            networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
+          }];
+        };
+
         moul-triangulum = darwinSystem {
           system = "x86_64-darwin";
           modules = nixDarwinCommonModules ++ [{
