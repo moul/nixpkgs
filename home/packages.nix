@@ -24,6 +24,13 @@ in {
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.htop.enable
   programs.htop.enable = true;
   programs.htop.settings.show_program_path = true;
+  programs.htop.settings.color_scheme = 5;
+  programs.htop.settings.highlight_base_name = 1;
+  programs.htop.settings.highlight_megabytes = 1;
+  programs.htop.settings.highlight_threads = 1;
+  programs.htop.settings.hide_userland_threads = 1;
+  programs.htop.settings.hide_kernel_threads = 1;
+  programs.htop.settings.tree_view = 1;
 
   # Zoxide, a faster way to navigate the filesystem
   # https://github.com/ajeetdsouza/zoxide
