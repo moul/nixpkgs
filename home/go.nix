@@ -22,5 +22,6 @@ in {
     "golang.org/x/tools/cmd/godoc" = inputs.gotools;
     "golang.org/x/tools/cmd/gorename" = inputs.gotools;
     "golang.org/x/tools/cmd/guru" = inputs.gotools;
+    "honnef.co/go/tools/cmd/staticcheck" = inputs.honneftools;
   };
 }

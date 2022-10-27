@@ -29,6 +29,10 @@
       url = "git+https://go.googlesource.com/tools";
       flake = false;
     };
+    honneftools = {
+      url = "github:dominikh/go-tools";
+      flake = false;
+    };
     spacemacs = {
       url = "github:syl20bnr/spacemacs/develop";
       flake = false;
@@ -140,7 +144,7 @@
           }];
         };
 
-	moul-fornax = darwinSystem {
+        moul-fornax = darwinSystem {
           system = "x86_64-darwin";
           modules = nixDarwinCommonModules ++ [{
             users.primaryUser = primaryUserInfo // {

@@ -147,6 +147,22 @@
         "type": "github"
       }
     },
+    "honneftools": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1664924469,
+        "narHash": "sha256-zszTO11H8Fg0gP+cz8fdIpYRMA77eeiCgzzmXKVaGlU=",
+        "owner": "dominikh",
+        "repo": "go-tools",
+        "rev": "4229c3d955f81fd39462d5eea9bc30a4f04a09d0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dominikh",
+        "repo": "go-tools",
+        "type": "github"
+      }
+    },
     "nixos-stable": {
       "locked": {
         "lastModified": 1664594436,
@@ -294,6 +310,7 @@
         "flake-utils": "flake-utils_2",
         "gotools": "gotools",
         "home-manager": "home-manager",
+        "honneftools": "honneftools",
         "nixos-stable": "nixos-stable",
         "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-stable": "nixpkgs-stable",
