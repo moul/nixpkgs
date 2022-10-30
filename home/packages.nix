@@ -85,6 +85,7 @@ in {
       ispell
       mosh # wrapper for `ssh` that better and not dropping connections
       nodePackages.speed-test # nice speed-test tool
+      nodejs
       nmap
       openssl
       parallel # runs commands in parallel
