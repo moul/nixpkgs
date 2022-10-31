@@ -40,7 +40,6 @@ in {
 
   # Prefer installing application from the Mac App Store
   homebrew.masApps = {
-<<<<<<< HEAD
     iStatMenus = 1319778037;
     LogicPro = 634148309;
     MicrosoftRemoteDesktop = 1295203466;
