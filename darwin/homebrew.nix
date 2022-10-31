@@ -69,7 +69,6 @@ in {
     Tailscale = 1475387142;
     Transmit = 1436522307;
     Twitter = 1482454543;
-    Canva = 897446215;
     Trello = 1278508951;
 
     # FIXME: optionals if darwin >= 12
