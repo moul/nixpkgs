@@ -40,6 +40,7 @@ in {
 
   # Prefer installing application from the Mac App Store
   homebrew.masApps = {
+<<<<<<< HEAD
     iStatMenus = 1319778037;
     LogicPro = 634148309;
     MicrosoftRemoteDesktop = 1295203466;
@@ -48,6 +49,10 @@ in {
     WiFiExplorer = 494803304;
     YubicoAuthenticator = 1497506650;
     Grammarly = 1462114288;
+    iNetNetworkScanner = 403304796;
+    oneSec = 1532875441;
+    Canva = 897446215;
+    Actions = 1586435171;
     Backtrack = 1477089520;
     DaisyDisk = 411643860;
     Deliveries = 290986013;
