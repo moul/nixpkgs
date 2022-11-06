@@ -67,3 +67,7 @@ ifeq ($(UNAME_S),Darwin)
 endif
 	nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | cachix push moul
 	@echo Done.
+
+###
+
+reload_kitty:; pkill -USR1 kitty

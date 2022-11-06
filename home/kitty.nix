@@ -59,6 +59,8 @@
     map kitty_mod+w                    close_tab
     map kitty_mod+left                 prev_tab
     map kitty_mod+right                next_tab
+    map kitty_mod+p                    prev_tab
+    map kitty_mod+n                    next_tab
   '';
 
   programs.kitty.extras.useSymbolsFromNerdFont = "JetBrainsMono Nerd Font";
