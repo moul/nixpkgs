@@ -60,6 +60,7 @@
       blue = "color4";
       cyan = "color6";
       green = "color2";
+      black = "color0";
     };
 
     terminal = {
@@ -73,11 +74,11 @@
 
     pkgThemes.kitty = {
       url_color = "blue";
-      tab_bar_background = "base2";
-      active_tab_background = "green";
-      active_tab_foreground = "base3";
-      inactive_tab_background = "base01";
-      inactive_tab_foreground = "base3";
+      tab_bar_background = "black";
+      active_tab_background = "color4";
+      active_tab_foreground = "color7";
+      inactive_tab_background = "black";
+      inactive_tab_foreground = "color7";
     };
   };
 

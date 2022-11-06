@@ -17,43 +17,48 @@
 
     # Window layout
     hide_window_decorations = "titlebar-only";
-    window_padding_width = "10";
+    window_padding_width = "5 5 1 5";
 
     # Tab bar
-    tab_bar_edge = "top";
+    tab_bar_edge = "bottom";
     tab_bar_style = "powerline";
-    tab_title_template = "Tab {index}: {title}";
+    tab_bar_min_tabs = "2";
+    #tab_title_template = "Tab {index}: {title}";
+    tab_title_template = "{title}";
     active_tab_font_style = "bold";
     inactive_tab_font_style = "normal";
-    tab_activity_symbol = "";
+    tab_activity_symbol = "#";
   };
 
   # Change the style of italic font variants
   programs.kitty.extraConfig = ''
-    font_features PragmataProMonoLiga-Italic +ss06
-    font_features PragmataProMonoLiga-BoldItalic +ss07
-    clear_all_shortcuts yes
-    rectangle_select_modifiers   no_op
-    kitty_mod                    cmd
-    map cmd+c                    copy_to_clipboard
-    map cmd+v                    paste_from_clipboard
-    map cmd+u                    input_unicode_character
-    map cmd+enter                toggle_fullscreen
-    map cmd+f                    show_scrollback
+    font_features                      PragmataProMonoLiga-Italic +ss06
+    font_features                      PragmataProMonoLiga-BoldItalic +ss07
+    clear_all_shortcuts                yes
+    rectangle_select_modifiers         no_op
+    kitty_mod                          cmd
 
-    map cmd+0                    change_font_size all 0
-    map cmd+shift+equals         change_font_size all +1.0
-    map cmd+shift+minus          change_font_size all -1.0
+    map kitty_mod+c                    copy_to_clipboard
+    map kitty_mod+v                    paste_from_clipboard
+    map kitty_mod+u                    input_unicode_character
+    map kitty_mod+enter                toggle_fullscreen
+    map kitty_mod+f                    show_scrollback
 
-    map cmd+0x1d                 change_font_size all 0
-    map cmd+0x18                 change_font_size all +1.0
-    map cmd+0x1b                 change_font_size all -1.0
+    map kitty_mod+0                    change_font_size all 0
+    map kitty_mod+shift+equals         change_font_size all +1.0
+    map kitty_mod+shift+minus          change_font_size all -1.0
 
-    map cmd+shift+u              kitten unicode_input
-    map cmd+t                    new_tab
-    map cmd+w                    close_tab
-    map cmd+left                 prev_tab
-    map cmd+right                next_tab
+    map kitty_mod+0x1d                 change_font_size all 0
+    map kitty_mod+0x18                 change_font_size all +1.0
+    map kitty_mod+0x1b                 change_font_size all -1.0
+
+    map kitty_mod+shift+u              kitten unicode_input
+    map kitty_mod+.                    reload_config_file
+
+    map kitty_mod+t                    new_tab
+    map kitty_mod+w                    close_tab
+    map kitty_mod+left                 prev_tab
+    map kitty_mod+right                next_tab
   '';
 
   programs.kitty.extras.useSymbolsFromNerdFont = "JetBrainsMono Nerd Font";
@@ -64,8 +69,9 @@
     enable = true;
 
     # Background dependent colors
-    dark = config.colors.ManfredTouron-dark.pkgThemes.kitty;
-    light = config.colors.ManfredTouron-light.pkgThemes.kitty;
+    dark =  config.colors.ManfredTouron-dark.pkgThemes.kitty;
+    light = config.colors.ManfredTouron-dark.pkgThemes.kitty;
+    #light = config.colors.ManfredTouron-light.pkgThemes.kitty;
   };
 
   programs.fish.functions.set-term-colors = {
