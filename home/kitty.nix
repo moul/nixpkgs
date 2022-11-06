@@ -48,6 +48,12 @@
     map cmd+0x1d                 change_font_size all 0
     map cmd+0x18                 change_font_size all +1.0
     map cmd+0x1b                 change_font_size all -1.0
+
+    map cmd+shift+u              kitten unicode_input
+    map cmd+t                    new_tab
+    map cmd+w                    close_tab
+    map cmd+left                 prev_tab
+    map cmd+right                next_tab
   '';
 
   programs.kitty.extras.useSymbolsFromNerdFont = "JetBrainsMono Nerd Font";
@@ -72,4 +78,3 @@
   '';
   # }}}
 }
-# vim: foldmethod=marker
