@@ -95,6 +95,7 @@ in {
     "krisp"
     "loom"
     "minecraft"
+    "netspot"
     "notion"
     "nvidia-geforce-now"
     "raycast"
