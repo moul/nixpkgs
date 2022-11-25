@@ -6,7 +6,7 @@ require (
 	berty.tech/berty/v2 v2.418.0
 	github.com/cespare/prettybench v0.1.0
 	github.com/daixiang0/gci v0.3.2
-	github.com/gfanton/loon v1.0.0
+	github.com/gfanton/loon v1.4.0
 	github.com/gnolang/gno v0.0.0-20220712022912-c6d1e89d8307
 	github.com/goreleaser/goreleaser v1.5.0
 	github.com/maruel/panicparse/v2 v2.2.2
@@ -360,6 +360,7 @@ require (
 	github.com/stretchr/testify v1.7.2 // indirect
 	github.com/subosito/gotenv v1.2.0 // indirect
 	github.com/syndtr/goleveldb v1.0.0 // indirect
+	github.com/teacat/noire v1.1.0 // indirect
 	github.com/tecbot/gorocksdb v0.0.0-20191217155057-f0fad39f321c // indirect
 	github.com/tklauser/go-sysconf v0.3.9 // indirect
 	github.com/tklauser/numcpus v0.3.0 // indirect
