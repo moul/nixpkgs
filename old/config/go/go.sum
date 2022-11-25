@@ -1644,6 +1644,8 @@ github.com/maruel/circular v0.0.0-20200815005550-36e533b830e9 h1:d8OcZrg9dmqfBsH
 github.com/maruel/circular v0.0.0-20200815005550-36e533b830e9/go.mod h1:AEsb24YMiJiSqh8Cs8kRGJxDDXKEkveJ7nxYUeYibEc=
 github.com/maruel/panicparse/v2 v2.2.2 h1:4Gu/Z5oLpJCE/0/NwxrUkyn7alpqOQdJAUuchB2OoJU=
 github.com/maruel/panicparse/v2 v2.2.2/go.mod h1:WizmeHJfpyKYYKGInKv8ax8jh7DJnQE5yFDuzFfHzIU=
+github.com/maruel/panicparse/v2 v2.3.1 h1:NtJavmbMn0DyzmmSStE8yUsmPZrZmudPH7kplxBinOA=
+github.com/maruel/panicparse/v2 v2.3.1/go.mod h1:s3UmQB9Fm/n7n/prcD2xBGDkwXD6y2LeZnhbEXvs9Dg=
 github.com/maruel/ut v1.0.2 h1:mQTlQk3jubTbdTcza+hwoZQWhzcvE4L6K6RTtAFlA1k=
 github.com/maruel/ut v1.0.2/go.mod h1:RV8PwPD9dd2KFlnlCc/DB2JVvkXmyaalfc5xvmSrRSs=
 github.com/matryer/is v1.4.0 h1:sosSmIWwkYITGrxZ25ULNDeKiMNzFSr4V/eqBQP0PeE=
