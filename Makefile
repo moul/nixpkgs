@@ -1,7 +1,7 @@
 HOSTNAME ?= `hostname | sed s/\\.local//`
 UNAME_S := $(shell uname -s)
 DARWIN_HOSTS = moul-musca moul-volans moul-pyxis moul-triangulum moul-scutum moul-fornax
-LINUX_HOSTS = fwrz zrwf crux
+LINUX_HOSTS = fwrz zrwf crux pictor
 
 all: switch cachix-push
 
