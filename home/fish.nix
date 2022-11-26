@@ -104,6 +104,8 @@ in {
     eamsc = "emacs";
     emaccs = "emacs";
 
+    "docker-compose" = "docker compose";
+
     # Nix related
     drb = "darwin-rebuild build --flake ${nixConfigDirectory}";
     drs = "darwin-rebuild switch --flake ${nixConfigDirectory}";
