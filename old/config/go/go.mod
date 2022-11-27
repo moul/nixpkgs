@@ -1,6 +1,6 @@
 module moul.io/nixpkgs/config/go
 
-go 1.18
+go 1.19
 
 require (
 	berty.tech/berty/v2 v2.418.0
