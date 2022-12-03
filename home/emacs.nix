@@ -20,7 +20,7 @@ in {
   # Spacemacs
   home.file.".emacs.d" = {
     source = pkgs.spacemacs;
-    #resursive = true;
+    recursive = true;
   };
 
   home.activation.emacsdPopulate = config.lib.dag.entryAfter [
@@ -32,10 +32,10 @@ in {
     ln -sf ${configsd}/.spacemacs ~/.spacemacs;
 
     # setup .emacs cache dir (TODO: find a nix idiomatic way).
-    for dir in .cache elpa; do
-      mkdir -p ${config.xdg.cacheHome}/emacs/$dir;
-      sudo mv ~/.emacs.d/$dir ~/.emacs.d/$dir.old || true;
-      sudo ln -s ${config.xdg.cacheHome}/emacs/$dir/ ~/.emacs.d/$dir;
-    done
+    #for dir in .cache elpa; do
+    #  mkdir -p ${config.xdg.cacheHome}/emacs/$dir;
+    #  sudo mv ~/.emacs.d/$dir ~/.emacs.d/$dir.old || true;
+    #  sudo ln -s ${config.xdg.cacheHome}/emacs/$dir/ ~/.emacs.d/$dir;
+    #done
   '';
 }

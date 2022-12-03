@@ -71,3 +71,8 @@ endif
 ###
 
 reload_kitty:; pkill -USR1 kitty
+
+build_emacs:
+	raw-emacs --batch -L ~/.emacs.d/core -L ~/.emacs.d/layers -l ~/.emacs.d/core/core-load-paths.el -l ~/.emacs.d/core/core-versions.el --eval '(batch-byte-recompile-directory 0)' ~/.emacs.d/core
+	raw-emacs --batch --eval '(batch-byte-recompile-directory 0)' ~/.emacs.d/layers
+	raw-emacs --batch --eval '(batch-byte-compile)' ~/.emacs.d/*.el

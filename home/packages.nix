@@ -96,6 +96,7 @@ in {
       # python3Packages.shell-functools # a collection of functional programming tools for the shell
       ripgrep # better version of `grep`
       socat
+      #sudo
       tcpdump
       tealdeer # rust implementation of `tldr`
       thefuck
