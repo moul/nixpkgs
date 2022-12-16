@@ -9,7 +9,7 @@ require (
 	github.com/gfanton/loon v1.4.0
 	github.com/gnolang/gno v0.0.0-20220712022912-c6d1e89d8307
 	github.com/goreleaser/goreleaser v1.5.0
-	github.com/maruel/panicparse/v2 v2.2.2
+	github.com/maruel/panicparse/v2 v2.3.1
 	golang.org/x/tools v0.1.11-0.20220513221640-090b14e8501f
 	honnef.co/go/tools v0.3.3
 	moul.io/adapterkit v0.0.0-20220619192858-e6df15e3ae2f
