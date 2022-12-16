@@ -66,6 +66,7 @@ in {
       emacs-nox
       entr
       exa # fancy version of `ls`
+      expect
       fd # fancy version of `find`
       ffmpeg
       file
