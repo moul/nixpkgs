@@ -13,7 +13,7 @@ require (
 	golang.org/x/tools v0.1.12
 	honnef.co/go/tools v0.3.3
 	moul.io/adapterkit v1.5.2
-	moul.io/assh/v2 v2.14.0
+	moul.io/assh/v2 v2.15.0
 	moul.io/moulsay v1.3.0
 	moul.io/prefix v1.7.1
 	moul.io/retry v0.7.1
@@ -77,7 +77,7 @@ require (
 	github.com/docker/distribution v2.7.1+incompatible // indirect
 	github.com/docker/docker v20.10.12+incompatible // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
-	github.com/docker/go-units v0.4.0 // indirect
+	github.com/docker/go-units v0.5.0 // indirect
 	github.com/docker/libcompose v0.4.0 // indirect
 	github.com/dustin/go-humanize v1.0.0 // indirect
 	github.com/eidolon/wordwrap v0.0.0-20161011182207-e0f54129b8bb // indirect
