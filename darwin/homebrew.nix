@@ -101,6 +101,8 @@ in {
     "raycast"
     "superhuman"
     "vlc"
+    "roam-research"
+    "obsidian"
     # "amethyst"
     # "anki"
     # "arq"
