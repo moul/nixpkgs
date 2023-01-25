@@ -183,6 +183,19 @@
           }];
         };
 
+        moul-dorado = darwinSystem {
+          system = "aarch64-darwin";
+          modules = nixDarwinCommonModules ++ [{
+            users.primaryUser = primaryUserInfo // {
+              username = "moul";
+              nixConfigDirectory = "/Users/moul/.config/nixpkgs";
+            };
+            networking.computerName = "Manfred (Dorado)";
+            networking.hostName = "moul-dorado";
+            networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
+          }];
+        };
+
         moul-scutum = darwinSystem {
           system = "aarch64-darwin";
           modules = nixDarwinCommonModules ++ [{
