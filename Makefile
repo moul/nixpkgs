@@ -40,8 +40,6 @@ darwin-cleanup:
 	sudo mv /etc/zshrc.backup-before-nix /etc/zshrc || true
 	sudo rm -rf /etc/nix /nix /var/root/.nix-profile /var/root/.nix-defexpr /var/root/.nix-channels /Users/$(USER)/.nix-profile /Users/$(USER)/.nix-defexpr /Users/$(USER)/.nix-channels || true
 
-
-
 linux-bootstrap-b darwin-bootstrap-b:
 	nix-env -iA nixpkgs.nixVersions.stable
 
