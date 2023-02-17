@@ -61,8 +61,8 @@
           (final: prev:
             let
             in {
-              emacsNativeComp =
-                (import emacs-overlay final prev).emacsNativeComp;
+              emacsUnstable =
+                (import emacs-overlay final prev).emacsUnstable;
               spacemacs = inputs.spacemacs;
             })
         ];

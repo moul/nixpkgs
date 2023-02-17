@@ -44,12 +44,12 @@ linux-bootstrap-b darwin-bootstrap-b:
 	nix-env -iA nixpkgs.nixVersions.stable
 
 $(DARWIN_HOSTS):
-	nix --experimental-features 'nix-command flakes' build .#darwinConfigurations.$@.system
+	nix --experimental-features 'nix-command flakes ca-derivations ca-references' build .#darwinConfigurations.$@.system
 	./result/sw/bin/darwin-rebuild switch --flake .#$@
 	@echo Done.
 
 $(LINUX_HOSTS):
-	nix --experimental-features 'nix-command flakes' build .#homeConfigurations.$@.activationPackage
+	nix --experimental-features 'nix-command flakes ca-derivations ca-references' build .#homeConfigurations.$@.activationPackage
 	./result/activate
 	@echo Done.
 
@@ -74,3 +74,12 @@ build_emacs:
 	raw-emacs --batch -L ~/.emacs.d/core -L ~/.emacs.d/layers -l ~/.emacs.d/core/core-load-paths.el -l ~/.emacs.d/core/core-versions.el --eval '(batch-byte-recompile-directory 0)' ~/.emacs.d/core
 	raw-emacs --batch --eval '(batch-byte-recompile-directory 0)' ~/.emacs.d/layers
 	raw-emacs --batch --eval '(batch-byte-compile)' ~/.emacs.d/*.el
+
+nix-info:
+	nix-shell -p nix-info --run "nix-info -m"
+
+nix-store-verify:
+	nix store verify --recursive \
+	  --experimental-features nix-command \
+	  --sigs-needed 10000 \
+	  /run/current-system

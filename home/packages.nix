@@ -110,12 +110,13 @@ in {
       xz # extract XZ archives
       jq
       unixtools.watch
+      youtube-dl
 
       # Useful nix related tools
       vivid
       cachix # adding/managing alternative binary caches hosted by Cachix
       comma # run software from without installing it
-      niv # easy dependency management for nix projects
+      # niv # easy dependency management for nix projects
       nixfmt
       nix-diff
       nix-index

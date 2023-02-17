@@ -15,6 +15,7 @@ in {
 
   # TODO: emacs-nox
   # TODO: emacs server
+  # TODO: 'emacs -nw' by default
   programs.emacs.package = pkgs.emacsNativeComp;
 
   # Spacemacs
