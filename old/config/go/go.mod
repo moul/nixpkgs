@@ -303,7 +303,7 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/mapstructure v1.4.3 // indirect
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
-	github.com/moby/moby v1.13.1 // indirect
+	github.com/moby/moby v20.10.20+incompatible // indirect
 	github.com/moby/term v0.0.0-20210619224110-3f7ff695adc6 // indirect
 	github.com/morikuni/aec v1.0.0 // indirect
 	github.com/moul/flexyaml v0.0.0-20171225152558-f458bfa8afe2 // indirect
