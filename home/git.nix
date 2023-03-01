@@ -6,6 +6,8 @@
   # Aliases config in ./configs/git-aliases.nix
   programs.git.enable = true;
 
+  programs.git.lfs.enable = true;
+
   programs.git.extraConfig = {
     # core.editor = "${pkgs.emacs-nox}/bin/emacs --remote-wait-silent -cc split";
     diff.colorMoved = "default";
