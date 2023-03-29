@@ -109,6 +109,7 @@ in {
       wget
       xz # extract XZ archives
       jq
+      yq
       unixtools.watch
       youtube-dl
 
