@@ -61,7 +61,6 @@ require (
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/cheekybits/genny v1.0.0 // indirect
 	github.com/cheggaaa/pb v1.0.29 // indirect
-	github.com/containerd/containerd v1.6.18 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.1 // indirect
 	github.com/crackcomm/go-gitignore v0.0.0-20170627025303-887ab5e44cc3 // indirect
 	github.com/creack/pty v1.1.11 // indirect
@@ -75,7 +74,7 @@ require (
 	github.com/dgraph-io/ristretto v0.1.0 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/docker/distribution v2.7.1+incompatible // indirect
-	github.com/docker/docker v20.10.12+incompatible // indirect
+	github.com/docker/docker v20.10.24+incompatible // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
 	github.com/docker/libcompose v0.4.0 // indirect
@@ -119,6 +118,7 @@ require (
 	github.com/google/flatbuffers v1.12.1 // indirect
 	github.com/google/go-github/v42 v42.0.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
+	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/gopacket v1.1.19 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/goreleaser/fileglob v1.3.0 // indirect
