@@ -200,10 +200,10 @@
           system = "aarch64-darwin";
           modules = nixDarwinCommonModules ++ [{
             users.primaryUser = primaryUserInfo // {
-              username = "renato";
-              nixConfigDirectory = "/Users/renato/.config/nixpkgs";
+              username = "moul";
+              nixConfigDirectory = "/Users/moul/.config/nixpkgs";
             };
-            networking.computerName = "Renato (Scutum)";
+            networking.computerName = "Manfred (Scutum)";
             networking.hostName = "moul-scutum";
             networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
           }];
