@@ -73,6 +73,7 @@ in {
       fzf
       gist
       git-crypt
+      ghostscript
       gnumake
       gnupg
       graphviz

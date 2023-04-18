@@ -140,6 +140,7 @@ in {
   # installed in `../home/default.nix` whenever possible.
   homebrew.brews = [
     "mas"
+    "gs"
     #"hub"
     #"golang"
     #"mosh"
