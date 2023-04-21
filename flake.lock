@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "chemacs2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1674216959,
+        "narHash": "sha256-/WtacZPr45lurS0hv+W8UGzsXY3RujkU5oGGGqjqG0Q=",
+        "owner": "plexus",
+        "repo": "chemacs2",
+        "rev": "c2d700b784c793cc82131ef86323801b8d6e67bb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "plexus",
+        "ref": "main",
+        "repo": "chemacs2",
+        "type": "github"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -306,6 +323,7 @@
     },
     "root": {
       "inputs": {
+        "chemacs2": "chemacs2",
         "darwin": "darwin",
         "emacs-overlay": "emacs-overlay",
         "flake-compat": "flake-compat",

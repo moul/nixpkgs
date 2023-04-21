@@ -37,6 +37,10 @@
       url = "github:syl20bnr/spacemacs/develop";
       flake = false;
     };
+    chemacs2 = {
+      url = "github:plexus/chemacs2/main";
+      flake = false;
+    };
   };
 
   outputs =
@@ -64,6 +68,7 @@
               emacsUnstable =
                 (import emacs-overlay final prev).emacsUnstable;
               spacemacs = inputs.spacemacs;
+	      chemacs2 = inputs.chemacs2;
             })
         ];
       };
