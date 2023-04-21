@@ -214,7 +214,7 @@ It should only modify the values of Spacemacs settings."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style 'vim
+   dotspacemacs-editing-style 'emacs
 
    ;; Specify the startup banner. Dfault value is `official', it displays
    ;; the official spacemacs logo. An integer value is the index of text
