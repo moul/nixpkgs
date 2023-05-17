@@ -141,6 +141,7 @@ in {
   homebrew.brews = [
     "mas"
     "gs"
+    "homeport/tap/termshot"
     #"hub"
     #"golang"
     #"mosh"
