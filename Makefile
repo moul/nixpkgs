@@ -1,7 +1,7 @@
 HOSTNAME ?= `hostname | cut -d. -f1`
 UNAME_S := $(shell uname -s)
 DARWIN_HOSTS = moul-musca moul-volans moul-pyxis moul-triangulum moul-scutum moul-fornax moul-dorado
-LINUX_HOSTS = fwrz zrwf crux pictor
+LINUX_HOSTS = fwrz zrwf crux pictor lyra
 
 all: switch cachix-push
 

@@ -304,6 +304,23 @@
               };
             });
         };
+        lyra = home-manager.lib.homeManagerConfiguration {
+          extraSpecialArgs = { inherit inputs; };
+          pkgs = import inputs.nixpkgs-unstable {
+            system = "x86_64-linux";
+            inherit (nixpkgsConfig) config overlays;
+          };
+          modules = attrValues self.homeManagerModules ++ singleton
+            ({ config, ... }: {
+              home.username = config.home.user-info.username;
+              home.homeDirectory = "/home/${config.home.username}";
+              home.stateVersion = homeManagerStateVersion;
+              home.user-info = primaryUserInfo // {
+                nixConfigDirectory =
+                  "${config.home.homeDirectory}/.config/nixpkgs";
+              };
+            });
+        };
         pictor = home-manager.lib.homeManagerConfiguration {
           extraSpecialArgs = { inherit inputs; };
           pkgs = import inputs.nixpkgs-unstable {
