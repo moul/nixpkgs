@@ -65,10 +65,9 @@
           (final: prev:
             let
             in {
-              emacsUnstable =
-                (import emacs-overlay final prev).emacsUnstable;
+              emacsUnstable = (import emacs-overlay final prev).emacsUnstable;
               spacemacs = inputs.spacemacs;
-	      chemacs2 = inputs.chemacs2;
+              chemacs2 = inputs.chemacs2;
             })
         ];
       };

@@ -52,9 +52,6 @@ in {
     "${xterm-emacsclient}/bin/xemacsclient";
   programs.zsh.shellAliases.ec = "${xterm-emacsclient}/bin/xemacsclient -nw";
 
-
-
-
   #  # Emacs
   #  programs.emacs.enable = true;
   #

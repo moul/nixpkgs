@@ -2,7 +2,7 @@
 
 let
   inherit (config.home) user-info homeDirectory;
-rust_home = "${config.xdg.dataHome}/rust";
+  rust_home = "${config.xdg.dataHome}/rust";
   #em = pkgs.writeScriptBin "em"
   #  (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${pkgs.emacsNativeComp}" ]
   #    (lib.readFile ./../config/em));
@@ -61,7 +61,7 @@ in {
     "${rust_home}/cargo/bin"
     "${rust_home}/rustup/bin"
     # go
-    "${homeDirectory}/go/bin"    
+    "${homeDirectory}/go/bin"
   ];
 
   # Bat, a substitute for cat.
@@ -90,11 +90,11 @@ in {
       # Some basics
       abduco # lightweight session management
       ascii
-#      aspell
-#      aspellDicts.en
-#      aspellDicts.en-computers
-#      aspellDicts.en-science
-#      aspellDicts.fr
+      #      aspell
+      #      aspellDicts.en
+      #      aspellDicts.en-computers
+      #      aspellDicts.en-science
+      #      aspellDicts.fr
       assh
       bandwhich # display current network utilization by process
       bottom # fancy version of `top` with ASCII graphs
@@ -157,7 +157,6 @@ in {
       unixtools.watch
       youtube-dl
 
-
       # Useful nix related tools
       vivid
       cachix # adding/managing alternative binary caches hosted by Cachix
@@ -174,9 +173,6 @@ in {
       nixpkgs-review # review pull-requests on nixpkgs
       nodePackages.node2nix
       statix # lints and suggestions for the Nix programming language
-
-
-
 
       # Some basics
       tig

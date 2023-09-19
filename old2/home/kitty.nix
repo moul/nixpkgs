@@ -71,7 +71,7 @@
     enable = true;
 
     # Background dependent colors
-    dark =  config.colors.ManfredTouron-dark.pkgThemes.kitty;
+    dark = config.colors.ManfredTouron-dark.pkgThemes.kitty;
     light = config.colors.ManfredTouron-dark.pkgThemes.kitty;
     #light = config.colors.ManfredTouron-light.pkgThemes.kitty;
   };
