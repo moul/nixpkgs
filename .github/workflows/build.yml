@@ -1,0 +1,90 @@
+name: Build Nix envs
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+    - '**'
+    - '!*.md'      
+  push:
+    branches:
+    - 'master'
+    paths:
+    - '**'
+    - '!*.md'
+
+env:
+  CACHIX_USER: moul
+  UPDATE_BRANCH: flake-update
+
+jobs:
+  build-macos-env:
+    name: Build/cache macOS Nix env
+    runs-on: macos-latest
+    env:
+      CONFIG_NAME: githubCI
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install Nix
+      uses: cachix/install-nix-action@v22
+      with:
+        extra_nix_config: |
+          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+    - name: Setup Cachix
+      uses: cachix/cachix-action@v12
+      with:
+        name: ${{ env.CACHIX_USER }}
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+    - name: Build and switch to nix-darwin env
+      run: |
+        # Create /run directory
+        echo -e "run\tprivate/var/run" | sudo tee -a /etc/synthetic.conf >/dev/null
+        /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -t &>/dev/null || true
+        # Prevent conflict between Cachix installed by workflow and the one installed in the config
+        nix-env --set-flag priority 1 cachix
+
+        # Build to bootstrap config
+        nix build .#darwinConfigurations.bootstrap-x86.system
+
+        # [hack] remove conflicting files
+        sudo rm -f /etc/nix/nix.conf
+        sudo rm -f /etc/shells
+
+        # Switch to bootstrap config
+        ./result/sw/bin/darwin-rebuild switch --flake .#bootstrap-x86
+
+        # Build and switch to full config
+        /run/current-system/sw/bin/zsh -c "darwin-rebuild switch --flake .#$CONFIG_NAME"
+        
+  build-linux-env:
+    name: Build/cache Linux Nix env
+    runs-on: ubuntu-latest
+    env:
+      CONFIG_NAME: githubCI
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install Nix
+      uses: cachix/install-nix-action@v21
+      with:
+        extra_nix_config: |
+          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+    - name: Setup Cachix
+      uses: cachix/cachix-action@v12
+      with:
+        name: ${{ env.CACHIX_USER }}
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+    - name: Build and switch to home-manager env
+      run: |
+        # Prevent conflict between Cachix installed by workflow and the one installed in the config
+        nix-env --set-flag priority 1 cachix
+        # Build and switch to home-manager env
+        nix build ".#homeConfigurations.$CONFIG_NAME.activationPackage"; ./result/activate

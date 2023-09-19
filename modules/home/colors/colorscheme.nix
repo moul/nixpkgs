@@ -8,7 +8,13 @@ let
   baseColorOptions = listToAttrs (map (i: {
     name = "color${toString i}";
     value = mkOption { type = types.str; };
-  }) (range 0 15));
+  }) (range 0 15)) // listToAttrs (map (i: {
+    name = "color${toString i}";
+    value = mkOption {
+      default = "#00000";
+      type = types.str;
+    };
+  }) (range 16 99));
 
   mkColorOption = args:
     mkOption (args // {
@@ -74,6 +80,9 @@ in {
           active_tab_foreground = mkColorOption { };
           inactive_tab_foreground = mkColorOption { };
           inactive_tab_background = mkColorOption { };
+          bell_border_color = mkColorOption { };
+          active_border_color = mkColorOption { default = config.terminal.bg; };
+          inactive_border_color = mkColorOption { };
         };
       };
     };

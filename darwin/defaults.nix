@@ -7,10 +7,11 @@
     AppleShowScrollBars = "Automatic";
     AppleTemperatureUnit = "Celsius";
     InitialKeyRepeat = 15;
-    KeyRepeat = 2;
+    KeyRepeat = 1;
     NSAutomaticCapitalizationEnabled = false;
     NSAutomaticDashSubstitutionEnabled = false;
     NSAutomaticPeriodSubstitutionEnabled = false;
+    NSWindowResizeTime = 1.0e-2;
     _HIHideMenuBar = false;
   };
 
@@ -27,12 +28,17 @@
     autohide = true;
     expose-group-by-app = false;
     mru-spaces = false;
-    tilesize = 128;
+    tilesize = 25;
     # Disable all hot corners
     wvous-bl-corner = 1;
     wvous-br-corner = 1;
     wvous-tl-corner = 1;
     wvous-tr-corner = 1;
+    # disable animation
+    launchanim = false;
+    autohide-delay = 0.1;
+    autohide-time-modifier = 0.1;
+    expose-animation-duration = 0.1;
   };
 
   # Login and lock screen
@@ -46,13 +52,16 @@
 
   # Trackpad
   system.defaults.trackpad = {
-    Clicking = false;
+    Clicking = true;
     TrackpadRightClick = true;
   };
 
   # Finder
   system.defaults.finder = {
+    ShowStatusBar = true;
+    AppleShowAllFiles = true;
     FXEnableExtensionChangeWarning = true;
-    CreateDesktop = false;
+    AppleShowAllExtensions = true;
+    QuitMenuItem = true;
   };
 }

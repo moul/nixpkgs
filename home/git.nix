@@ -2,37 +2,38 @@
 
 {
   # Git
-  # https://rycee.gitlab.io/home-manager/options.html#opt-programs.git.enable
-  # Aliases config in ./configs/git-aliases.nix
-  programs.git.enable = true;
+  programs.git = {
+    # https://rycee.gitlab.io/home-manager/options.html#opt-enable
+    # Aliases config in ./configs/git-aliases.nix
+    enable = true;
+    userEmail = config.home.user-info.email;
+    userName = config.home.user-info.username;
 
-  programs.git.lfs.enable = true;
+    extraConfig = {
+      core.editor = "em";
+      core.whitespace = "trailing-space,space-before-tab";
+      diff.colorMoved = "default";
+      pull.rebase = true;
+    };
 
-  programs.git.extraConfig = {
-    # core.editor = "${pkgs.emacs-nox}/bin/emacs --remote-wait-silent -cc split";
-    diff.colorMoved = "default";
-    pull.rebase = true;
-    init.defaultBranch = "main";
-  } // (if pkgs.stdenv.isDarwin then {
-    gpg.format = "ssh";
-    user.signingKey =
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+r9TcD4g/DVW5/9W9grjD700PJccMonLEWnB+v++42";
-    gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
-    commit.gpgsign = true;
-  } else
-    { });
+    ignores = [ "*~" "*.swp" "*#" ".#*" ".DS_Store" ];
 
-  programs.git.ignores = [ ".DS_Store" ];
+    # Enhanced diffs
+    delta.enable = true;
 
-  programs.git.userEmail = config.home.user-info.email;
-  programs.git.userName = config.home.user-info.fullName;
+    # large file
+    lfs.enable = true;
 
-  # Enhanced diffs
-  programs.git.delta.enable = true;
+    aliases = {
+      lg =
+        "log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h%C(reset) - %C(green)(%ar)%C(reset) %s %C(italic)- %an%C(reset)%C(magenta bold)%d%C(reset)' --all";
+    };
+  };
 
   # GitHub CLI
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.gh.enable
-  # Aliases config in ./gh-aliases.nix
-  programs.gh.enable = true;
-  programs.gh.settings.git_protocol = "ssh";
+  programs.gh = {
+    enable = true;
+    settings.git_protocol = "ssh";
+  };
 }

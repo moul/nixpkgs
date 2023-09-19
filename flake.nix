@@ -1,442 +1,179 @@
 {
-  description = "moul’s Nix system configs, and some other useful stuff.";
-
   inputs = {
-    # Package sets
+    # Package semodules
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixpkgs-22.05-darwin";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/release-23.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixos-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
 
     # Environment/system management
-    darwin.url = "github:LnL7/nix-darwin";
+    darwin.url = "github:LnL7/nix-darwin/master";
     darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.utils.follows = "flake-utils";
+
+    # flake utils
+    flake-compat.url = "github:edolstra/flake-compat";
+    flake-compat.flake = false;
+
+    flake-utils.url = "github:numtide/flake-utils";
+
+    # lsp
+    rnix-lsp.url = "github:nix-community/rnix-lsp";
+
+    # overlay
+    home-manager.url = "github:nix-community/home-manager/master";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+
+    # rnix-lsp
 
     # Other sources
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
-    flake-utils.url = "github:numtide/flake-utils";
-    prefmanager.url = "github:malob/prefmanager";
-    prefmanager.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    prefmanager.inputs.flake-compat.follows = "flake-compat";
-    prefmanager.inputs.flake-utils.follows = "flake-utils";
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
-    gotools = {
-      url = "git+https://go.googlesource.com/tools";
-      flake = false;
-    };
-    honneftools = {
-      url = "github:dominikh/go-tools";
-      flake = false;
-    };
-    spacemacs = {
-      url = "github:syl20bnr/spacemacs/develop";
-      flake = false;
-    };
-    chemacs2 = {
-      url = "github:plexus/chemacs2/main";
-      flake = false;
-    };
+
+    # emacs
+    spacemacs.url = "github:syl20bnr/spacemacs/develop";
+    spacemacs.flake = false;
+
+    doomemacs.url = "github:doomemacs/doomemacs/master";
+    doomemacs.flake = false;
+
+    chemacs2.url = "github:plexus/chemacs2/main";
+    chemacs2.flake = false;
+
+    # yabai
+    # yabai.url = "github:koekeishiya/yabai";
+    # yabai.flake = false;
+
+    # zsh plugins
+    fast-syntax-highlighting.url =
+      "github:zdharma-continuum/fast-syntax-highlighting";
+    fast-syntax-highlighting.flake = false;
+
+    fzf-tab.url = "github:Aloxaf/fzf-tab";
+    fzf-tab.flake = false;
+
+    powerlevel10k.url = "github:romkatv/powerlevel10k";
+    powerlevel10k.flake = false;
   };
 
-  outputs =
-    { self, darwin, home-manager, flake-utils, emacs-overlay, ... }@inputs:
+  outputs = { self, darwin, home-manager, rnix-lsp, flake-utils, ... }@inputs:
     let
-      # Some building blocks ------------------------------------------------------------------- {{{
+      inherit (self.lib) attrValues makeOverridable optionalAttrs singleton;
 
-      inherit (darwin.lib) darwinSystem;
-      inherit (inputs.nixpkgs-unstable.lib)
-        attrValues makeOverridable optionalAttrs singleton;
+      homeStateVersion = "23.05";
 
       # Configuration for `nixpkgs`
-      nixpkgsConfig = {
+      nixpkgsDefaults = {
         config = { allowUnfree = true; };
         overlays = attrValues self.overlays ++ [
-          # Sub in x86 version of packages that don't build on Apple Silicon yet
-          (final: prev:
-            (optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-              inherit (final.pkgs-x86) idris2;
-            }))
-        ] ++ [
-          (final: prev:
-            let
-            in {
-              emacsUnstable =
-                (import emacs-overlay final prev).emacsUnstable;
-              spacemacs = inputs.spacemacs;
-	      chemacs2 = inputs.chemacs2;
-            })
+          # put stuff here
         ];
       };
 
-      homeManagerStateVersion = "22.11";
-
       primaryUserInfo = {
         username = "moul";
-        fullName = "Manfred Touron";
+        fullName = "";
         email = "94029+moul@users.noreply.github.com";
-        nixConfigDirectory = "/Users/moul/.config/nixpkgs";
+        nixConfigDirectory = "/Users/moul/nixpkgs";
       };
 
-      # Modules shared by most `nix-darwin` personal configurations.
-      nixDarwinCommonModules = attrValues self.darwinModules ++ [
-        # `home-manager` module
-        home-manager.darwinModules.home-manager
-        ({ config, ... }:
-          let inherit (config.users) primaryUser;
-          in {
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            nixpkgs = nixpkgsConfig;
-            # Hack to support legacy worklows that use `<nixpkgs>` etc.
-            # nix.nixPath = { nixpkgs = "${primaryUser.nixConfigDirectory}/nixpkgs.nix"; };
-            nix.nixPath = { nixpkgs = "${inputs.nixpkgs-unstable}"; };
-            # `home-manager` config
-            users.users.${primaryUser.username}.home =
-              "/Users/${primaryUser.username}";
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.${primaryUser.username} = {
-              imports = attrValues self.homeManagerModules;
-              home.stateVersion = homeManagerStateVersion;
-              home.user-info = config.users.primaryUser;
-            };
-            # Add a registry entry for this flake
-            nix.registry.my.flake = self;
-          })
-      ];
-      # }}}
+      ciUserInfo = {
+        username = "runner";
+        fullName = "";
+        email = "github-actions@github.com";
+        nixConfigDirectory = "/Users/runner/work/nixpkgs/nixpkgs";
+      };
     in {
 
-      # System outputs ------------------------------------------------------------------------- {{{
-
-      # My `nix-darwin` configs
-      darwinConfigurations = rec {
-        # Mininal configurations to bootstrap systems
-        bootstrap-x86 = makeOverridable darwinSystem {
-          system = "x86_64-darwin";
-          modules = [ ./darwin/bootstrap.nix { nixpkgs = nixpkgsConfig; } ];
-        };
-        bootstrap-arm = bootstrap-x86.override { system = "aarch64-darwin"; };
-
-        # Specific Computers
-        moul-musca = darwinSystem {
-          system = "x86_64-darwin";
-          modules = nixDarwinCommonModules ++ [{
-            users.primaryUser = primaryUserInfo // {
-              username = "manfredtouron";
-              nixConfigDirectory = "/Users/manfredtouron/.config/nixpkgs";
-            };
-            networking.computerName = "Manfred (Musca)";
-            networking.hostName = "moul-musca";
-            networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
-          }];
-        };
-
-        moul-volans = darwinSystem {
-          system = "x86_64-darwin";
-          modules = nixDarwinCommonModules ++ [{
-            users.primaryUser = primaryUserInfo // {
-              username = "moul";
-              nixConfigDirectory = "/Users/moul/.config/nixpkgs";
-            };
-            networking.computerName = "Manfred (Volans)";
-            networking.hostName = "moul-volans";
-            networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
-          }];
-        };
-
-        moul-fornax = darwinSystem {
-          system = "x86_64-darwin";
-          modules = nixDarwinCommonModules ++ [{
-            users.primaryUser = primaryUserInfo // {
-              username = "moul";
-              nixConfigDirectory = "/Users/moul/.config/nixpkgs";
-            };
-            networking.computerName = "Manfred (Fornax)";
-            networking.hostName = "moul-fornax";
-            networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
-          }];
-        };
-
-        moul-triangulum = darwinSystem {
-          system = "x86_64-darwin";
-          modules = nixDarwinCommonModules ++ [{
-            users.primaryUser = primaryUserInfo // {
-              username = "moul";
-              nixConfigDirectory = "/Users/moul/.config/nixpkgs";
-            };
-            networking.computerName = "Manfred (Triangulum)";
-            networking.hostName = "moul-triangulum";
-            networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
-          }];
-        };
-
-        moul-pyxis = darwinSystem {
-          system = "aarch64-darwin";
-          modules = nixDarwinCommonModules ++ [{
-            users.primaryUser = primaryUserInfo // {
-              username = "moul2";
-              nixConfigDirectory = "/Users/moul2/.config/nixpkgs";
-            };
-            networking.computerName = "Manfred (Pyxis)";
-            networking.hostName = "moul-pyxis";
-            networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
-          }];
-        };
-
-        moul-dorado = darwinSystem {
-          system = "aarch64-darwin";
-          modules = nixDarwinCommonModules ++ [{
-            users.primaryUser = primaryUserInfo // {
-              username = "moul";
-              nixConfigDirectory = "/Users/moul/.config/nixpkgs";
-            };
-            networking.computerName = "Manfred (Dorado)";
-            networking.hostName = "moul-dorado";
-            networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
-          }];
-        };
-
-        moul-scutum = darwinSystem {
-          system = "aarch64-darwin";
-          modules = nixDarwinCommonModules ++ [{
-            users.primaryUser = primaryUserInfo // {
-              username = "moul";
-              nixConfigDirectory = "/Users/moul/.config/nixpkgs";
-            };
-            networking.computerName = "Manfred (Scutum)";
-            networking.hostName = "moul-scutum";
-            networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
-          }];
-        };
-
-        x86-macbook = darwinSystem {
-          system = "x86_64-darwin";
-          modules = nixDarwinCommonModules ++ [{
-            users.primaryUser = primaryUserInfo;
-            networking.computerName = "Manfred x86 MacBook";
-            networking.hostName = "ManfredX86MacBook";
-            networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
-          }];
-        };
-
-        m1-macbook = darwinSystem {
-          system = "aarch64-darwin";
-          modules = nixDarwinCommonModules ++ [{
-            users.primaryUser = primaryUserInfo;
-            networking.computerName = "Manfred M1 MacBook";
-            networking.hostName = "ManfredM1MacBook";
-            networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
-          }];
-        };
-
-        # Config with small modifications needed/desired for CI with GitHub workflow
-        githubCI = darwinSystem {
-          system = "x86_64-darwin";
-          modules = nixDarwinCommonModules ++ [
-            ({ lib, ... }: {
-              users.primaryUser = primaryUserInfo // {
-                username = "runner";
-                nixConfigDirectory = "/Users/runner/work/nixpkgs/nixpkgs";
-              };
-              homebrew.enable = lib.mkForce false;
-            })
-          ];
-        };
-      };
-
-      # Config I use with Linux cloud VMs
-      # Build and activate on new system with:
-      # `nix build .#homeConfigurations.moul.activationPackage; ./result/activate`
-      homeConfigurations = rec {
-        fwrz = home-manager.lib.homeManagerConfiguration {
-          extraSpecialArgs = { inherit inputs; };
-          pkgs = import inputs.nixpkgs-unstable {
-            system = "x86_64-linux";
-            inherit (nixpkgsConfig) config overlays;
-          };
-          modules = attrValues self.homeManagerModules ++ singleton
-            ({ config, ... }: {
-              home.username = config.home.user-info.username;
-              home.homeDirectory = "/home/${config.home.username}";
-              home.stateVersion = homeManagerStateVersion;
-              home.user-info = primaryUserInfo // {
-                nixConfigDirectory =
-                  "${config.home.homeDirectory}/.config/nixpkgs";
-              };
-            });
-        };
-        zrwf = home-manager.lib.homeManagerConfiguration {
-          extraSpecialArgs = { inherit inputs; };
-          pkgs = import inputs.nixpkgs-unstable {
-            system = "x86_64-linux";
-            inherit (nixpkgsConfig) config overlays;
-          };
-          modules = attrValues self.homeManagerModules ++ singleton
-            ({ config, ... }: {
-              home.username = config.home.user-info.username;
-              home.homeDirectory = "/home/${config.home.username}";
-              home.stateVersion = homeManagerStateVersion;
-              home.user-info = primaryUserInfo // {
-                nixConfigDirectory =
-                  "${config.home.homeDirectory}/.config/nixpkgs";
-              };
-            });
-        };
-        crux = home-manager.lib.homeManagerConfiguration {
-          extraSpecialArgs = { inherit inputs; };
-          pkgs = import inputs.nixpkgs-unstable {
-            system = "x86_64-linux";
-            inherit (nixpkgsConfig) config overlays;
-          };
-          modules = attrValues self.homeManagerModules ++ singleton
-            ({ config, ... }: {
-              home.username = config.home.user-info.username;
-              home.homeDirectory = "/home/${config.home.username}";
-              home.stateVersion = homeManagerStateVersion;
-              home.user-info = primaryUserInfo // {
-                nixConfigDirectory =
-                  "${config.home.homeDirectory}/.config/nixpkgs";
-              };
-            });
-        };
-        lyra = home-manager.lib.homeManagerConfiguration {
-          extraSpecialArgs = { inherit inputs; };
-          pkgs = import inputs.nixpkgs-unstable {
-            system = "x86_64-linux";
-            inherit (nixpkgsConfig) config overlays;
-          };
-          modules = attrValues self.homeManagerModules ++ singleton
-            ({ config, ... }: {
-              home.username = config.home.user-info.username;
-              home.homeDirectory = "/home/${config.home.username}";
-              home.stateVersion = homeManagerStateVersion;
-              home.user-info = primaryUserInfo // {
-                nixConfigDirectory =
-                  "${config.home.homeDirectory}/.config/nixpkgs";
-              };
-            });
-        };
-        pictor = home-manager.lib.homeManagerConfiguration {
-          extraSpecialArgs = { inherit inputs; };
-          pkgs = import inputs.nixpkgs-unstable {
-            system = "x86_64-linux";
-            inherit (nixpkgsConfig) config overlays;
-          };
-          modules = attrValues self.homeManagerModules ++ singleton
-            ({ config, ... }: {
-              home.username = config.home.user-info.username;
-              home.homeDirectory = "/home/${config.home.username}";
-              home.stateVersion = homeManagerStateVersion;
-              home.user-info = primaryUserInfo // {
-                nixConfigDirectory =
-                  "${config.home.homeDirectory}/.config/nixpkgs";
-              };
-            });
-        };
-        githubCi = home-manager.lib.homeManagerConfiguration {
-          extraSpecialArgs = { inherit inputs; };
-          pkgs = import inputs.nixpkgs-unstable {
-            system = "x86_64-linux";
-            inherit (nixpkgsConfig) config overlays;
-          };
-          modules = attrValues self.homeManagerModules ++ singleton
-            ({ config, ... }: {
-              home.username = "runner";
-              home.homeDirectory = "/home/${config.home.username}";
-              home.stateVersion = homeManagerStateVersion;
-              home.user-info = primaryUserInfo // {
-                nixConfigDirectory =
-                  "${config.home.homeDirectory}/.config/nixpkgs";
-              };
-            });
-        };
-      };
-      # }}}
-
-      # Non-system outputs --------------------------------------------------------------------- {{{
+      # Add some additional functions to `lib`.
+      lib = inputs.nixpkgs-unstable.lib.extend (_: _: {
+        mkDarwinSystem = import ./lib/mkDarwinSystem.nix inputs;
+        lsnix = import ./lib/lsnix.nix;
+      });
 
       overlays = {
         # Overlays to add different versions `nixpkgs` into package set
         pkgs-master = _: prev: {
           pkgs-master = import inputs.nixpkgs-master {
             inherit (prev.stdenv) system;
-            inherit (nixpkgsConfig) config;
+            inherit (nixpkgsDefaults) config;
           };
         };
         pkgs-stable = _: prev: {
           pkgs-stable = import inputs.nixpkgs-stable {
             inherit (prev.stdenv) system;
-            inherit (nixpkgsConfig) config;
+            inherit (nixpkgsDefaults) config;
           };
         };
         pkgs-unstable = _: prev: {
           pkgs-unstable = import inputs.nixpkgs-unstable {
             inherit (prev.stdenv) system;
-            inherit (nixpkgsConfig) config;
+            inherit (nixpkgsDefaults) config;
           };
         };
 
-        prefmanager = _: prev: {
-          prefmanager =
-            inputs.prefmanager.packages.${prev.stdenv.system}.default;
-        };
-
         # Overlay useful on Macs with Apple Silicon
-        apple-silicon = _: prev:
+        pkgs-silicon = _: prev:
           optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
             # Add access to x86 packages system is running Apple Silicon
             pkgs-x86 = import inputs.nixpkgs-unstable {
               system = "x86_64-darwin";
-              inherit (nixpkgsConfig) config;
+              inherit (nixpkgsDefaults) config;
             };
           };
 
-        # Overlay to include node packages listed in `./pkgs/node-packages/package.json`
-        # Run `nix run my#nodePackages.node2nix -- -14` to update packages.
-        nodePackages = _: prev: {
-          nodePackages = prev.nodePackages
-            // import ./pkgs/node-packages { pkgs = prev; };
+        # non flake inputs
+        my-inputs = final: prev: {
+          spacemacs = inputs.spacemacs;
+          doomemacs = inputs.doomemacs;
+          chemacs2 = inputs.chemacs2;
+          zsh-plugins.fast-syntax-highlighting =
+            inputs.fast-syntax-highlighting;
+          zsh-plugins.fzf-tab = inputs.fzf-tab;
+          zsh-plugins.powerlevel10k = inputs.powerlevel10k;
+          # yabai = inputs.yabai;
         };
+
+        my-loon = import ./overlays/loon.nix;
+        my-libvterm = import ./overlays/libvterm.nix;
+      };
+
+      # Non-system outputs --------------------------------------------------------------------- {{{
+
+      commonModules = {
+        colors = import ./modules/home/colors;
+        my-colors = import ./home/colors.nix;
       };
 
       darwinModules = {
         # My configurations
-        moul-bootstrap = import ./darwin/bootstrap.nix;
-        moul-defaults = import ./darwin/defaults.nix;
-        moul-general = import ./darwin/general.nix;
-        moul-homebrew = import ./darwin/homebrew.nix;
+        my-bootstrap = import ./darwin/bootstrap.nix;
+        my-defaults = import ./darwin/defaults.nix;
+        my-env = import ./darwin/env.nix;
+        my-homebrew = import ./darwin/homebrew.nix;
+        my-yabai = import ./darwin/yabai.nix;
+        my-skhd = import ./darwin/skhd.nix;
 
-        programs-nix-index = import ./modules/darwin/programs/nix-index.nix;
+        # local modules
+        services-emacsd = import ./modules/darwin/services/emacsd.nix;
         users-primaryUser = import ./modules/darwin/users.nix;
+        programs-nix-index = import ./modules/darwin/programs/nix-index.nix;
       };
 
       homeManagerModules = {
         # My configurations
-        moul-colors = import ./home/colors.nix;
-        moul-config-files = import ./home/config-files.nix;
-        moul-fish = import ./home/fish.nix;
-        moul-git = import ./home/git.nix;
-        moul-git-aliases = import ./home/git-aliases.nix;
-        moul-gh-aliases = import ./home/gh-aliases.nix;
-        moul-kitty = import ./home/kitty.nix;
-        moul-emacs = import ./home/emacs.nix;
-        moul-ssh = import ./home/ssh.nix;
-        moul-go = import ./home/go.nix;
-        moul-shell = import ./home/shell.nix;
-        moul-tmux = import ./home/tmux.nix;
-        moul-xdg = import ./home/xdg.nix;
-        moul-packages = import ./home/packages.nix;
-        moul-starship = import ./home/starship.nix;
-        moul-starship-symbols = import ./home/starship-symbols.nix;
+        my-shells = import ./home/shells.nix;
+        my-git = import ./home/git.nix;
+        my-kitty = import ./home/kitty.nix;
+        my-packages = import ./home/packages.nix;
+        my-asdf = import ./home/asdf.nix;
+        my-emacs = import ./home/emacs.nix;
+        my-tmux = import ./home/tmux.nix;
+        my-config = import ./home/config.nix;
 
-        # Modules I've created
-        colors = import ./modules/home/colors;
+        # local modules
+        programs-truecolor = import ./modules/home/programs/truecolor;
+        # programs-asdf = import ./modules/home/programs/asdf;
         programs-kitty-extras = import ./modules/home/programs/kitty/extras.nix;
+        programs-zsh-oh-my-zsh-extra =
+          import ./modules/home/programs/zsh/oh-my-zsh/extras.nix;
+
         home-user-info = { lib, ... }: {
           options.home.user-info = (self.darwinModules.users-primaryUser {
             inherit lib;
@@ -445,19 +182,117 @@
       };
       # }}}
 
-      # Add re-export `nixpkgs` packages with overlays.
-      # This is handy in combination with `nix registry add my /Users/moul/.config/nixpkgs`
-    } // flake-utils.lib.eachDefaultSystem (system: {
-      legacyPackages = import inputs.nixpkgs-unstable {
-        inherit system;
-        inherit (nixpkgsConfig) config;
-        overlays = with self.overlays; [
-          pkgs-master
-          pkgs-stable
-          apple-silicon
-          nodePackages
-        ];
+      # System outputs ------------------------------------------------------------------------- {{{
+
+      # My `nix-darwin` configs
+      darwinConfigurations = rec {
+        # Mininal configurations to bootstrap systems
+        bootstrap-x86 = makeOverridable darwin.lib.darwinSystem {
+          system = "x86_64-darwin";
+          modules = [ ./darwin/bootstrap.nix { nixpkgs = nixpkgsDefaults; } ];
+        };
+        bootstrap-arm = bootstrap-x86.override { system = "aarch64-darwin"; };
+
+        # My Apple Silicon macOS laptop config
+        moul-dorado = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo
+          // {
+            system = "aarch64-darwin";
+            modules = (attrValues self.darwinModules)
+              ++ (attrValues self.commonModules) ++ singleton {
+                nixpkgs = nixpkgsDefaults;
+                networking.computerName = "moul-dorado";
+                networking.hostName = "moul-dorado";
+                networking.knownNetworkServices =
+                  [ "Wi-Fi" "USB 10/100/1000 LAN" ];
+                nix.registry.my.flake = inputs.self;
+              };
+
+            inherit homeStateVersion;
+            homeModules = (attrValues self.homeManagerModules)
+              ++ (attrValues self.commonModules) ++ [
+
+              ];
+          });
+
+        # Config with small modifications needed/desired for CI with GitHub workflow
+        githubCI = self.darwinConfigurations.macbook.override {
+          system = "x86_64-darwin";
+          username = "runner";
+          nixConfigDirectory = "/Users/runner/work/nixpkgs/nixpkgs";
+          extraModules = singleton {
+            homebrew.enable = self.lib.mkForce false;
+            services.yabai.enable = self.lib.mkForce false;
+            services.skhd.enable = self.lib.mkForce false;
+          };
+        };
       };
+
+      # Config I use with non-NixOS Linux systems (e.g., cloud VMs etc.)
+      # Build and activate on new system with:
+      # `nix build .#homeConfigurations.cloud.activationPackage && ./result/activate`
+      homeConfigurations = {
+        cloud = home-manager.lib.homeManagerConfiguration {
+          pkgs = import inputs.nixpkgs-unstable
+            (nixpkgsDefaults // { system = "x86_64-linux"; });
+          modules = attrValues self.homeManagerModules
+            ++ (attrValues self.commonModules) ++ singleton ({ config, ... }: {
+              home.user-info = primaryUserInfo // {
+                nixConfigDirectory = "${config.home.homeDirectory}/nixpkgs";
+              };
+              home.username = config.home.user-info.username;
+              home.homeDirectory = "/home/${config.home.username}";
+              home.stateVersion = homeStateVersion;
+            });
+        };
+
+        # specific config for github ci
+        githubCI = home-manager.lib.homeManagerConfiguration {
+          pkgs = import inputs.nixpkgs-unstable
+            (nixpkgsDefaults // { system = "x86_64-linux"; });
+          modules = attrValues self.homeManagerModules
+            ++ (attrValues self.commonModules) ++ singleton ({ config, ... }: {
+              home.user-info = ciUserInfo // {
+                nixConfigDirectory = "${config.home.homeDirectory}/nixpkgs";
+              };
+              home.username = config.home.user-info.username;
+              home.homeDirectory = "/home/${config.home.username}";
+              home.stateVersion = homeStateVersion;
+            });
+        };
+      };
+      # }}}
+
+      # Add re-export `nixpkgs` packages with overlays.
+      # This is handy in combination with `nix registry add my /Users/moul/nixpkgs`
+    } // flake-utils.lib.eachDefaultSystem (system: {
+      # Re-export `nixpkgs-unstable` with overlays.
+      # This is handy in combination with setting `nix.registry.my.flake = inputs.self`.
+      # Allows doing things like `nix run my#prefmanager -- watch --all`
+      legacyPackages =
+        import inputs.nixpkgs-unstable (nixpkgsDefaults // { inherit system; });
+
+      # Development shells ----------------------------------------------------------------------{{{
+      # Shell environments for development
+      # With `nix.registry.my.flake = inputs.self`, development shells can be created by running,
+      # e.g., `nix develop my#python`.
+      devShells = let pkgs = self.legacyPackages.${system};
+      in {
+        asdf = pkgs.mkShell {
+          name = "asdf";
+          inputsFrom = attrValues { inherit (pkgs) asdf-vm; };
+          shellHook = ''
+            if [ -f "${pkgs.asdf-vm}/share/asdf-vm/asdf.sh" ]; then
+              . "${pkgs.asdf-vm}/share/asdf-vm/asdf.sh"
+            fi
+
+            fpath=(${pkgs.asdf-vm}/share/asdf-vm/completions $fpath)
+
+            if [ -f "''${ASDF_DATA_DIR}/.asdf/plugins/java/set-java-home.zsh" ]; then
+               . "''${ASDF_DATA_DIR}/.asdf/plugins/java/set-java-home.zsh"
+            fi
+          '';
+        };
+      };
+      # }}}
     });
 }
-# vim: foldmethod=marker
