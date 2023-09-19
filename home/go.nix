@@ -11,7 +11,7 @@ in {
 
   programs.go = {
     enable = true;
-    package = pkgs.go_1_20;
+    package = pkgs.go_1_21;
     goBin = "go/bin";
     goPath = "go";
   };
