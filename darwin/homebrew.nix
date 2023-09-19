@@ -30,7 +30,7 @@ in {
 
   homebrew.taps = [
     "homebrew/cask"
-    "homebrew/cask-drivers"
+    #"homebrew/cask-drivers"
     "homebrew/cask-fonts"
     "homebrew/cask-versions"
     "homebrew/core"
@@ -141,7 +141,7 @@ in {
   homebrew.brews = [
     "mas"
     "gs"
-    "homeport/tap/termshot"
+    #"Homeport/tap/termshot"
     #"hub"
     #"golang"
     #"mosh"
