@@ -1,0 +1,12 @@
+### ZSH Plugins
+
+## zsh-users
+zsh-users/zsh-completions
+zdharma/fast-syntax-highlighting
+# fzf autocomplete
+Aloxaf/fzf-tab
+
+## themes
+# powerline10k
+romkatv/powerlevel10k
+
