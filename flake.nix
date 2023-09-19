@@ -1,6 +1,6 @@
 {
   inputs = {
-    # Package sets
+    # Package semodules
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/release-23.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -69,7 +69,7 @@
       primaryUserInfo = {
         username = "moul";
         fullName = "";
-        email = "8671905+moul@users.noreply.github.com";
+        email = "94029+moul@users.noreply.github.com";
         nixConfigDirectory = "/Users/moul/nixpkgs";
       };
 
@@ -164,6 +164,7 @@
         my-packages = import ./home/packages.nix;
         my-asdf = import ./home/asdf.nix;
         my-emacs = import ./home/emacs.nix;
+        my-tmux = import ./home/tmux.nix;
         my-config = import ./home/config.nix;
 
         # local modules
@@ -193,24 +194,25 @@
         bootstrap-arm = bootstrap-x86.override { system = "aarch64-darwin"; };
 
         # My Apple Silicon macOS laptop config
-        macbook = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo // {
-          system = "aarch64-darwin";
-          modules = (attrValues self.darwinModules)
-            ++ (attrValues self.commonModules) ++ singleton {
-              nixpkgs = nixpkgsDefaults;
-              networking.computerName = "guicp";
-              networking.hostName = "ghost";
-              networking.knownNetworkServices =
-                [ "Wi-Fi" "USB 10/100/1000 LAN" ];
-              nix.registry.my.flake = inputs.self;
-            };
+        moul-dorado = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo
+          // {
+            system = "aarch64-darwin";
+            modules = (attrValues self.darwinModules)
+              ++ (attrValues self.commonModules) ++ singleton {
+                nixpkgs = nixpkgsDefaults;
+                networking.computerName = "moul-dorado";
+                networking.hostName = "moul-dorado";
+                networking.knownNetworkServices =
+                  [ "Wi-Fi" "USB 10/100/1000 LAN" ];
+                nix.registry.my.flake = inputs.self;
+              };
 
-          inherit homeStateVersion;
-          homeModules = (attrValues self.homeManagerModules)
-            ++ (attrValues self.commonModules) ++ [
+            inherit homeStateVersion;
+            homeModules = (attrValues self.homeManagerModules)
+              ++ (attrValues self.commonModules) ++ [
 
-            ];
-        });
+              ];
+          });
 
         # Config with small modifications needed/desired for CI with GitHub workflow
         githubCI = self.darwinConfigurations.macbook.override {

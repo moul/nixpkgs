@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Inspired by https://github.com/norswap/.emacs.d/blob/4b5173f88d8f8ce7a019398005b800239f0b5170/em
+
+# Set to location of file to open if no files are specified.
+ARGS=("$@")
+ARGS=${ARGS:-"."}
+
+# Get the number of "displayed" frames, and check if emacs is running at all.
+FRAMES="$(${pkgs.emacs}/bin/emacsclient -e "(length (frame-list))" 2>/dev/null)"
+RUNNING=$?
+FRAMES=${FRAMES:-0}
+
+# For some reason, we might end up with zombie emacs processes,
+# clean them up or it will mess up the rest of the logic.
+if [[ $RUNNING != 0 ]]; then
+    pgrep -f "${pkgs.emacs}/bin/emacsclient" | awk '{ print $1 }' | xargs kill -9 2>/dev/null
+fi
+
+# Is emacs running with --daemon or --bg-daemon flag?
+# If yes, then an additional frame is being counted compared to the real count.
+pgrep -if "emacs.*daemon" > /dev/null && FRAMES=$((FRAMES - 1))
+
+# Emacs is visible if there are visible frames.
+VISIBLE=$([[ "$FRAMES" -gt 0 ]]; echo $?)
+
+# LAUNCH EMACS
+if [[ $RUNNING != 0 ]]; then
+    # The daemon is not running, start the daemon and open a frame.
+    exec ${pkgs.emacs}/bin/emacsclient -nw -a '' -c "${ARGS[@]}" 2>/dev/null
+elif [[ $VISIBLE != 0 ]]; then
+    # There are no visible frames, open one.
+    exec ${pkgs.emacs}/bin/emacsclient -nw -c "${ARGS[@]}"
+else
+    exec ${pkgs.emacs}/bin/emacsclient -nw "${ARGS[@]}"
+fi

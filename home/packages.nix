@@ -1,6 +1,20 @@
 { config, lib, pkgs, ... }:
 
-let rust_home = "${config.xdg.dataHome}/rust";
+let
+  inherit (config.home) user-info homeDirectory;
+rust_home = "${config.xdg.dataHome}/rust";
+  #em = pkgs.writeScriptBin "em"
+  #  (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${pkgs.emacsNativeComp}" ]
+  #    (lib.readFile ./../config/em));
+  #raw-emacs = pkgs.writeScriptBin "raw-emacs"
+  #  (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${pkgs.emacsNativeComp}" ]
+  #    (lib.readFile ./../config/raw-emacs));
+  em = pkgs.writeScriptBin "em"
+    (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${pkgs.emacs}" ]
+      (lib.readFile ./../config/em));
+  raw-emacs = pkgs.writeScriptBin "raw-emacs"
+    (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${pkgs.emacs}" ]
+      (lib.readFile ./../config/raw-emacs));
 in {
   # ssh
   programs.ssh = {
@@ -42,7 +56,13 @@ in {
     ${pkgs.rustup}/bin/rustup toolchain install stable 1>/dev/null
   '';
 
-  home.sessionPath = [ "${rust_home}/cargo/bin" "${rust_home}/rustup/bin" ];
+  home.sessionPath = [
+    # rust
+    "${rust_home}/cargo/bin"
+    "${rust_home}/rustup/bin"
+    # go
+    "${homeDirectory}/go/bin"    
+  ];
 
   # Bat, a substitute for cat.
   # https://github.com/sharkdp/bat
@@ -63,6 +83,101 @@ in {
 
   home.packages = with pkgs;
     [
+      # custom
+      em
+      raw-emacs
+
+      # Some basics
+      abduco # lightweight session management
+      ascii
+#      aspell
+#      aspellDicts.en
+#      aspellDicts.en-computers
+#      aspellDicts.en-science
+#      aspellDicts.fr
+      assh
+      bandwhich # display current network utilization by process
+      bottom # fancy version of `top` with ASCII graphs
+      browsh # in terminal browser
+      coreutils
+      cowsay
+      curl
+      diff-so-fancy
+      (nerdfonts.override { fonts = [ "Iosevka" "FiraCode" "Hack" ]; })
+      docker
+      du-dust # fancy version of `du`
+      emacs-nox
+      entr
+      #exa # fancy version of `ls`
+      expect
+      fd # fancy version of `find`
+      ffmpeg
+      file
+      fzf
+      gist
+      git-crypt
+      ghostscript
+      gnumake
+      gnupg
+      graphviz
+      hub
+      htop # fancy version of `top`
+      httpie
+      hyperfine # benchmarking tool
+      imagemagick
+      inetutils
+      ipfs
+      ispell
+      mosh # wrapper for `ssh` that better and not dropping connections
+      nodePackages.speed-test # nice speed-test tool
+      nodejs
+      nmap
+      openssl
+      parallel # runs commands in parallel
+      pre-commit
+      # procs
+      protobuf
+      pstree
+      # python3Packages.shell-functools # a collection of functional programming tools for the shell
+      ripgrep # better version of `grep`
+      socat
+      #sudo
+      tcpdump
+      tealdeer # rust implementation of `tldr`
+      thefuck
+      tree
+      tmuxinator
+      # tty-clock
+      unrar # extract RAR archives
+      unzip
+      wget
+      xz # extract XZ archives
+      jq
+      yq
+      unixtools.watch
+      youtube-dl
+
+
+      # Useful nix related tools
+      vivid
+      cachix # adding/managing alternative binary caches hosted by Cachix
+      comma # run software from without installing it
+      # niv # easy dependency management for nix projects
+      nixfmt
+      nix-diff
+      nix-index
+      nix-info
+      nix-prefetch-github
+      nix-prefetch-scripts
+      nix-tree # interactively browse dependency graphs of Nix derivations
+      nix-update # swiss-knife for updating nix packages
+      nixpkgs-review # review pull-requests on nixpkgs
+      nodePackages.node2nix
+      statix # lints and suggestions for the Nix programming language
+
+
+
+
       # Some basics
       tig
       mosh # wrapper for `ssh` that better and not dropping connections

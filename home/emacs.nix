@@ -53,7 +53,12 @@ in {
   programs.emacs.package = pkgs.emacs-gtk;
 
   # setup alias
-  programs.zsh.shellAliases.emacs = "${xterm-emacs}/bin/xemacs";
+  #programs.zsh.shellAliases.emacs = "${xterm-emacs}/bin/xemacs";
+  programs.zsh.shellAliases.emacs = "em";
+  programs.zsh.shellAliases.emasc = "em";
+  programs.zsh.shellAliases.eamsc = "em";
+  programs.zsh.shellAliases.emaccs = "em";
+  programs.zsh.shellAliases.emacss = "em";
   programs.zsh.shellAliases.emacsclient =
     "${xterm-emacsclient}/bin/xemacsclient";
   programs.zsh.shellAliases.ec = "${xterm-emacsclient}/bin/xemacsclient -nw";

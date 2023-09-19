@@ -53,6 +53,8 @@ in {
     "${homeDirectory}/.local/bin"
     # npm bin folder
     "${config.xdg.dataHome}/node_modules/bin"
+    # go
+    "${homeDirectory}/go/bin"
   ];
 
   home.sessionVariables = {
