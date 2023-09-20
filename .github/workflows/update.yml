@@ -6,7 +6,7 @@ on:
     - cron: '0 3 * * 3,6'  # At 03:00 UTC on Wednesday and Saturday
 
 env:
-  GITHUB_REVIEWER: mou
+  GITHUB_REVIEWER: moul
   CACHIX_USER: moul
   BOT_USER_NAME: moul-bot
   BOT_USER_MAIL: bot@moul.io
