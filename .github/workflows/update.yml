@@ -11,7 +11,7 @@ env:
   BOT_USER_NAME: moul-bot
   BOT_USER_MAIL: bot@moul.io
   BOT_FORK: moul-bot/nixpkgs
-  BASE_BRANCH: master
+  BASE_BRANCH: main
   REF_BRANCH: nix/flake-update-inputs
 
 jobs:
