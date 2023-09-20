@@ -48,7 +48,8 @@ in {
       yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
       yabai -m rule --add label="ArcUnstadard" app="^Arc$" subrole!="AXStandardWindow" border=off manage=off
       yabai -m rule --add label="iStat" app="^iStat*" sticky=on layer=above manage=off border=off
-
+      yabai -m rule --add app="1Password" manage=off sticky=on
+      yabai -m rule --add app="QuickGPT" manage=off sticky=on
       yabai -m rule --add app="^(emacs|Xcode)$" manage=on
     '';
   };
