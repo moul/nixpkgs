@@ -24,17 +24,18 @@ in {
       normal_window_border_color = "0x11${hexBlack}";
       window_animation_duration = 0.15;
       window_border = "on";
-      window_border_radius = 11;
-      window_border_width = 4;
-      window_gap = 8;
+      window_border_radius = 10;
+      window_border_width = 3;
+      window_gap = 5;
       window_placement = "second_child";
+      window_border_blur = "off";
       window_shadow = "float";
       window_topmost = "off";
       split_ratio = 0.5;
-      top_padding = 5;
-      bottom_padding = 5;
-      left_padding = 5;
-      right_padding = 5;
+      top_padding = 3;
+      bottom_padding = 3;
+      left_padding = 3;
+      right_padding = 3;
     };
 
     extraConfig = ''
@@ -48,9 +49,11 @@ in {
       yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
       yabai -m rule --add label="ArcUnstadard" app="^Arc$" subrole!="AXStandardWindow" border=off manage=off
       yabai -m rule --add label="iStat" app="^iStat*" sticky=on layer=above manage=off border=off
-      yabai -m rule --add app="1Password" manage=off sticky=on
-      yabai -m rule --add app="QuickGPT" manage=off sticky=on
-      yabai -m rule --add app="^(emacs|Xcode)$" manage=on
+      yabai -m rule --add app="1Password" manage=off sticky=on border=off
+      yabai -m rule --add app="QuickGPT" manage=off sticky=on border=off
+      yabai -m rule --add app="^(emacs|Xcode)$" manage=on border=on
+      yabai -m rule --add app="^Reminders$" manage=off sticky=on border=off
+      yabai -m rule --add app="^Reminders$" title="META SCREEN" manage=on border=on
     '';
   };
 }

@@ -156,8 +156,6 @@ in {
       zstyle ":completion:*:git-checkout:*" sort false
       zstyle ':completion:*:descriptions' format '[%d]'
       zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
-
-      #
     '';
 
     shellAliases = with pkgs;
@@ -183,9 +181,9 @@ in {
         du = "${du-dust}/bin/dust";
         rg =
           "${ripgrep}/bin/rg --column --line-number --no-heading --color=always --ignore-case";
-        ps = "${procs}/bin/procs";
+        # ps = "${procs}/bin/procs";
         # npmadd = "${mynodejs}/bin/npm install --global";
-        htop = "${btop}/bin/btop";
+        # htop = "${btop}/bin/btop";
 
         # list dir
         ls = "${eza}/bin/eza";

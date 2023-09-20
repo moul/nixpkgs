@@ -4,7 +4,7 @@ UNAME_S := $(shell uname -s)
 DARWIN_HOSTS = moul-musca moul-volans moul-pyxis moul-triangulum moul-scutum moul-fornax moul-dorado
 LINUX_HOSTS = fwrz zrwf crux pictor lyra
 
-all: switch cachix-push
+all: switch reload_all cachix-push
 
 switch:
 	@echo "Trying to guess what to do..."
@@ -69,7 +69,16 @@ endif
 
 ###
 
+reload_all: reload_yabai
 reload_kitty:; pkill -USR1 kitty
+#reload_skhd:;  $(call restart_service,org.nixos.yabai.plist)
+#reload_yabai:; $(call restart_service,org.nixos.skhd.plist)
+
+#define restart_service
+#	@set -e; plist_path=`find "${HOME}/Library/LaunchAgents" -name "$(1)" 2>/dev/null | head -n 1`; \
+#	((set -x; sudo launchctl bootout system "$$plist_path") || true); \
+#	(set -x; sudo launchctl bootstrap system "$$plist_path")
+#endef
 
 build_emacs:
 	raw-emacs --batch -L ~/.emacs.d/core -L ~/.emacs.d/layers -l ~/.emacs.d/core/core-load-paths.el -l ~/.emacs.d/core/core-versions.el --eval '(batch-byte-recompile-directory 0)' ~/.emacs.d/core
