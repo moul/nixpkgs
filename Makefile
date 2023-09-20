@@ -69,7 +69,7 @@ endif
 
 ###
 
-reload_all: reload_yabai
+reload_all: reload_kitty
 reload_kitty:; pkill -USR1 kitty
 #reload_skhd:;  $(call restart_service,org.nixos.yabai.plist)
 #reload_yabai:; $(call restart_service,org.nixos.skhd.plist)

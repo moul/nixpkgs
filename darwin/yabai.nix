@@ -54,6 +54,9 @@ in {
       yabai -m rule --add app="^(emacs|Xcode)$" manage=on border=on
       yabai -m rule --add app="^Reminders$" manage=off sticky=on border=off
       yabai -m rule --add app="^Reminders$" title="META SCREEN" manage=on border=on
+
+      yabai -m signal --add event=space_changed action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"pecan-workspace-jsx\"'"
+
     '';
   };
 }

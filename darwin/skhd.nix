@@ -17,26 +17,22 @@ in {
       # cmd + <-
       #cmd + shift - return : osascript -e 'tell application "Arc" to make new window' -e 'tell application "Arc" to activate'
 
-      cmd + shift - k [
+      alt + shift - k [
           * : ${pkgs.kitty}/bin/kitty --single-instance -d ~
           "kitty" ~
       ]
-      cmd + shift - a : osascript -e 'tell application "Arc" to make new window' -e 'tell application "Arc" to activate'
-      cmd + shift - r : open -n -a "Reminders"
-      cmd + shift - t : open -n -a "Texts"
-      cmd + shift - p : open -n -a "1Password"
+      alt + shift - a : osascript -e 'tell application "Arc" to make new window' -e 'tell application "Arc" to activate'
+      alt + shift - r : open -n -a "Reminders"
+      alt + shift - t : open -n -a "Texts"
+      alt + shift - p : open -n -a "1Password"
 
       ## Window command
 
       # focus
       lcmd - left : ${yabai} -m window --focus west || yabai -m display --focus west
-      lcmd - l : ${yabai} -m window --focus west || yabai -m display --focus west
       lcmd - down : ${yabai} -m window --focus south || yabai -m display --focus south
-      lcmd - j : ${yabai} -m window --focus south || yabai -m display --focus south
       lcmd - up : ${yabai} -m window --focus north || yabai -m display --focus north
-      lcmd - k : ${yabai} -m window --focus north || yabai -m display --focus north
       lcmd - right : ${yabai} -m window --focus east || yabai -m display --focus east
-      lcmd - ';' : ${yabai} -m window --focus east || yabai -m display --focus east
 
       # swap
       ## left
@@ -50,9 +46,9 @@ in {
       lcmd + shift - right : ${yabai} -m window --swap east \
            || (${yabai} -m window --display east && yabai -m display --focus east) \
            || ${yabai} -m window --toggle split
-      lcmd + shift - ';' : ${yabai} -m window --swap east \
-           || (${yabai} -m window --display east && yabai -m display --focus east) \
-           || ${yabai} -m window --toggle split
+      #lcmd + shift - ';' : ${yabai} -m window --swap east \
+      #     || (${yabai} -m window --display east && yabai -m display --focus east) \
+      #     || ${yabai} -m window --toggle split
       ## up
       lcmd + shift - up : ${yabai} -m window --swap north \
            || (${yabai} -m window --display north && yabai -m display --focus north) \

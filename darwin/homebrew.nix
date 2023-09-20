@@ -99,6 +99,7 @@ in {
     "notion"
     "nvidia-geforce-now"
     "raycast"
+    "ubersicht"
     "superhuman"
     "vlc"
     #"roam-research"
