@@ -8,14 +8,20 @@ in {
     enable = true;
     skhdConfig = ''
       # open terminal
-      cmd - return [
-          * : ${pkgs.kitty}/bin/kitty --single-instance -d ~
-          "kitty" ~
-      ]
+      #cmd - return [
+      #    * : ${pkgs.kitty}/bin/kitty --single-instance -d ~
+      #    "kitty" ~
+      #]
 
       # open new arc window
       # cmd + <-
-      cmd + shift - return : osascript -e 'tell application "Arc" to make new window' -e 'tell application "Arc" to activate'
+      #cmd + shift - return : osascript -e 'tell application "Arc" to make new window' -e 'tell application "Arc" to activate'
+
+      cmd + shift - k [
+          * : ${pkgs.kitty}/bin/kitty --single-instance -d ~
+          "kitty" ~
+      ]
+      cmd + shift - a : osascript -e 'tell application "Arc" to make new window' -e 'tell application "Arc" to activate'
 
       ## Window command
 
