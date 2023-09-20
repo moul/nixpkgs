@@ -216,7 +216,7 @@
           });
 
         # Config with small modifications needed/desired for CI with GitHub workflow
-        githubCI = self.darwinConfigurations.macbook.override {
+        githubCI = self.darwinConfigurations.moul-dorado.override {
           system = "x86_64-darwin";
           username = "runner";
           nixConfigDirectory = "/Users/runner/work/nixpkgs/nixpkgs";
