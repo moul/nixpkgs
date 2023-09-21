@@ -54,7 +54,7 @@ in {
     enable_audio_bell = "no";
     bell_on_tab = "yes";
 
-    background_opacity = "0.85";
+    background_opacity = "0.92";
 
     kitty_mod = "ctrl+alt";
 
