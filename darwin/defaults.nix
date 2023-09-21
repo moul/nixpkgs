@@ -2,7 +2,9 @@
   system.defaults.NSGlobalDomain = {
     "com.apple.trackpad.scaling" = 3.0;
     AppleInterfaceStyleSwitchesAutomatically = false;
+    AppleInterfaceStyle = "Dark";
     AppleMeasurementUnits = "Centimeters";
+    ApplePressAndHoldEnabled = true;
     AppleMetricUnits = 1;
     AppleShowScrollBars = "Automatic";
     AppleTemperatureUnit = "Celsius";
