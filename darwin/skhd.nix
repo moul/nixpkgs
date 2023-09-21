@@ -19,22 +19,22 @@ in {
       ## Window command
 
       # focus
-      lcmd + shift - left  : ${yabai} -m window --focus west  || yabai -m display --focus west
-      lcmd + shift - down  : ${yabai} -m window --focus south || yabai -m display --focus south
-      lcmd + shift - up    : ${yabai} -m window --focus north || yabai -m display --focus north
-      lcmd + shift - right : ${yabai} -m window --focus east  || yabai -m display --focus east
+      lcmd + ctrl - left  : ${yabai} -m window --focus west  || yabai -m display --focus west
+      lcmd + ctrl - down  : ${yabai} -m window --focus south || yabai -m display --focus south
+      lcmd + ctrl - up    : ${yabai} -m window --focus north || yabai -m display --focus north
+      lcmd + ctrl - right : ${yabai} -m window --focus east  || yabai -m display --focus east
 
       # swap
-      lcmd + alt - left : ${yabai} -m window --swap west \
+      lcmd + shift - left : ${yabai} -m window --swap west \
            || (${yabai} -m window --display west && yabai -m display --focus west) \
            || ${yabai} -m window --toggle split
-      lcmd + alt - right : ${yabai} -m window --swap east \
+      lcmd + shift - right : ${yabai} -m window --swap east \
            || (${yabai} -m window --display east && yabai -m display --focus east) \
            || ${yabai} -m window --toggle split
-      lcmd + alt - up : ${yabai} -m window --swap north \
+      lcmd + shift - up : ${yabai} -m window --swap north \
            || (${yabai} -m window --display north && yabai -m display --focus north) \
            || ${yabai} -m window --toggle split
-      lcmd + alt - down : ${yabai} -m window --swap south \
+      lcmd + shift - down : ${yabai} -m window --swap south \
            || (${yabai} -m window --display south && yabai -m display --focus south) \
            || ${yabai} -m window --toggle split
 
@@ -42,16 +42,16 @@ in {
       lcmd + shift - d : ${yabai} -m window --toggle split
 
       # increase window size
-      ctrl + lcmd + alt - left  : yabai -m window --resize left:-40:0
-      ctrl + lcmd + alt - down  : yabai -m window --resize bottom:0:40
-      ctrl + lcmd + alt - right : yabai -m window --resize top:0:-40
-      ctrl + lcmd + alt - up    : yabai -m window --resize right:40:0
+      ctrl + lcmd + shift - left  : yabai -m window --resize left:-40:0
+      ctrl + lcmd + shift - down  : yabai -m window --resize bottom:0:40
+      ctrl + lcmd + shift - up    : yabai -m window --resize top:0:-40
+      ctrl + lcmd + shift - right : yabai -m window --resize right:40:0
 
       # decrease window size
-      #ctrl + alt + alt - h : yabai -m window --resize left:40:0
-      #ctrl + alt + alt - j : yabai -m window --resize bottom:0:-40
-      #ctrl + alt + alt - k : yabai -m window --resize top:0:40
-      #ctrl + alt + alt - l : yabai -m window --resize right:-40:0
+      ctrl + alt + shift - left  : yabai -m window --resize left:40:0
+      ctrl + alt + shift - down  : yabai -m window --resize bottom:0:-40
+      ctrl + alt + shift - up    : yabai -m window --resize top:0:40
+      ctrl + alt + shift - right : yabai -m window --resize right:-40:0
 
       # warp
       # alt + shift - left : ${yabai} -m window --warp west || ${yabai} -m window --toggle split
