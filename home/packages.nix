@@ -40,7 +40,8 @@ in {
   # Go Env
   programs.go = {
     enable = true;
-    goPath = ".local/share/go";
+    #goPath = ".local/share/go";
+    goPath = "go";
     goBin = ".local/bin";
     package = pkgs.go;
   };
