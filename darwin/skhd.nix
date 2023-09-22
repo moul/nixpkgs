@@ -65,6 +65,7 @@ in {
                 ${yabai} -m window --toggle zoom-fullscreen
       ctrl + lcmd - p : ${yabai} -m window --focus mouse && \
               ${yabai} -m window --toggle zoom-parent
+      ctrl + lcmd - m : ${yabai} -m window --minimize
 
 
       # equalize window
