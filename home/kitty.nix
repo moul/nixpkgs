@@ -21,7 +21,8 @@ let
     ${xterm-emacsclient}/bin/xemacs -t -e '(spacemacs/switch-to-scratch-buffer) (delete-other-windows) (evil-emacs-state)'
   '';
 
-  theme = config.colors.catppuccin-macchiato;
+  #theme = config.colors.catppuccin-macchiato;
+  theme = config.colors.manfred-touron;
 in {
   # Kitty terminal
   # https://sw.kovidgoyal.net/kitty/conf.html
@@ -30,9 +31,10 @@ in {
 
   programs.kitty.settings = {
     # https://fsd.it/shop/fonts/pragmatapro/
-    font_family = "FiraCode Nerd Font Mono";
-    font_size = "14.0";
-    adjust_line_height = "120%";
+    #font_family = "FiraCode Nerd Font Mono";
+    font_family = "Iosevka Nerd Font Mono";
+    font_size = "12.0";
+    adjust_line_height = "100%";
     disable_ligatures = "cursor"; # disable ligatures when cursor is on them
 
     # Window layout
