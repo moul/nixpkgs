@@ -54,7 +54,7 @@
 
   # Trackpad
   system.defaults.trackpad = {
-    Clicking = true;
+    Clicking = false;
     TrackpadRightClick = true;
   };
 
@@ -66,4 +66,6 @@
     AppleShowAllExtensions = true;
     QuitMenuItem = true;
   };
+
+  system.keyboard.remapCapsLockToEscape = true;
 }
