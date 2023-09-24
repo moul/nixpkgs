@@ -37,6 +37,9 @@ in {
       bottom_padding = 3;
       left_padding = 3;
       right_padding = 3;
+      window_opacity = "on";
+      active_window_opacity = 1.0;
+      normal_window_opacity = 0.9;
     };
 
     extraConfig = ''
@@ -92,10 +95,11 @@ in {
       yabai -m rule --add app="1Password" manage=off sticky=on border=off
       yabai -m rule --add app="QuickGPT" manage=off sticky=on border=off
       yabai -m rule --add app="^(emacs|Xcode)$" manage=on border=on
-      yabai -m rule --add app="^Reminders$" manage=off sticky=on border=off
+      #yabai -m rule --add app="^Reminders$" manage=off sticky=on border=off
       yabai -m rule --add app="^Reminders$" title="META SCREEN" manage=on border=on
 
       #yabai -m signal --add event=space_changed action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"simple-bar-index-jsx\"'"
+      yabai -m signal --add even=space_changed action="osascript -e tell application \"Übersicht\" to refresh"
     '';
   };
 }
