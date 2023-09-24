@@ -3,6 +3,7 @@
 let
   theme = config.colors.catppuccin-macchiato;
   yabai = "${pkgs.yabai}/bin/yabai";
+  skhd = "${pkgs.skhd}/bin/skhd";
 in {
   services.skhd = {
     enable = true;
@@ -85,6 +86,33 @@ in {
       # @TODO: use nix abs path
       # @TODO: use current term directory
       # alt + shift - o : emacsclient --create-frame
+
+
+      # focus next space, or the first space if we are at the end
+      lcmd + ctrl - z : ${yabai} -m space --focus next || ${yabai} -m space --focus first
+
+      # focus prev space, or the last space if we are at the beginning
+      lcmd + ctrl - c : ${yabai} -m space --focus prev || ${yabai} -m space --focus last
+
+      alt + ctrl - left : ${skhd} -k "cmd + ctrl + alt - left"
+      alt + ctrl - right : ${skhd} -k "cmd + ctrl + alt - right"
+      alt + ctrl - 1 : ${skhd} -k "cmd + ctrl + alt - 1"
+      alt + ctrl - 2 : ${skhd} -k "cmd + ctrl + alt - 2"
+      alt + ctrl - 3 : ${skhd} -k "cmd + ctrl + alt - 3"
+      alt + ctrl - 4 : ${skhd} -k "cmd + ctrl + alt - 4"
+      alt + ctrl - 5 : ${skhd} -k "cmd + ctrl + alt - 5"
+      alt + ctrl - 6 : ${skhd} -k "cmd + ctrl + alt - 6"
+      alt + ctrl - 7 : ${skhd} -k "cmd + ctrl + alt - 7"
+
+      shift + alt + ctrl - left : ${yabai} -m window --space prev; ${skhd} -k "cmd + ctrl + alt - left"
+      shift + alt + ctrl - right : ${yabai} -m window --space next; ${skhd} -k "cmd + ctrl + alt - right"
+      shift + alt + ctrl - 1 : ${yabai} -m window --space 1; ${skhd} -k "cmd + ctrl + alt - 1"
+      shift + alt + ctrl - 2 : ${yabai} -m window --space 2; ${skhd} -k "cmd + ctrl + alt - 2"
+      shift + alt + ctrl - 3 : ${yabai} -m window --space 3; ${skhd} -k "cmd + ctrl + alt - 3"
+      shift + alt + ctrl - 4 : ${yabai} -m window --space 4; ${skhd} -k "cmd + ctrl + alt - 4"
+      shift + alt + ctrl - 5 : ${yabai} -m window --space 5; ${skhd} -k "cmd + ctrl + alt - 5"
+      shift + alt + ctrl - 6 : ${yabai} -m window --space 6; ${skhd} -k "cmd + ctrl + alt - 6"
+      shift + alt + ctrl - 7 : ${yabai} -m window --space 7; ${skhd} -k "cmd + ctrl + alt - 7"
     '';
   };
 }
