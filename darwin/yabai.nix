@@ -14,7 +14,7 @@ in {
       layout = "bsp";
       active_window_border_color = "0xff${hexYellow}";
       auto_balance = "off";
-      external_bar = "all:0:0";
+      external_bar = "all:20:0";
       focus_follows_mouse = "off";
       mouse_modifier = "fn";
       mouse_action1 = "resize";
@@ -95,7 +95,7 @@ in {
       yabai -m rule --add app="^Reminders$" manage=off sticky=on border=off
       yabai -m rule --add app="^Reminders$" title="META SCREEN" manage=on border=on
 
-      #yabai -m signal --add event=space_changed action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"pecan-workspace-jsx\"'"
+      #yabai -m signal --add event=space_changed action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"simple-bar-index-jsx\"'"
     '';
   };
 }
