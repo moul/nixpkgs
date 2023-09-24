@@ -69,10 +69,12 @@ endif
 
 ###
 
-reload_all: reload_kitty
+reload_all: reload_kitty reload_ubersicht reload_finder
 reload_kitty:; pkill -USR1 kitty
 #reload_skhd:;  $(call restart_service,org.nixos.yabai.plist)
 #reload_yabai:; $(call restart_service,org.nixos.skhd.plist)
+reload_ubersicht:; osascript -e 'tell application "Übersicht" to reload'; osascript -e 'tell application "Übersicht" to refresh'
+reload_finder:; killall Finder
 
 #define restart_service
 #	@set -e; plist_path=`find "${HOME}/Library/LaunchAgents" -name "$(1)" 2>/dev/null | head -n 1`; \
@@ -93,3 +95,4 @@ nix-store-verify:
 	  --experimental-features nix-command \
 	  --sigs-needed 10000 \
 	  /run/current-system
+

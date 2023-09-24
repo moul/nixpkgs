@@ -14,7 +14,7 @@
     NSAutomaticDashSubstitutionEnabled = false;
     NSAutomaticPeriodSubstitutionEnabled = false;
     NSWindowResizeTime = 1.0e-2;
-    _HIHideMenuBar = false;
+    _HIHideMenuBar = true;
   };
 
   # Firewall
