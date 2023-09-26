@@ -14,7 +14,8 @@ in {
       layout = "bsp";
       active_window_border_color = "0xff${hexYellow}";
       auto_balance = "off";
-      external_bar = "all:20:0";
+      #external_bar = "all:20:0"; # with ubersicht
+      external_bar = "all:0:0";
       focus_follows_mouse = "off";
       mouse_modifier = "fn";
       mouse_action1 = "resize";
