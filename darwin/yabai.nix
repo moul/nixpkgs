@@ -9,46 +9,50 @@ let
 in {
   services.yabai = {
     enable = true;
-    enableScriptingAddition = false;
+    enableScriptingAddition = true;
+    #configFile =
+    #  "/Users/${config.users.primaryUser.username}/.config/yabai/yabairc";
     config = {
-      layout = "bsp";
-      active_window_border_color = "0xff${hexYellow}";
+      active_window_border_color = "0xff888888";
+      active_window_opacity = "1.000000";
+      active_window_border_topmost = "off";
       auto_balance = "off";
-      #external_bar = "all:20:0"; # with ubersicht
       external_bar = "all:0:0";
-      focus_follows_mouse = "off";
-      mouse_modifier = "fn";
+      focus_follows_mouse = "autoraise";
+      layout = "bsp";
       mouse_action1 = "resize";
       mouse_action2 = "move";
       mouse_drop_action = "swap";
       mouse_follows_focus = "off";
-      normal_window_border_color = "0x11${hexBlack}";
-      window_animation_duration = 0;
+      mouse_modifier = "fn";
+      normal_window_border_color = "0xff444444";
+      insert_feedback_color = "0xffff0000";
+      normal_window_opacity = "1";
+      split_ratio = "0.500000";
+      split_type = "auto";
+      right_padding = "3";
+      bottom_padding = "3";
+      left_padding = "3";
+      top_padding = "3";
+      window_animation_duration = "0";
+      window_opacity_duration = "0";
+
       window_border = "on";
-      window_border_radius = 10;
-      window_border_width = 3;
-      window_gap = 5;
-      window_placement = "second_child";
       window_border_blur = "off";
-      #window_shadow = "float";
+      window_border_radius = "0";
+      window_border_width = "4";
+      window_border_placement = "inset";
+
+      window_gap = "5";
+      window_opacity = "off";
+      window_placement = "second_child";
       window_shadow = "off";
-      window_topmost = "off";
-      split_ratio = 0.5;
-      top_padding = 3;
-      bottom_padding = 3;
-      left_padding = 3;
-      right_padding = 3;
-      window_opacity = "on";
-      active_window_opacity = 1.0;
-      normal_window_opacity = 0.9;
+      window_topmost = "on";
     };
 
     extraConfig = ''
-      sudo yabai --load-sa
-      yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-
       # You might need to manually source this or integrate in a different way
-      yabai -m space --balance
+      # yabai -m space --balance
 
       for _ in $(yabai -m query --spaces | jq '.[].index | select(. > 6)'); do
           yabai -m space --destroy 7
