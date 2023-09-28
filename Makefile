@@ -10,6 +10,10 @@ switch:
 	@echo "Trying to guess what to do..."
 	@sh -xec "make $(HOSTNAME)"
 
+switch.offline:
+	@echo "Trying to guess what to do..."
+	@sh -xec "make $(HOSTNAME).offline"
+
 help:
 	@echo "read the Makefile"
 
@@ -47,6 +51,12 @@ linux-bootstrap-b darwin-bootstrap-b:
 $(DARWIN_HOSTS):
 	nix --experimental-features 'nix-command flakes ca-derivations ca-references' build .#darwinConfigurations.$@.system
 	./result/sw/bin/darwin-rebuild switch --flake .#$@
+	@echo Done.
+
+$(patsubst %,%.offline,$(DARWIN_HOSTS)):
+	# TODO: disable homebrew too.
+	nix --experimental-features 'nix-command flakes ca-derivations ca-references' build .#darwinConfigurations.$(patsubst %.offline,%,$@).system --option substitute false
+	./result/sw/bin/darwin-rebuild switch --flake $(patsubst %.offline,%,.#$@)
 	@echo Done.
 
 $(LINUX_HOSTS):
