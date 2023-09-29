@@ -4,8 +4,25 @@ let
   theme = config.colors.catppuccin-macchiato;
   yellow = theme.namedColors.yellow;
   black = theme.namedColors.black;
+  yabai = "${pkgs.yabai}/bin/yabai";
   hexYellow = builtins.substring 1 (builtins.stringLength yellow) yellow;
   hexBlack = builtins.substring 1 (builtins.stringLength black) black;
+  yabai_border = pkgs.writeShellScriptBin "hook" ''
+    #!/bin/bash
+
+    is_fullscreen=$(${yabai} -m query --windows --window "$YABAI_WINDOW_ID" | jq -re '.["zoom-fullscreen"]')
+    has_border=$(${yabai} -m query --windows --window "$YABAI_WINDOW_ID" | jq -re '.["border"]')
+
+    if [[ "$is_fullscreen" -eq "1" ]]; then
+      if [[ "$has_border" -eq "1" ]]; then
+        ${yabai} -m window "$YABAI_WINDOW_ID" --toggle border
+      fi
+    else
+      if [[ "$has_border" -eq "0" ]]; then
+        ${yabai} -m window "$YABAI_WINDOW_ID" --toggle border
+      fi
+    fi
+  '';
 in {
   services.yabai = {
     enable = true;
@@ -105,6 +122,9 @@ in {
 
       #yabai -m signal --add event=space_changed action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"simple-bar-index-jsx\"'"
       yabai -m signal --add even=space_changed action="osascript -e tell application \"Übersicht\" to refresh"
+
+      yabai -m signal --add event=window_resized action="${yabai_border}/bin/hook"
+
     '';
   };
 }
