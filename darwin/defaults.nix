@@ -15,6 +15,15 @@
     NSAutomaticPeriodSubstitutionEnabled = false;
     NSWindowResizeTime = 1.0e-2;
     _HIHideMenuBar = false;
+    "com.apple.sound.beep.feedback" = 0;
+    "com.apple.sound.beep.volume" = 0.0;
+    AppleKeyboardUIMode = 3;
+    AppleShowAllExtensions = true;
+    NSAutomaticWindowAnimationsEnabled = false;
+  };
+
+  system.defaults.CustomSystemPreferences = {
+    NSGlobalDomain = { NSWindowShouldDragOnGesture = true; };
   };
 
   # Firewall
@@ -31,6 +40,7 @@
     expose-group-by-app = false;
     mru-spaces = false;
     tilesize = 25;
+    show-recents = true;
     # Disable all hot corners
     wvous-bl-corner = 1;
     wvous-br-corner = 1;
