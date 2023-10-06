@@ -203,6 +203,7 @@ in {
       # my
       my-libvterm
       my-loon
+      my-gnolint
 
       # stable
       procs # fancy version of `ps`

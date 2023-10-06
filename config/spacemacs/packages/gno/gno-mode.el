@@ -17,7 +17,7 @@
 (require 'flycheck)
 (require 'go-mode)
 
-(defcustom gno-root-dir "/Users/gfanton/code/gnolang/gno"
+(defcustom gno-root-dir ""
   "Root directory for GNO lint."
   :type 'directory
   :group 'gno)
@@ -77,7 +77,7 @@
 
 (flycheck-define-checker gno-lint
   "A GNO syntax checker using the gno lint tool."
-  :command ("gnolinter" "lint"  (eval (concat "--root-dir=" gno-root-dir)) source)
+  :command ("gnolint" "lint"  (eval (concat "--root-dir=" gno-root-dir)) source)
   :error-patterns
   ((error line-start (file-name) ":" line ": " (message) " (code=" (id (one-or-more digit)) ")." line-end))
   :modes gno-mode)
