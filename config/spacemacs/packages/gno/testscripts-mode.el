@@ -21,11 +21,9 @@
   :mode 'sh-mode)
 
 (define-auto-innermode testscripts-auto-innermode
-  ;; :mode 'gno-mode
-  ;; :can-nest t
-  :head-matcher " [^ ]+.[[:alpha:]]+\\(.golden\\)? --$"
-  :tail-matcher "^--\\|\\'"
-  :mode-matcher (cons "[^.]+\\.\\([[:alpha:]]+\\)" 1)
+  :head-matcher "\\.\\([[:alpha:]]+\\)\\(.golden\\)? --\n"
+  :tail-matcher "^-- [^.]+\\|\\'"
+  :mode-matcher (cons "\\.\\([[:alpha:]]+\\)" 1)
   :fallback-mode 'text-mode)
 
 ;; Define the polymode
