@@ -31,7 +31,7 @@
 (define-derived-mode gno-mode go-mode "GNO"
   "Major mode for GNO files, an alias for go-mode."
   (setq-local tab-width gno-tab-width) ;; Use the custom gno-tab-width variable
-  (flycheck-mode)
+  ;; FIXME: disable lsp for now
   (when (fboundp 'lsp-disconnect) ;; Check if the lsp-disconnect function is available
     (lsp-disconnect)) ;; lsp doesn't work with gno yet
   (gno-mode-setup))
@@ -77,9 +77,14 @@
 
 (flycheck-define-checker gno-lint
   "A GNO syntax checker using the gno lint tool."
-  :command ("gnolint" "lint"  (eval (concat "--root-dir=" gno-root-dir)) source)
+  :command ("gnolint" "lint"  (eval (concat "--root-dir=" gno-root-dir)) source-original)
   :error-patterns
   ((error line-start (file-name) ":" line ": " (message) " (code=" (id (one-or-more digit)) ")." line-end))
+  ;; Ensure the file is saved, to work around
+  ;; https://github.com/python/mypy/issues/4746.
+  :predicate (lambda ()
+               (and (not (bound-and-true-p polymode-mode))
+                    (flycheck-buffer-saved-p)))
   :modes gno-mode)
 
 ;;;###autoload
@@ -87,9 +92,13 @@
 ;;;###autoload
 (add-hook 'gno-mode-hook
           (lambda ()
+            ;; enable flycheck by default
+            (flycheck-mode)
+            ;; FIXME: disable company for now
+            (when (featurep 'company) ; check if company is loaded
+              (company-mode -1)) ; disable company mode for gno-mode
             (when (fboundp 'lsp-ui-mode)
-              (lsp-ui-mode t))
-            (flycheck-select-checker 'gno-lint)))
+              (lsp-ui-mode t))))
 
 ;;;###autoload
 (define-derived-mode gno-dot-mod-mode go-dot-mod-mode "GNO Mod"
@@ -98,6 +107,7 @@
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("gno\\.mod\\'" . gno-dot-mod-mode))
+
 
 (provide 'gno-mode)
 

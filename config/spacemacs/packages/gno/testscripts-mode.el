@@ -21,13 +21,12 @@
   :mode 'sh-mode)
 
 (define-auto-innermode testscripts-auto-innermode
-  :can-overlap t
-  :can-nest t
-  :head-matcher "^-- [^.]+.[[:alpha:]]+\\(.golden\\)? --$"
-  :tail-matcher "\\(^-- [^ ]+ --$\\)\\|\\'"
-  :mode-matcher (cons "^-- [^.]+\\.\\([[:alpha:]]+\\)\\(.golden\\)? --$" 1)
-  :fallback-mode 'text-mode
-  )
+  ;; :mode 'gno-mode
+  ;; :can-nest t
+  :head-matcher " [^ ]+.[[:alpha:]]+\\(.golden\\)? --$"
+  :tail-matcher "^--\\|\\'"
+  :mode-matcher (cons "[^.]+\\.\\([[:alpha:]]+\\)" 1)
+  :fallback-mode 'text-mode)
 
 ;; Define the polymode
 (define-polymode testscripts-mode-polymode
@@ -35,13 +34,14 @@
   :innermodes '(testscripts-auto-innermode))
 
 ;;;###autoload
-(add-to-list 'auto-mode-alist '("\\.txtar\\'" . testscripts-mode-polymode))
-
-;;;###autoload
 (defun testscripts-mode ()
   "Activate the Testscripts polymode."
   (interactive)
+  (setq polymode-lsp-integration nil)
   (testscripts-mode-polymode))
+
+;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.txtar\\'" . testscripts-mode))
 
 (provide 'testscripts-mode)
 
