@@ -1,7 +1,7 @@
 ;;; testscripts-mode.el --- A polymode for Testscriptss -*- lexical-binding: t; -*-
 
-;; Author: Your Name <your.email@example.com>
-;; URL: https://github.com/yourusername/testscripts-mode
+;; Author: Your Name <8671905+gfanton@users.noreply.github.com>
+;; URL: https://github.com/gfanton/gno-mode
 ;; Version: 0.1.0
 ;; Package-Requires: ((emacs "25.1") (polymode "0.2.2"))
 ;; Keywords: languages, polymode, testscriptss
@@ -20,27 +20,19 @@
 (define-hostmode testscripts-bash-hostmode
   :mode 'sh-mode)
 
-(define-innermode testscripts-go-innermode
-  :mode 'go-mode
-  :head-matcher "^-- [^.]+.go --$"
-  :tail-matcher "\\(^-- [^.]+ --$\\)\\|\\'")
-
-(define-innermode testscripts-gno-innermode
-  :mode 'gno-mode
-  :head-matcher "^-- [^.]+.gno --$"
-  :tail-matcher "\\(^-- [^.]+ --$\\)\\|\\'")
-
-(define-innermode testscripts-golden-innermode
-  :mode 'text-mode
-  :head-matcher "^-- [^.]+.golden --$"
-  :tail-matcher "\\(^-- [^.]+ --$\\)\\|\\'")
+(define-auto-innermode testscripts-auto-innermode
+  :can-overlap t
+  :can-nest t
+  :head-matcher "^-- [^.]+.[[:alpha:]]+\\(.golden\\)? --$"
+  :tail-matcher "\\(^-- [^ ]+ --$\\)\\|\\'"
+  :mode-matcher (cons "^-- [^.]+\\.\\([[:alpha:]]+\\)\\(.golden\\)? --$" 1)
+  :fallback-mode 'text-mode
+  )
 
 ;; Define the polymode
 (define-polymode testscripts-mode-polymode
   :hostmode 'testscripts-bash-hostmode
-  :innermodes '(testscripts-go-innermode
-                testscripts-gno-innermode
-                testscripts-golden-innermode))
+  :innermodes '(testscripts-auto-innermode))
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.txtar\\'" . testscripts-mode-polymode))
