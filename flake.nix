@@ -246,6 +246,20 @@
             });
         };
 
+        lyra = home-manager.lib.homeManagerConfiguration {
+          pkgs = import inputs.nixpkgs-unstable
+            (nixpkgsDefaults // { system = "x86_64-linux"; });
+          modules = attrValues self.homeManagerModules
+            ++ (attrValues self.commonModules) ++ singleton ({ config, ... }: {
+              home.user-info = primaryUserInfo // {
+                nixConfigDirectory = "${config.home.homeDirectory}/nixpkgs";
+              };
+              home.username = config.home.user-info.username;
+              home.homeDirectory = "/home/${config.home.username}";
+              home.stateVersion = homeStateVersion;
+            });
+        };
+
         # specific config for github ci
         githubCI = home-manager.lib.homeManagerConfiguration {
           pkgs = import inputs.nixpkgs-unstable
