@@ -114,9 +114,10 @@ This function should only modify configuration layer settings."
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
+                                      polymode
+                                      sqlite3
                                       (catppuccin :location (recipe :fetcher github :repo "catppuccin/emacs"))
                                       (gno-mode :location "~/.spacemacs.d/packages/gno")
-                                      sqlite3
                                       )
 
    ;; A list of packages that cannot be updated.
@@ -624,7 +625,7 @@ before packages are loaded."
   (spacemacs/load-spacemacs-env) 
 
   ;; load custom gno mode
-  (require 'gno-mode)
+  (require 'gno)
 
   ;; @TODO: find a way to set this
   (unless (file-exists-p "/tmp/.emacs-saves/")
