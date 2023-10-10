@@ -60,6 +60,9 @@ in {
   home.sessionVariables = {
     LC_ALL = "en_US.UTF-8";
     FZF_BASE = "${pkgs.fzf}/share/fzf";
+    TERMINFO_DIRS =
+      "${pkgs.kitty.terminfo.outPath}/share/terminfo:$TERMINFO_DIRS";
+
   };
 
   # Direnv, load and unload environment variables depending on the current directory.
@@ -204,4 +207,6 @@ in {
           "${restart-service}/bin/restart-service org.nixos.skhd.plist";
       });
   };
+
+  #config.environment.systemPackages = [ pkgs.kitty.terminfo ];
 }
