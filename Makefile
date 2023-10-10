@@ -79,7 +79,15 @@ endif
 
 ###
 
-reload_all: reload_kitty reload_ubersicht reload_finder
+reload_all:
+	@echo "Trying to guess what to do..."
+	@sh -xec "make $(HOSTNAME).reload_all"
+
+$(patsubst %,%.reload_all,$(DARWIN_HOSTS)): reload_all_darwin
+$(patsubst %,%.reload_all,$(LINUX_HOSTS)): reload_all_linux
+
+reload_all_darwin: reload_kitty reload_ubersicht reload_finder
+reload_all_linux:
 reload_kitty:; pkill -USR1 kitty
 #reload_skhd:;  $(call restart_service,org.nixos.yabai.plist)
 #reload_yabai:; $(call restart_service,org.nixos.skhd.plist)
