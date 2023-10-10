@@ -37,6 +37,8 @@ in {
   manual.html.enable = false;
   manual.manpages.enable = false;
 
+  targets.genericLinux.enable = pkgs.stdenv.isLinux;
+
   # Go Env
   programs.go = {
     enable = true;
