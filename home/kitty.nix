@@ -95,7 +95,7 @@ in {
     "cmd+d" = "launch --cwd=current --location=vsplit";
     "cmd+shift+d" = "launch --cwd=current --location=hsplit";
 
-    "cmd+enter" = "new_os_window_with_cwd";
+    #"cmd+enter" = "new_os_window_with_cwd";
 
     "shift+cmd+up" = "move_window up";
     "shift+cmd+left" = "move_window left";

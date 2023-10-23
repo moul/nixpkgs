@@ -170,7 +170,7 @@
   colors.manfred-touron = {
     colors = {
       # black
-      color0 = "#222222"; # Default Black
+      color0 = "#000000"; # Default Black
       color8 = "#4e4e4e"; # Bright Black
       # red
       color1 = "#ff0000"; # Default Red
@@ -224,7 +224,7 @@
 
       # other
       text = "color16";
-      base = "color17";
+      base = "color0"; # color17
       mantle = "color18";
       crux = "color19";
       surface = "color20";
