@@ -182,6 +182,7 @@ in {
         ".." = "cd ..";
         cat = "${bat}/bin/bat";
         du = "${du-dust}/bin/dust";
+        pp = "${homeDirectory}/go/bin/pp";
         rg =
           "${ripgrep}/bin/rg --column --line-number --no-heading --color=always --ignore-case";
         # ps = "${procs}/bin/procs";
