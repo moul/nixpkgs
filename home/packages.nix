@@ -49,15 +49,15 @@ in {
   };
 
   # rust env
-  # setup cargo home
-  home.sessionVariables.CARGO_HOME = "${rust_home}/cargo";
-  # setup rustup
-  home.sessionVariables.RUSTUP_HOME = "${rust_home}/rustup";
-  home.activation.rustup = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    export CARGO_HOME="${rust_home}/cargo"
-    export RUSTUP_HOME="${rust_home}/rustup"
-    ${pkgs.rustup}/bin/rustup toolchain install stable 1>/dev/null
-  '';
+  ## setup cargo home
+  #home.sessionVariables.CARGO_HOME = "${rust_home}/cargo";
+  ## setup rustup
+  #home.sessionVariables.RUSTUP_HOME = "${rust_home}/rustup";
+  #home.activation.rustup = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  #  export CARGO_HOME="${rust_home}/cargo"
+  #  export RUSTUP_HOME="${rust_home}/rustup"
+  #  ${pkgs.rustup}/bin/rustup toolchain install stable 1>/dev/null
+  #'';
 
   home.sessionPath = [
     # rust
