@@ -215,6 +215,30 @@
 
               ];
           });
+        moul-pyxis = makeOverridable self.lib.mkDarwinSystem ({
+          username = "moul2";
+          fullName = "";
+          email = "94029+moul@users.noreply.github.com";
+          nixConfigDirectory = "/Users/moul2/nixpkgs";
+        } // {
+
+          system = "aarch64-darwin";
+          modules = (attrValues self.darwinModules)
+            ++ (attrValues self.commonModules) ++ singleton {
+              nixpkgs = nixpkgsDefaults;
+              networking.computerName = "moul-pyxis";
+              networking.hostName = "moul-pyxis";
+              networking.knownNetworkServices =
+                [ "Wi-Fi" "USB 10/100/1000 LAN" ];
+              nix.registry.my.flake = inputs.self;
+            };
+
+          inherit homeStateVersion;
+          homeModules = (attrValues self.homeManagerModules)
+            ++ (attrValues self.commonModules) ++ [
+
+            ];
+        });
 
         # Config with small modifications needed/desired for CI with GitHub workflow
         githubCI = self.darwinConfigurations.moul-dorado.override {
