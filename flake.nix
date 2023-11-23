@@ -215,6 +215,25 @@
 
               ];
           });
+        moul-volans = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo
+          // {
+	    system = "x86_64-darwin";
+            modules = (attrValues self.darwinModules)
+              ++ (attrValues self.commonModules) ++ singleton {
+                nixpkgs = nixpkgsDefaults;
+                networking.computerName = "moul-volans";
+                networking.hostName = "moul-volans";
+                networking.knownNetworkServices =
+                  [ "Wi-Fi" "USB 10/100/1000 LAN" ];
+                nix.registry.my.flake = inputs.self;
+              };
+
+            inherit homeStateVersion;
+            homeModules = (attrValues self.homeManagerModules)
+              ++ (attrValues self.commonModules) ++ [
+
+              ];
+          });
         moul-pyxis = makeOverridable self.lib.mkDarwinSystem ({
           username = "moul2";
           fullName = "";
