@@ -102,6 +102,7 @@ in {
     "ubersicht"
     "superhuman"
     "vlc"
+    #"signal"
     #"roam-research"
     #"obsidian"
     # "amethyst"
@@ -142,6 +143,8 @@ in {
   homebrew.brews = [
     "mas"
     "gs"
+    "ffmpeg"
+    "plz-cli"
     #"Homeport/tap/termshot"
     #"hub"
     #"golang"
