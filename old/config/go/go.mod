@@ -61,7 +61,9 @@ require (
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/cheekybits/genny v1.0.0 // indirect
 	github.com/cheggaaa/pb v1.0.29 // indirect
+	github.com/containerd/cgroups v1.0.4 // indirect
 	github.com/containerd/containerd v1.6.18 // indirect
+	github.com/coreos/go-systemd/v22 v22.3.2 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.1 // indirect
 	github.com/crackcomm/go-gitignore v0.0.0-20170627025303-887ab5e44cc3 // indirect
 	github.com/creack/pty v1.1.11 // indirect
@@ -81,6 +83,7 @@ require (
 	github.com/docker/libcompose v0.4.0 // indirect
 	github.com/dustin/go-humanize v1.0.0 // indirect
 	github.com/eidolon/wordwrap v0.0.0-20161011182207-e0f54129b8bb // indirect
+	github.com/elastic/gosigar v0.12.0 // indirect
 	github.com/elgris/jsondiff v0.0.0-20160530203242-765b5c24c302 // indirect
 	github.com/facebookgo/atomicfile v0.0.0-20151019160806-2de1f203e7d5 // indirect
 	github.com/fatih/color v1.13.0 // indirect
@@ -109,6 +112,7 @@ require (
 	github.com/gobuffalo/packd v1.0.0 // indirect
 	github.com/gobuffalo/packr/v2 v2.8.0 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
+	github.com/godbus/dbus/v5 v5.0.6 // indirect
 	github.com/gofrs/uuid v4.0.0+incompatible // indirect
 	github.com/gogo/gateway v1.1.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
@@ -184,7 +188,7 @@ require (
 	github.com/ipfs/go-ipld-legacy v0.1.0 // indirect
 	github.com/ipfs/go-ipns v0.1.2 // indirect
 	github.com/ipfs/go-log v1.0.5 // indirect
-	github.com/ipfs/go-log/v2 v2.4.0 // indirect
+	github.com/ipfs/go-log/v2 v2.5.0 // indirect
 	github.com/ipfs/go-merkledag v0.5.1 // indirect
 	github.com/ipfs/go-metrics-interface v0.0.1 // indirect
 	github.com/ipfs/go-mfs v0.2.1 // indirect
@@ -223,59 +227,55 @@ require (
 	github.com/koron/go-ssdp v0.0.2 // indirect
 	github.com/kr/pty v1.1.8 // indirect
 	github.com/leaanthony/go-ansi-parser v1.5.0 // indirect
-	github.com/libp2p/go-addr-util v0.1.0 // indirect
 	github.com/libp2p/go-buffer-pool v0.0.2 // indirect
 	github.com/libp2p/go-cidranger v1.1.0 // indirect
 	github.com/libp2p/go-conn-security-multistream v0.3.0 // indirect
 	github.com/libp2p/go-doh-resolver v0.3.1 // indirect
 	github.com/libp2p/go-eventbus v0.2.1 // indirect
 	github.com/libp2p/go-flow-metrics v0.0.3 // indirect
-	github.com/libp2p/go-libp2p v0.17.0 // indirect
+	github.com/libp2p/go-libp2p v0.18.0 // indirect
 	github.com/libp2p/go-libp2p-asn-util v0.1.0 // indirect
-	github.com/libp2p/go-libp2p-autonat v0.7.0 // indirect
 	github.com/libp2p/go-libp2p-blankhost v0.3.0 // indirect
 	github.com/libp2p/go-libp2p-connmgr v0.2.4 // indirect
-	github.com/libp2p/go-libp2p-core v0.13.0 // indirect
+	github.com/libp2p/go-libp2p-core v0.14.0 // indirect
 	github.com/libp2p/go-libp2p-discovery v0.6.0 // indirect
 	github.com/libp2p/go-libp2p-gostream v0.3.0 // indirect
 	github.com/libp2p/go-libp2p-http v0.2.1 // indirect
 	github.com/libp2p/go-libp2p-kad-dht v0.15.0 // indirect
 	github.com/libp2p/go-libp2p-kbucket v0.4.7 // indirect
 	github.com/libp2p/go-libp2p-loggables v0.1.0 // indirect
-	github.com/libp2p/go-libp2p-mplex v0.4.1 // indirect
+	github.com/libp2p/go-libp2p-mplex v0.6.0 // indirect
 	github.com/libp2p/go-libp2p-nat v0.1.0 // indirect
-	github.com/libp2p/go-libp2p-netutil v0.1.0 // indirect
 	github.com/libp2p/go-libp2p-noise v0.3.0 // indirect
 	github.com/libp2p/go-libp2p-peerstore v0.6.0 // indirect
 	github.com/libp2p/go-libp2p-pnet v0.2.0 // indirect
 	github.com/libp2p/go-libp2p-pubsub v0.6.0 // indirect
 	github.com/libp2p/go-libp2p-pubsub-router v0.5.0 // indirect
-	github.com/libp2p/go-libp2p-quic-transport v0.15.2 // indirect
+	github.com/libp2p/go-libp2p-quic-transport v0.16.1 // indirect
 	github.com/libp2p/go-libp2p-record v0.1.3 // indirect
 	github.com/libp2p/go-libp2p-rendezvous v0.0.0 // indirect
+	github.com/libp2p/go-libp2p-resource-manager v0.1.5 // indirect
 	github.com/libp2p/go-libp2p-routing-helpers v0.2.3 // indirect
-	github.com/libp2p/go-libp2p-swarm v0.9.0 // indirect
-	github.com/libp2p/go-libp2p-testing v0.6.0 // indirect
+	github.com/libp2p/go-libp2p-swarm v0.10.2 // indirect
+	github.com/libp2p/go-libp2p-testing v0.8.0 // indirect
 	github.com/libp2p/go-libp2p-tls v0.3.1 // indirect
-	github.com/libp2p/go-libp2p-transport-upgrader v0.6.0 // indirect
+	github.com/libp2p/go-libp2p-transport-upgrader v0.7.1 // indirect
 	github.com/libp2p/go-libp2p-xor v0.0.0-20210714161855-5c005aca55db // indirect
-	github.com/libp2p/go-libp2p-yamux v0.7.0 // indirect
-	github.com/libp2p/go-maddr-filter v0.1.0 // indirect
-	github.com/libp2p/go-mplex v0.3.0 // indirect
+	github.com/libp2p/go-libp2p-yamux v0.8.2 // indirect
+	github.com/libp2p/go-mplex v0.6.0 // indirect
 	github.com/libp2p/go-msgio v0.1.0 // indirect
 	github.com/libp2p/go-nat v0.1.0 // indirect
-	github.com/libp2p/go-netroute v0.1.6 // indirect
+	github.com/libp2p/go-netroute v0.2.0 // indirect
 	github.com/libp2p/go-openssl v0.0.7 // indirect
 	github.com/libp2p/go-reuseport v0.1.0 // indirect
 	github.com/libp2p/go-reuseport-transport v0.1.0 // indirect
-	github.com/libp2p/go-sockaddr v0.1.1 // indirect
-	github.com/libp2p/go-stream-muxer-multistream v0.3.0 // indirect
-	github.com/libp2p/go-tcp-transport v0.4.0 // indirect
-	github.com/libp2p/go-ws-transport v0.5.0 // indirect
-	github.com/libp2p/go-yamux/v2 v2.3.0 // indirect
+	github.com/libp2p/go-stream-muxer-multistream v0.4.0 // indirect
+	github.com/libp2p/go-tcp-transport v0.5.1 // indirect
+	github.com/libp2p/go-ws-transport v0.6.0 // indirect
+	github.com/libp2p/go-yamux/v3 v3.0.2 // indirect
 	github.com/libp2p/zeroconf/v2 v2.1.1 // indirect
 	github.com/linxGnu/grocksdb v1.7.2 // indirect
-	github.com/lucas-clemente/quic-go v0.24.0 // indirect
+	github.com/lucas-clemente/quic-go v0.25.0 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/magiconair/properties v1.8.5 // indirect
 	github.com/markbates/errx v1.1.0 // indirect
@@ -325,10 +325,12 @@ require (
 	github.com/onsi/ginkgo v1.16.4 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.0.3-0.20211202183452-c5a74bcca799 // indirect
+	github.com/opencontainers/runtime-spec v1.0.3-0.20210326190908-1c3f411f0417 // indirect
 	github.com/opentracing-contrib/go-observer v0.0.0-20170622124052-a52f23424492 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/openzipkin-contrib/zipkin-go-opentracing v0.4.5 // indirect
 	github.com/openzipkin/zipkin-go v0.2.2 // indirect
+	github.com/pbnjay/memory v0.0.0-20210728143218-7b4eea64cf58 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/peterbourgon/ff/v3 v3.1.2 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
@@ -340,6 +342,8 @@ require (
 	github.com/prometheus/procfs v0.7.3 // indirect
 	github.com/prometheus/statsd_exporter v0.21.0 // indirect
 	github.com/rainycape/unidecode v0.0.0-20150907023854-cb7f23ec59be // indirect
+	github.com/raulk/clock v1.1.0 // indirect
+	github.com/raulk/go-watchdog v1.2.0 // indirect
 	github.com/reiver/go-oi v1.0.0 // indirect
 	github.com/reiver/go-telnet v0.0.0-20180421082511-9ff0b2ab096e // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
