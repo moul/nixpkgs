@@ -1,10 +1,10 @@
 final: super:
 let inherit (super) pkgs lib;
 in {
-  my-loon = pkgs.buildGo118Module rec {
+  my-loon = pkgs.buildGo121Module rec {
     pname = "retry";
     version = "0.7.2";
-    vendorSha256 = "sha256-7X4fY5XYRr0haJMZstiXB9vDlAXzwqnym2wetCSW1Lo=";
+    vendorHash = "sha256-7X4fY5XYRr0haJMZstiXB9vDlAXzwqnym2wetCSW1Lo=";
     src = pkgs.fetchurl {
       url =
         "https://github.com/moul/retry/archive/refs/tags/v${version}.tar.gz";

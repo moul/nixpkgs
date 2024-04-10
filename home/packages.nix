@@ -250,7 +250,7 @@ in {
 
       # Useful nix related tools
       nixpkgs-fmt
-      rnix-lsp
+      #rnix-lsp
       cachix # adding/managing alternative binary caches hosted by Cachix
       lorri # improve `nix-shell` experience in combination with `direnv`
       niv # easy dependency management for nix projects
