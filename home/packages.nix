@@ -72,6 +72,7 @@ in {
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.bat.enable
 
   programs.bat.enable = true;
+
   programs.bat.themes = {
     catppuccin-macchiato = {
       src = pkgs.fetchFromGitHub {
@@ -83,6 +84,7 @@ in {
       file = "/Catppuccin-macchiato.tmTheme";
     };
   };
+
   programs.bat.config = {
     style = "plain";
     theme = "catppuccin-macchiato";
