@@ -394,7 +394,7 @@ require (
 	golang.org/x/net v0.0.0-20220722155237-a158d28d115b // indirect
 	golang.org/x/oauth2 v0.0.0-20220309155454-6242fa91716a // indirect
 	golang.org/x/sync v0.0.0-20220722155255-886fb9371eb4 // indirect
-	golang.org/x/sys v0.0.0-20220722155257-8c9f86f7a55f // indirect
+	golang.org/x/sys v0.4.0 // indirect
 	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211 // indirect
 	golang.org/x/text v0.4.0 // indirect
 	golang.org/x/time v0.0.0-20220224211638-0e9765cccd65 // indirect
@@ -431,7 +431,7 @@ require (
 )
 
 replace (
-	bazil.org/fuse => bazil.org/fuse v0.0.0-20200117225306-7b5117fecadc // specific version for iOS building
+	bazil.org/fuse => bazil.org/fuse v0.0.0-20230120002735-62a210ff1fd5 // specific version for iOS building
 	github.com/agl/ed25519 => github.com/agl/ed25519 v0.0.0-20200225211852-fd4d107ace12 // latest commit before the author shutdown the repo; see https://github.com/golang/go/issues/20504
 	github.com/libp2p/go-libp2p-rendezvous => github.com/berty/go-libp2p-rendezvous v0.0.0-20211013085524-09965cd64781 // use berty fork of go-libp2p-rendezvous with sqlcipher support
 	github.com/lucas-clemente/quic-go => github.com/lucas-clemente/quic-go v0.25.0
