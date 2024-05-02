@@ -26,7 +26,7 @@ let
 in {
   services.yabai = {
     enable = true;
-    enableScriptingAddition = true;
+    #enableScriptingAddition = true;
     #configFile =
     #  "/Users/${config.users.primaryUser.username}/.config/yabai/yabairc";
     config = {

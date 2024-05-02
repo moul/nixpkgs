@@ -91,7 +91,7 @@ reload_all_linux:
 reload_kitty:; pkill -USR1 kitty
 #reload_skhd:;  $(call restart_service,org.nixos.yabai.plist)
 #reload_yabai:; $(call restart_service,org.nixos.skhd.plist)
-reload_ubersicht:; osascript -e 'tell application "Übersicht" to reload'; osascript -e 'tell application "Übersicht" to refresh'
+reload_ubersicht:; #osascript -e 'tell application "Übersicht" to reload'; osascript -e 'tell application "Übersicht" to refresh'
 reload_finder:; killall Finder
 
 #define restart_service

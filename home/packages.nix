@@ -70,14 +70,18 @@ in {
   # Bat, a substitute for cat.
   # https://github.com/sharkdp/bat
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.bat.enable
+
   programs.bat.enable = true;
   programs.bat.themes = {
-    catppuccin-macchiato = builtins.readFile (pkgs.fetchFromGitHub {
-      owner = "catppuccin";
-      repo = "bat";
-      rev = "ba4d16880d63e656acced2b7d4e034e4a93f74b1";
-      sha256 = "sha256-6WVKQErGdaqb++oaXnY3i6/GuH2FhTgK0v4TN4Y0Wbw=";
-    } + "/Catppuccin-macchiato.tmTheme");
+    catppuccin-macchiato = {
+      src = pkgs.fetchFromGitHub {
+        owner = "catppuccin";
+        repo = "bat";
+        rev = "ba4d16880d63e656acced2b7d4e034e4a93f74b1";
+        sha256 = "sha256-6WVKQErGdaqb++oaXnY3i6/GuH2FhTgK0v4TN4Y0Wbw=";
+      };
+      file = "/Catppuccin-macchiato.tmTheme";
+    };
   };
   programs.bat.config = {
     style = "plain";
@@ -109,7 +113,7 @@ in {
       (nerdfonts.override { fonts = [ "Iosevka" "FiraCode" "Hack" ]; })
       docker
       du-dust # fancy version of `du`
-      emacs-nox
+      #emacs-nox
       entr
       #exa # fancy version of `ls`
       expect
@@ -129,7 +133,7 @@ in {
       hyperfine # benchmarking tool
       imagemagick
       inetutils
-      ipfs
+      #ipfs
       ispell
       mosh # wrapper for `ssh` that better and not dropping connections
       nodePackages.speed-test # nice speed-test tool
@@ -223,18 +227,18 @@ in {
       aspellDicts.en-computers
 
       # rust
-      rustup
+      pkgs-stable.rustup
 
       # ruby
-      ruby_3_1
+      pkgs-stable.ruby_3_1
 
       # js
-      nodejs-18_x
-      nodePackages.pnpm
-      yarn
+      pkgs-stable.nodejs-18_x
+      pkgs-stable.nodePackages.pnpm
+      pkgs-stable.yarn
 
       # python
-      (python39.withPackages
+      (pkgs-stable.python39.withPackages
         (p: with p; [ virtualenv pip mypy pylint yapf setuptools ]))
       pipenv
 
