@@ -9,6 +9,7 @@
       "https://nix-community.cachix.org"
       "https://gfanton.cachix.org"
       "https://moul.cachix.org"
+      "https://moul2.cachix.org"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -20,7 +21,7 @@
 
     trusted-users = [ "@admin" ];
 
-    auto-optimise-store = true;
+    auto-optimise-store = false;
 
     experimental-features = [ "nix-command" "flakes" ];
 

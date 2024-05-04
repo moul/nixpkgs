@@ -220,6 +220,25 @@
 
               ];
           });
+        moul-scutum = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo
+          // {
+            system = "aarch64-darwin";
+            modules = (attrValues self.darwinModules)
+              ++ (attrValues self.commonModules) ++ singleton {
+                nixpkgs = nixpkgsDefaults;
+                networking.computerName = "moul-scutum";
+                networking.hostName = "moul-scutum";
+                networking.knownNetworkServices =
+                  [ "Wi-Fi" "USB 10/100/1000 LAN" ];
+                nix.registry.my.flake = inputs.self;
+              };
+
+            inherit homeStateVersion;
+            homeModules = (attrValues self.homeManagerModules)
+              ++ (attrValues self.commonModules) ++ [
+
+              ];
+          });
         moul-volans = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo
           // {
             system = "x86_64-darwin";
