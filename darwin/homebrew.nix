@@ -29,11 +29,11 @@ in {
   homebrew.global.brewfile = true;
 
   homebrew.taps = [
-    "homebrew/cask"
+    #"homebrew/cask"
     #"homebrew/cask-drivers"
     "homebrew/cask-fonts"
     "homebrew/cask-versions"
-    "homebrew/core"
+    #"homebrew/core"
     "homebrew/services"
     "nrlquaker/createzap"
   ];
@@ -41,7 +41,7 @@ in {
   # Prefer installing application from the Mac App Store
   homebrew.masApps = {
     iStatMenus = 1319778037;
-    LogicPro = 634148309;
+    #LogicPro = 634148309;
     MicrosoftRemoteDesktop = 1295203466;
     #Model15 = 1041465860;
     PixelmatorPro = 1289583905;
@@ -57,7 +57,7 @@ in {
     Deliveries = 290986013;
     Fantastical = 975937182;
     GarageBand = 682658836;
-    iMovie = 408981434;
+    #iMovie = 408981434;
     Keynote = 409183694;
     Monodraw = 920404675;
     NextDNS = 1464122853;
@@ -81,27 +81,27 @@ in {
   # If an app isn't available in the Mac App Store, or the version in the App Store has
   # limitiations, e.g., Transmit, install the Homebrew Cask.
   homebrew.casks = [
-    "1password"
-    "1password-cli"
-    "backblaze"
-    "blobby-volley2"
-    "discord"
-    "docker"
-    "firefox-developer-edition"
-    "google-chrome"
-    "google-drive"
-    "ipfs"
-    "keybase"
-    "krisp"
-    "loom"
-    "minecraft"
-    "netspot"
-    "notion"
-    "nvidia-geforce-now"
-    "raycast"
-    "ubersicht"
-    "superhuman"
-    "vlc"
+    #"1password"
+    #"1password-cli"
+    #"backblaze"
+    #"blobby-volley2"
+    #"discord"
+    #"docker"
+    #"firefox-developer-edition"
+    #"google-chrome"
+    #"google-drive"
+    #"ipfs"
+    #"keybase"
+    #"krisp"
+    #"loom"
+    #"minecraft"
+    #"netspot"
+    #"notion"
+    #"nvidia-geforce-now"
+    #"raycast"
+    #"ubersicht"
+    #"superhuman"
+    #"vlc"
     #"signal"
     #"roam-research"
     #"obsidian"
