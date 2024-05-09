@@ -6,7 +6,7 @@ require (
 	berty.tech/berty/v2 v2.418.0
 	github.com/cespare/prettybench v0.1.0
 	github.com/daixiang0/gci v0.3.2
-	github.com/gfanton/loon v1.4.0
+	github.com/gfanton/loon v1.5.0
 	github.com/gnolang/gno v0.0.0-20220712022912-c6d1e89d8307
 	github.com/goreleaser/goreleaser v1.5.0
 	github.com/maruel/panicparse/v2 v2.3.1

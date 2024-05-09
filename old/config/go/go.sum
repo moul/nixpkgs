@@ -446,6 +446,8 @@ github.com/getsentry/sentry-go v0.6.1 h1:K84dY1/57OtWhdyr5lbU78Q/+qgzkEyGc/ud+Si
 github.com/getsentry/sentry-go v0.6.1/go.mod h1:0yZBuzSvbZwBnvaF9VwZIMen3kXscY8/uasKtAX1qG8=
 github.com/gfanton/loon v1.4.0 h1:FnN8pk4x7fF/X7PDmKETqRBzPjjScnPOnVgdlMvkNu0=
 github.com/gfanton/loon v1.4.0/go.mod h1:WRLuJXEeaeS2AE+nNUzkdHFLDGoc3MQVfzHSdMPtB0Q=
+github.com/gfanton/loon v1.5.0 h1:7qCI6wYznhCnMwXNQrgANngb8Fsbbp7mtJtsdWesIL4=
+github.com/gfanton/loon v1.5.0/go.mod h1:zET8bHW5npQodU/npt1xqZ03FqciQY4YifvCaZqnGlo=
 github.com/ghodss/yaml v1.0.0/go.mod h1:4dBDuWmgqj2HViK6kFavaiC9ZROes6MMH2rRYeMEF04=
 github.com/gin-contrib/sse v0.0.0-20190301062529-5545eab6dad3/go.mod h1:VJ0WA2NBN22VlZ2dKZQPAPnyWw5XTlK1KymzLKsr59s=
 github.com/gin-contrib/sse v0.1.0/go.mod h1:RHrZQHXnP2xjPF+u1gW/2HnVO7nvIa9PG3Gm+fLHvGI=
