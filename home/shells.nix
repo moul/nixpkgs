@@ -93,6 +93,7 @@ in {
 
     # enable completion
     enableCompletion = true;
+    completionInit = "autoload -U compinit && compinit -i";
     autosuggestion.enable = true;
     oh-my-zsh = {
       enable = true;

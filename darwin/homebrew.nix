@@ -113,6 +113,7 @@ in {
     # "element"
     # "etrecheckpro"
     # "firefox"
+    "flux"
     # "gpg-suite"
     # "hammerspoon"
     # "obsbot-me-tool"
