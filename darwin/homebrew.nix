@@ -83,9 +83,10 @@ in {
   homebrew.casks = [
     "1password"
     #"1password-cli"
-    #"backblaze"
+    "amethyst"
+    "backblaze"
     #"blobby-volley2"
-    #"discord"
+    "discord"
     #"docker"
     #"firefox-developer-edition"
     #"google-chrome"

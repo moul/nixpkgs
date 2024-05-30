@@ -86,10 +86,9 @@ reload_all:
 $(patsubst %,%.reload_all,$(DARWIN_HOSTS)): reload_all_darwin
 $(patsubst %,%.reload_all,$(LINUX_HOSTS)): reload_all_linux
 
-reload_all_darwin: reload_kitty reload_ubersicht reload_finder
+reload_all_darwin: reload_kitty reload_finder
 reload_all_linux:
 reload_kitty:; pkill -USR1 kitty
-reload_ubersicht:; #osascript -e 'tell application "Übersicht" to reload'; osascript -e 'tell application "Übersicht" to refresh'
 reload_finder:; killall Finder
 
 #define restart_service
