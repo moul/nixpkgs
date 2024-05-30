@@ -34,10 +34,6 @@
     chemacs2.url = "github:plexus/chemacs2/main";
     chemacs2.flake = false;
 
-    # yabai
-    # yabai.url = "github:koekeishiya/yabai";
-    # yabai.flake = false;
-
     # zsh plugins
     fast-syntax-highlighting.url =
       "github:zdharma-continuum/fast-syntax-highlighting";
@@ -125,7 +121,6 @@
             inputs.fast-syntax-highlighting;
           zsh-plugins.fzf-tab = inputs.fzf-tab;
           zsh-plugins.powerlevel10k = inputs.powerlevel10k;
-          # yabai = inputs.yabai;
         };
 
         # My overlays
@@ -149,7 +144,6 @@
         my-defaults = import ./darwin/defaults.nix;
         my-env = import ./darwin/env.nix;
         my-homebrew = import ./darwin/homebrew.nix;
-        my-yabai = import ./darwin/yabai.nix;
         my-jankyborders = import ./darwin/jankyborders.nix;
         my-skhd = import ./darwin/skhd.nix;
 
@@ -290,7 +284,6 @@
           nixConfigDirectory = "/Users/runner/work/nixpkgs/nixpkgs";
           extraModules = singleton {
             homebrew.enable = self.lib.mkForce false;
-            services.yabai.enable = self.lib.mkForce false;
             services.skhd.enable = self.lib.mkForce false;
           };
         };

@@ -23,12 +23,6 @@ in {
   #   recursive = true;
   # };
 
-  # yabai
-  # home.file."/.config/yabai" = {
-  #   source = "${lib.cleanSource ../config/yabai}";
-  #   recursive = true;
-  # };
-
   # home.file."/.config/skhd" = {
   #   source = "${lib.cleanSource ../config/skhd}";
   #   recursive = true;

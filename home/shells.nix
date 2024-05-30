@@ -202,9 +202,7 @@ in {
         # switch on rosetta shell
         rosetta-zsh = "${pkgs-x86.zsh}/bin/zsh";
 
-        # yabai & skhd
-        restart-yabai =
-          "${restart-service}/bin/restart-service org.nixos.yabai.plist";
+        # skhd
         restart-skhd =
           "${restart-service}/bin/restart-service org.nixos.skhd.plist";
         restart-borders =
