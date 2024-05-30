@@ -44,19 +44,19 @@ in {
     #LogicPro = 634148309;
     MicrosoftRemoteDesktop = 1295203466;
     #Model15 = 1041465860;
-    PixelmatorPro = 1289583905;
+    #PixelmatorPro = 1289583905;
     WiFiExplorer = 494803304;
-    YubicoAuthenticator = 1497506650;
-    Grammarly = 1462114288;
+    #YubicoAuthenticator = 1497506650;
+    #Grammarly = 1462114288;
     iNetNetworkScanner = 403304796;
     oneSec = 1532875441;
-    Canva = 897446215;
+    #Canva = 897446215;
     Actions = 1586435171;
     Backtrack = 1477089520;
     DaisyDisk = 411643860;
     Deliveries = 290986013;
-    Fantastical = 975937182;
-    GarageBand = 682658836;
+    #Fantastical = 975937182;
+    #GarageBand = 682658836;
     #iMovie = 408981434;
     Keynote = 409183694;
     Monodraw = 920404675;
@@ -69,7 +69,7 @@ in {
     Tailscale = 1475387142;
     Transmit = 1436522307;
     Twitter = 1482454543;
-    Trello = 1278508951;
+    #Trello = 1278508951;
 
     # FIXME: optionals if darwin >= 12
     #Infuse = 1136220934;
