@@ -101,7 +101,7 @@ in {
     #"nvidia-geforce-now"
     "raycast"
     #"ubersicht"
-    #"superhuman"
+    "superhuman"
     #"vlc"
     #"signal"
     #"roam-research"
