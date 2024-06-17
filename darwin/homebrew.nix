@@ -102,7 +102,7 @@ in {
     "raycast"
     #"ubersicht"
     "superhuman"
-    #"vlc"
+    "vlc"
     #"signal"
     #"roam-research"
     #"obsidian"
