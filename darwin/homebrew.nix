@@ -93,7 +93,7 @@ in {
     "google-drive"
     #"ipfs"
     #"keybase"
-    #"krisp"
+    "krisp"
     #"loom"
     #"minecraft"
     #"netspot"
