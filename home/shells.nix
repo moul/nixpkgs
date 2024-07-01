@@ -173,6 +173,14 @@ in {
           value = "ls -T --level=${toString i} -l";
         }) (lib.range 0 10));
       in {
+        # gno
+        gnox = "go run -C ~/go/src/github.com/gnolang/gno ./gnovm/cmd/gno";
+        gnokeyx =
+          "go run -C ~/go/src/github.com/gnolang/gno ./gno.land/cmd/gnokey";
+        gnodevx = "go run -C ~/go/src/github.com/gnolang/gno/contribs/gnodev .";
+        gnolandx =
+          "go run -C ~/go/src/github.com/gnolang/gno ./gno.land/cmd/gnoland";
+
         dev = "(){ nix develop $1 -c $SHELL ;}";
         mydev = "(){ nix develop my#$1 -c $SHELL ;}";
 
