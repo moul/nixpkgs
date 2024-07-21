@@ -88,7 +88,7 @@ $(patsubst %,%.reload_all,$(LINUX_HOSTS)): reload_all_linux
 
 reload_all_darwin: reload_kitty reload_finder
 reload_all_linux:
-reload_kitty:; pkill -USR1 kitty
+reload_kitty:; pkill -USR1 kitty || true
 reload_finder:; killall Finder
 
 #define restart_service
