@@ -164,7 +164,7 @@ in {
       jq
       yq
       unixtools.watch
-      youtube-dl
+      #youtube-dl
 
       # Useful nix related tools
       vivid

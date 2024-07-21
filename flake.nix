@@ -144,13 +144,13 @@
         my-defaults = import ./darwin/defaults.nix;
         my-env = import ./darwin/env.nix;
         my-homebrew = import ./darwin/homebrew.nix;
-        my-jankyborders = import ./darwin/jankyborders.nix;
+        #my-jankyborders = import ./darwin/jankyborders.nix;
         my-skhd = import ./darwin/skhd.nix;
 
         # local modules
         services-emacsd = import ./modules/darwin/services/emacsd.nix;
-        services-jankybordersd =
-          import ./modules/darwin/services/jankybordersd.nix;
+        #services-jankybordersd =
+        #  import ./modules/darwin/services/jankybordersd.nix;
         users-primaryUser = import ./modules/darwin/users.nix;
         programs-nix-index = import ./modules/darwin/programs/nix-index.nix;
       };
@@ -165,11 +165,11 @@
         my-emacs = import ./home/emacs.nix;
         my-tmux = import ./home/tmux.nix;
         my-config = import ./home/config.nix;
-        my-jankyborders = import ./home/jankyborders.nix;
+        #my-jankyborders = import ./home/jankyborders.nix;
 
         # local modules
         programs-truecolor = import ./modules/home/programs/truecolor;
-        programs-jankyborders = import ./modules/home/programs/jankyborders;
+        #programs-jankyborders = import ./modules/home/programs/jankyborders;
         # programs-asdf = import ./modules/home/programs/asdf;
         programs-kitty-extras = import ./modules/home/programs/kitty/extras.nix;
         programs-zsh-oh-my-zsh-extra =

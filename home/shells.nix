@@ -213,8 +213,8 @@ in {
         # skhd
         restart-skhd =
           "${restart-service}/bin/restart-service org.nixos.skhd.plist";
-        restart-borders =
-          "${restart-service}/bin/restart-service org.nixos.jankyborders.plist";
+        #restart-borders =
+        #  "${restart-service}/bin/restart-service org.nixos.jankyborders.plist";
       });
   };
 
