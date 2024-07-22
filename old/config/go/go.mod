@@ -17,7 +17,7 @@ require (
 	moul.io/moulsay v1.3.0
 	moul.io/prefix v1.7.1
 	moul.io/retry v0.7.1
-	moul.io/sshportal v1.19.3
+	moul.io/sshportal v1.19.5
 	moul.io/testman v1.5.0
 	pathwar.land/pathwar/v2 v2.78.0
 )
