@@ -96,6 +96,7 @@ in {
     "google-drive"
     #"ipfs"
     #"keybase"
+    "keyclu"
     "krisp"
     #"loom"
     #"minecraft"
