@@ -13,7 +13,7 @@ require (
 	golang.org/x/tools v0.1.12
 	honnef.co/go/tools v0.3.3
 	moul.io/adapterkit v1.5.2
-	moul.io/assh/v2 v2.15.0
+	moul.io/assh/v2 v2.16.0
 	moul.io/moulsay v1.3.0
 	moul.io/prefix v1.7.1
 	moul.io/retry v0.7.1
