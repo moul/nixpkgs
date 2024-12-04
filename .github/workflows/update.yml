@@ -39,7 +39,7 @@ jobs:
 
     # Checkout the base branch
     - name: Checkout Base Branch
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         ref: ${{ env.BASE_BRANCH }}
 
