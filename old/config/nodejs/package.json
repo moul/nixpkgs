@@ -1,9 +1,0 @@
-{
-  "name": "moul-nixpkgs",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "dependencies": {
-    "ethlint": "^1.2.5"
-  }
-}
