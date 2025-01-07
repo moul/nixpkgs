@@ -209,12 +209,6 @@ in {
       // (lib.optionalAttrs (stdenv.system == "aarch64-darwin") {
         # switch on rosetta shell
         rosetta-zsh = "${pkgs-x86.zsh}/bin/zsh";
-
-        # skhd
-        restart-skhd =
-          "${restart-service}/bin/restart-service org.nixos.skhd.plist";
-        #restart-borders =
-        #  "${restart-service}/bin/restart-service org.nixos.jankyborders.plist";
       });
   };
 

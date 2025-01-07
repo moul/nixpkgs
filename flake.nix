@@ -145,7 +145,6 @@
         my-env = import ./darwin/env.nix;
         my-homebrew = import ./darwin/homebrew.nix;
         #my-jankyborders = import ./darwin/jankyborders.nix;
-        my-skhd = import ./darwin/skhd.nix;
 
         # local modules
         services-emacsd = import ./modules/darwin/services/emacsd.nix;
@@ -203,6 +202,25 @@
                 nixpkgs = nixpkgsDefaults;
                 networking.computerName = "moul-dorado";
                 networking.hostName = "moul-dorado";
+                networking.knownNetworkServices =
+                  [ "Wi-Fi" "USB 10/100/1000 LAN" ];
+                nix.registry.my.flake = inputs.self;
+              };
+
+            inherit homeStateVersion;
+            homeModules = (attrValues self.homeManagerModules)
+              ++ (attrValues self.commonModules) ++ [
+
+              ];
+          });
+        moul-abilite = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo
+          // {
+            system = "aarch64-darwin";
+            modules = (attrValues self.darwinModules)
+              ++ (attrValues self.commonModules) ++ singleton {
+                nixpkgs = nixpkgsDefaults;
+                networking.computerName = "moul-abilite";
+                networking.hostName = "moul-abilite";
                 networking.knownNetworkServices =
                   [ "Wi-Fi" "USB 10/100/1000 LAN" ];
                 nix.registry.my.flake = inputs.self;
@@ -282,10 +300,8 @@
           system = "x86_64-darwin";
           username = "runner";
           nixConfigDirectory = "/Users/runner/work/nixpkgs/nixpkgs";
-          extraModules = singleton {
-            homebrew.enable = self.lib.mkForce false;
-            services.skhd.enable = self.lib.mkForce false;
-          };
+          extraModules =
+            singleton { homebrew.enable = self.lib.mkForce false; };
         };
       };
 
