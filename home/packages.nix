@@ -9,12 +9,6 @@ let
   #raw-emacs = pkgs.writeScriptBin "raw-emacs"
   #  (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${pkgs.emacsNativeComp}" ]
   #    (lib.readFile ./../config/raw-emacs));
-  em = pkgs.writeScriptBin "em"
-    (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${pkgs.emacs}" ]
-      (lib.readFile ./../config/em));
-  raw-emacs = pkgs.writeScriptBin "raw-emacs"
-    (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${pkgs.emacs}" ]
-      (lib.readFile ./../config/raw-emacs));
 in {
   # ssh
   programs.ssh = {
@@ -93,8 +87,8 @@ in {
   home.packages = with pkgs;
     [
       # custom
-      em
-      raw-emacs
+      #em
+      #raw-emacs
 
       # Some basics
       abduco # lightweight session management
