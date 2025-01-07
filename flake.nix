@@ -124,8 +124,8 @@
         };
 
         # My overlays
-        my-loon = import ./overlays/loon.nix;
-        my-gnolint = import ./overlays/gnolint.nix;
+        #my-loon = import ./overlays/loon.nix;
+        #my-gnolint = import ./overlays/gnolint.nix;
         my-libvterm = import ./overlays/libvterm.nix;
         my-retry = import ./overlays/retry.nix;
       };

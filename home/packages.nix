@@ -112,7 +112,9 @@ in {
       cowsay
       curl
       diff-so-fancy
-      (nerdfonts.override { fonts = [ "Iosevka" "FiraCode" "Hack" ]; })
+      #(nerdfonts.override { fonts = [ "Iosevka" "FiraCode" "Hack" ]; })
+      nerd-fonts.iosevka
+      nerd-fonts.fira-code
       docker
       du-dust # fancy version of `du`
       #emacs-nox
@@ -210,8 +212,8 @@ in {
 
       # my
       my-libvterm
-      my-loon
-      my-gnolint
+      #my-loon
+      #my-gnolint
 
       # stable
       procs # fancy version of `ps`

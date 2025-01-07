@@ -37,7 +37,7 @@
   # Dock and Mission Control
   system.defaults.dock = {
     autohide = true;
-    expose-group-by-app = false;
+    expose-group-apps = false;
     mru-spaces = false;
     tilesize = 25;
     show-recents = true;
@@ -75,6 +75,7 @@
     FXEnableExtensionChangeWarning = true;
     AppleShowAllExtensions = true;
     QuitMenuItem = true;
+    CreateDesktop = false;
   };
 
   system.keyboard.remapCapsLockToEscape = true;
