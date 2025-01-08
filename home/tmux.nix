@@ -31,6 +31,9 @@
     }
   ];
   programs.tmux.extraConfig = ''
+    #set -g default-command "reattach-to-user-namespace -l zsh"
+    set -g default-command "${pkgs.zsh}/bin/zsh"
+
     # custom
     bind-key -n C-S-Left swap-window -t -1
     bind-key -n C-S-Right swap-window -t +1
