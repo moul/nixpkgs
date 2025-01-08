@@ -14,6 +14,7 @@ let
     #pdf-tools
     #treesit-grammars.with-all-grammars
     go-mode
+    markdown-mode
   ]);
   #em = pkgs.writeScriptBin "em"
   #  (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${pkgs.emacs}" ]
