@@ -1,0 +1,527 @@
+#  -*- coding: utf-8 -*-
+
+* Global settings
+** better-defaults
+  [[https://github.com/technomancy/better-defaults][better-defaults]] does a bunch of generic emacs interface tidying,
+  including:
+  - better buffer unique names
+  - turn off scrollbar, menu bar, toolbar
+
+#+begin_src emacs-lisp
+  (require 'better-defaults)
+#+end_src
+
+** fill
+
+#+begin_src emacs-lisp
+  (setq-default fill-column 80)
+#+end_src
+
+** ido
+
+  ido-completing-read enables ido in many places.  (better-defaults already
+  enables ido for some things, this just goes further).  smex adds
+  ido-like behaviour to =M-x=.
+#+begin_src emacs-lisp
+  (ido-mode 1)
+  (ido-everywhere 1)
+  (ido-ubiquitous-mode 1)
+
+  (require 'smex)
+  (setq smex-save-file (concat user-emacs-directory ".smex-items"))
+  (smex-initialize)
+  (global-set-key (kbd "M-x") 'smex)
+#+end_src
+
+** magit
+
+   [[https://github.com/magit/magit][magit]] is the only way to interact with git.  Seriously, even when
+   I'm using other editors, I'll keep emacs open in order to use magit.
+   The main reasons I like it:
+   - easy manipulation of individual lines within a changeset
+   - one-character commands for all common operations (push, pull,
+     commit, rebase, merge..)
+   As a result, I bind a global key combination to =magit-status= so
+   it's always easy to get to.
+
+#+begin_src emacs-lisp
+  (global-set-key "\C-cg" 'magit-status)
+#+end_src
+
+** y-or-n-p
+
+   This replaces dialogs which require a full "yes" or "no" to just
+   require a simple "y" or "n".
+
+#+begin_src emacs-lisp
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+end_src
+
+** visual things
+
+    This adds a graphic in the margin to show how many empty lines you
+    have beyond the end of your file's content.
+
+#+begin_src emacs-lisp
+  (set-default 'indicate-empty-lines t)
+#+end_src
+
+   This adds line numbers everywhere, which is particularly useful for pairing.
+
+#+begin_src emacs-lisp
+  (global-display-line-numbers-mode 1)
+#+end_src
+
+Tabs should be 4 chars, not 8:
+
+#+begin_src emacs-lisp
+  (setq-default tab-width 4)
+#+end_src
+
+** disable annoying keybindings
+
+I hit these by mistake all the time and they're never what I want.
+
+#+BEGIN_SRC emacs-lisp
+  (global-unset-key (kbd "C-z"))
+  ;; (global-unset-key (kbd "C-x C-c"))
+#+END_SRC
+
+** enable commands
+
+   Emacs has a few commands which are disabled by default, because
+   they can be confusing.  Enable them here:
+
+#+begin_src emacs-lisp
+  (put 'narrow-to-region 'disabled nil)
+  (put 'upcase-region 'disabled nil)
+#+end_src
+
+** visible bell
+
+#+BEGIN_SRC emacs-lisp
+  (setq visible-bell nil)
+  (setq ring-bell-function
+        (lambda ()
+          (invert-face 'mode-line)
+          (run-with-timer 0.1 nil 'invert-face 'mode-line)))
+#+END_SRC
+
+** flycheck
+
+#+begin_src emacs-lisp
+  (require 'flycheck)
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+  (diminish 'flycheck-mode)
+#+end_src
+
+* company-mode
+
+Company mode is a standard completion package that works well with lsp-mode.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'after-init-hook #'global-company-mode)
+#+END_SRC
+
+* Pretty-mode
+
+This adds pretty arrows, lambdas, etc to Haskell and friends
+
+#+BEGIN_SRC emacs-lisp
+  (global-pretty-mode 1)
+#+END_SRC
+
+* Javascript
+** eslint
+
+I cribbed a lot of this from [[http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html][a nice blog post]].
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default flycheck-disabled-checkers
+    (append flycheck-disabled-checkers
+            '(javascript-jshint)))
+
+  ;; use local eslint from node_modules before global
+  ;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
+  (defun my/use-eslint-from-node-modules ()
+    (let* ((root (locate-dominating-file
+                  (or (buffer-file-name) default-directory)
+                  "node_modules"))
+           (eslint (and root
+                        (expand-file-name "node_modules/eslint/bin/eslint.js"
+                                          root))))
+      (when (and eslint (file-executable-p eslint))
+        (setq-local flycheck-javascript-eslint-executable eslint))))
+
+  (defun my/allow-eslint-in-web-mode ()
+    (flycheck-add-mode 'javascript-eslint 'web-mode))
+
+
+  (defun my/flycheck-mode-hook ()
+    (progn
+      (my/use-eslint-from-node-modules)
+      (my/allow-eslint-in-web-mode)))
+
+  (add-hook 'flycheck-mode-hook #'my/flycheck-mode-hook)
+#+END_SRC
+
+* golang
+
+#+BEGIN_SRC emacs-lisp
+  ;; Set up before-save hooks to format buffer and add/delete imports.
+  ;; Make sure you don't have other gofmt/goimports hooks enabled.
+  (defun lsp-go-install-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  (add-hook 'go-mode-hook #'lsp-deferred)
+  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+#+END_SRC
+
+* gnolang
+
+https://github.com/gnolang/gno/blob/master/CONTRIBUTING.md
+https://github.com/gfanton/nixpkgs/blob/master/config/spacemacs/packages/gno/gno-mode.el
+
+#+BEGIN_SRC emacs-lisp
+      ;; lsp-gno.el --- LSP client for the Gno Programming Language -*- lexical-binding: t -*-
+
+    ;; Author: Guilhem Fanton <guilhem.fanton@gmail.com>
+    ;; Version: 0.1
+    ;; Package-Requires: ((lsp-mode "6.3.2"))
+    ;; Keywords: languages, gno, lsp
+    ;; URL: https://github.com/gfanton/gno-mode
+
+    ;;; Commentary:
+
+    ;; This package integrates the Gno Programming Language with Emacs, using
+    ;; the LSP protocol and the gnopls language server. It provides features like
+    ;; autocompletion, diagnostics, and other IDE-like functionalities.
+    ;;
+    ;; To use this package, ensure that the `gnopls` language server is installed
+    ;; and available on your PATH.
+
+    ;;; Code:
+
+    (require 'lsp-mode)
+    ;;(require 'gno-mode)
+    (require 'lsp-completion)
+
+    (defgroup lsp-gno nil
+      "LSP support for the Gno Programming Language, using the gnopls language server."
+      :group 'lsp-mode
+      :package-version '(lsp-mode . "6.3.2"))
+
+    (defcustom lsp-gno-gnopls-server-path "gnopls"
+      "Path to gnopls server binary."
+      :type 'string
+      :group 'lsp-gno)
+
+    (defcustom lsp-gno-gnopls-gnokey-path "gnokey"
+      "Path to gnokey binary."
+      :type 'string
+      :group 'lsp-gno)
+
+    (defcustom lsp-gno-precompile-on-save nil
+      "If true, the server will precompile the file before saving it."
+      :type 'boolean
+      :group 'lsp-gno)
+
+    (defcustom lsp-gno-build-on-save nil
+      "If true, the server will build the file before saving it."
+      :type 'boolean
+      :group 'lsp-gno)
+
+    (defcustom lsp-gno-root ""
+      "Path to a local copy of the gno repository. GNOROOT will be used as a fallback."
+      :type '(choice (directory :tag "Root directory") (const :tag "Unspecified" nil))
+      :group 'lsp-gno)
+
+    (lsp-register-custom-settings
+     '(("gnopls.gno" lsp-gno-gnopls-server-path)
+       ("gnopls.gnokey" lsp-gno-gnopls-gnokey-path)
+       ("gnopls.precompileOnSave" lsp-gno-precompile-on-save t)
+       ("gnopls.buildOnSave" lsp-gno-build-on-save t)
+       ("gnopls.root" lsp-gno-root)))
+
+    (lsp-register-client
+     (make-lsp-client :new-connection (lsp-stdio-connection
+                                       (lambda ()
+                                         (if lsp-gno-root
+                                             (list lsp-gno-gnopls-server-path "serve")
+                                           (message "lsp-gno-root is not specified")
+                                           nil)))
+                      :activation-fn (lsp-activate-on "gno" "gnomod")
+                      :priority 1 ;; should override gopls
+                      :server-id 'gnopls
+                      :completion-in-comments? t))
+
+    (lsp-consistency-check lsp-gno)
+
+    ;;;###autoload
+    (defun lsp-gno-setup ()
+      "Set up LSP for GNO."
+      (add-to-list 'lsp-language-id-configuration '(gno-mode . "gno"))
+      (add-to-list 'lsp-language-id-configuration '(go-dot-mod-mode . "gnomod")))
+
+    (provide 'lsp-gno)
+    ;;; lsp-gno.el ends here
+
+        ;;; gno-mode.el --- Major mode for editing GNO files, based on go-mode -*- lexical-binding: t -*-
+
+        ;; Author: Guilhem Fanton <guilhem.fanton@gmail.com>
+        ;; Version: 0.1
+        ;; Package-Requires: ((emacs "24.3") (go-mode "1.5.0"))
+        ;; Keywords: languages, gno
+        ;; URL: https://github.com/yourusername/gno-mode
+
+        ;;; Commentary:
+
+        ;; This package provides a major mode for editing GNO files, which
+        ;; is based on go-mode. It includes additional functions for formatting
+        ;; GNO code using gofumpt.
+
+        ;;; Code:
+
+        (require 'flycheck)
+        (require 'go-mode)
+
+        (defcustom gno-root-dir ""
+          "Root directory for GNO lint."
+          :type 'directory
+          :group 'gno)
+
+        (defcustom gno-tab-width 8
+          "Width of a tab for GNO mode."
+          :type 'integer
+          :group 'gno)
+
+        ;;;###autoload
+        (define-derived-mode gno-mode go-mode "GNO"
+          "Major mode for GNO files, an alias for go-mode."
+          (setq-local tab-width gno-tab-width) ;; Use the custom gno-tab-width variable
+          ;; (flycheck-mode)
+          ;; If LSP is available, configure and start it.
+          (when (fboundp 'lsp)
+            (lsp)))
+
+        ;;;###autoload
+        (add-to-list 'auto-mode-alist '("\\.gno\\'" . gno-mode))
+
+        (defun gno-mode-setup ()
+          "Hook for setting up gno-mode."
+          (add-hook 'before-save-hook 'gno-format-buffer nil t)
+          (add-hook 'after-save-hook 'gnoimports-on-save nil t))
+
+        (defun gno-format-buffer ()
+          "Format the current buffer using gofumpt. This is an adapted version from go-mode gofmt."
+          (interactive)
+          (let ((tmpfile (make-nearby-temp-file "gofumpt" nil ".gno"))
+                (patchbuf (get-buffer-create "*Gofumpt patch*"))
+                (errbuf (get-buffer-create "*Gofumpt Errors*"))
+                (coding-system-for-read 'utf-8)
+                (coding-system-for-write 'utf-8))
+
+            (unwind-protect
+                (save-restriction
+                  (widen)
+                  (with-current-buffer errbuf
+                    (setq buffer-read-only nil)
+                    (erase-buffer))
+                  (with-current-buffer patchbuf
+                    (erase-buffer))
+                  (write-region nil nil tmpfile)
+                  (message "Calling gofumpt: %s" tmpfile)
+                  (if (zerop (call-process "gofumpt" nil errbuf nil "-w" (file-local-name tmpfile)))
+                      (progn
+                        (if (zerop (call-process-region (point-min) (point-max) "diff" nil patchbuf nil "-n" "-" tmpfile))
+                            (message "Buffer is already gofumpted")
+                          (go--apply-rcs-patch patchbuf)
+                          (message "Applied gofumpt"))
+                        (gofmt--kill-error-buffer errbuf))
+                    (message "Could not apply gofumpt")
+                    (gofmt--process-errors (buffer-file-name) tmpfile errbuf)))
+
+              (kill-buffer patchbuf)
+              (delete-file tmpfile))))
+
+        (defun gnoimports-on-save ()
+          "Run gnoimports on the current file before saving."
+          (when (string-equal (file-name-extension (buffer-file-name)) "gno")
+            (let ((cmd (concat "gno fmt -w " (shell-quote-argument (buffer-file-name))))
+                  (output-buf (get-buffer-create "*Gnoimports Output*")))
+              (message "Running: %s" cmd)
+              (with-current-buffer output-buf
+                (erase-buffer))
+              (let ((exit-code (call-process-shell-command cmd nil output-buf)))
+                (if (zerop exit-code)
+                    (progn
+                      (message "gnoimports succeeded")
+                      (revert-buffer t t t)) ;; Revisit buffer to reflect changes
+                  (message "gnoimports failed with exit code %d" exit-code)
+                  (with-current-buffer output-buf
+                    (message "gnoimports output:\n%s" (buffer-string))))))))
+
+        (flycheck-define-checker gno-lint
+          "A GNO syntax checker using the gno lint tool."
+          :command ("gno" "lint"  (eval (concat "--root-dir=" gno-root-dir)) source-original)
+          :error-patterns
+          ((error line-start (file-name) ":" line ": " (message) " (code=" (id (one-or-more digit)) ")." line-end))
+          ;; Ensure the file is saved, to work around
+          ;; https://github.com/python/mypy/issues/4746.
+          :predicate (lambda ()
+                       (and (not (bound-and-true-p polymode-mode))
+                            (flycheck-buffer-saved-p)))
+          :modes gno-mode)
+
+        ;;;###autoload
+        (add-to-list 'flycheck-checkers 'gno-lint)
+        ;;;###autoload
+        (add-hook 'gno-mode-hook
+                  (lambda ()
+                    ;; enable flycheck by default
+                    (flycheck-mode)
+                    ;; FIXME: disable company for now
+                    (when (featurep 'company) ; check if company is loaded
+                      (company-mode -1)) ; disable company mode for gno-mode
+                    (when (fboundp 'lsp-ui-mode)
+                      (lsp-ui-mode t))))
+
+        ;;;###autoload
+        (define-derived-mode gno-dot-mod-mode go-dot-mod-mode "GNO Mod"
+          "Major mode for GNO mod files, an alias for go-dot-mod-mode."
+          )
+
+        ;;;###autoload
+        (add-to-list 'auto-mode-alist '("gno\\.mod\\'" . gno-dot-mod-mode))
+
+        (provide 'gno-mode)
+
+        ;;; gno-mode.el ends here
+
+
+        ;;; gno.el --- Main entry point for GNO package -*- lexical-binding: t -*-
+
+      ;; Author: Guilhem Fanton <guilhem.fanton@gmail.com>
+      ;; Version: 0.1
+      ;; Package-Requires: ((emacs "24.3") (go-mode "1.5.0") (lsp-mode "6.3.2"))
+      ;; Keywords: languages, gno
+      ;; URL: https://github.com/gfanton/gno-mode
+
+      ;;; Commentary:
+
+      ;; This is the main entry point for the GNO package.
+      ;; It provides a major mode for editing GNO files, LSP support, and other related utilities.
+
+      ;;; Code:
+
+      ;;(require 'gno-mode)
+      ;;(require 'lsp-gno)
+      ;;(require 'testscripts-mode)
+
+      ;; Setup lsp-gno
+      (lsp-gno-setup)
+
+      (provide 'gno)
+
+      ;;; gno.el ends here
+
+
+    ;;; testscripts-mode.el --- A polymode for Testscriptss -*- lexical-binding: t; -*-
+
+  ;; Author: Your Name <8671905+gfanton@users.noreply.github.com>
+  ;; URL: https://github.com/gfanton/gno-mode
+  ;; Version: 0.1.0
+  ;; Package-Requires: ((emacs "25.1") (polymode "0.2.2"))
+  ;; Keywords: languages, polymode, testscriptss
+
+  ;;; Commentary:
+
+  ;; This package provides a polymode for Testscripts. Testscripts files with
+  ;; extension .txtar will have sections highlighted in sh-mode, go-mode,
+  ;; gno-mode, and text-mode based on section headers.
+
+  ;;; Code:
+
+  (require 'polymode)
+
+  ;; Define host and inner modes
+  (define-hostmode testscripts-bash-hostmode
+    :mode 'sh-mode)
+
+  (define-auto-innermode testscripts-auto-innermode
+    :head-matcher "\\.\\([[:alpha:]]+\\)\\(.golden\\)? --\n"
+    :tail-matcher "^-- [^.]+\\|\\'"
+    :mode-matcher (cons "\\.\\([[:alpha:]]+\\)" 1)
+    :fallback-mode 'text-mode)
+
+
+  ;; Define the polymode
+  (define-polymode testscripts-mode-polymode
+    :hostmode 'testscripts-bash-hostmode
+    :innermodes '(testscripts-auto-innermode))
+
+  ;;;###autoload
+  (defun testscripts-mode ()
+    "Activate the Testscripts polymode."
+    (interactive)
+    (setq polymode-lsp-integration nil)
+    (testscripts-mode-polymode))
+
+  ;;;###autoload
+  (add-to-list 'auto-mode-alist '("\\.txtar\\'" . testscripts-mode))
+
+  (provide 'testscripts-mode)
+
+  ;;; testscripts-mode.el ends here
+#+END_SRC
+
+* Markdown
+
+#+begin_src emacs-lisp
+  (add-hook 'markdown-mode-hook (lambda ()
+                                  (variable-pitch-mode 1)
+                                  (visual-line-mode 1)))
+#+end_src
+* projectile
+
+[[https://github.com/bbatsov/projectile][Projectile]] is a minor mode which allows you to quickly navigate to
+files within the same project.
+
+#+begin_src emacs-lisp
+  (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (diminish 'projectile-mode)
+#+end_src
+
+When switching projects, jump straight to the magit status:
+
+#+begin_src emacs-lisp
+  (setq projectile-switch-project-action 'projectile-vc)
+#+end_src
+
+* local settings
+  This repo has a /local directory, with all of its contents in
+  =.gitignore=, containing various local settings.
+
+** customized variables
+   custom.el provides a mechanism for customizing emacs variables from
+   within emacs.  To make such changes permanent, it will put changes
+   into =custom-file= which by default is =init.el=.  To avoid
+   polluting that file, we set it to something else:
+
+   #+BEGIN_SRC emacs-lisp
+     (setq custom-file (concat user-emacs-directory "custom.el"))
+     (load custom-file 'noerror)
+   #+END_SRC
+
+* envrc
+
+This integrates with existing `direnv` integrations, so that things
+work correctly with local dev environments.
+
+We add this last (see the [[https://github.com/purcell/envrc][project readme]] for why).
+
+#+BEGIN_SRC emacs-lisp
+  (envrc-global-mode 1)
+#+END_SRC
