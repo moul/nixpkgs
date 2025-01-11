@@ -1,9 +1,22 @@
+{ config, lib, pkgs, ...}:
 
-{ config, pkgs, ...}:
-{
+let
+  my-emacs = pkgs.emacs30-nox.override {
+    #withNativeCompilation = true;
+    #withSQLite3 = true;
+    #withTreeSitter = true;
+    #withWebP = true;
+  };
+  em = pkgs.writeScriptBin "em"
+    (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${my-emacs}" ]
+      (lib.readFile ./../config/em));
+  raw-emacs-old = pkgs.writeScriptBin "raw-emacs-old"
+    (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${my-emacs}" ]
+      (lib.readFile ./../config/raw-emacs));
+in {
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs30-nox;
+    package = my-emacs;
 
     extraConfig = pkgs.lib.mkIf pkgs.stdenv.hostPlatform.isDarwin ''
       ; macOS ls doesn't support --dired
@@ -47,7 +60,7 @@
         nix-sandbox
         pretty-mode
         projectile
-        rust-mode
+        #rust-mode
         #sops
         #terraform-mode
         yaml-mode
@@ -55,12 +68,26 @@
       ];
   };
 
+  home.packages = with pkgs; [
+    sqlite # required by magit
+    em
+    raw-emacs-old
+  ];
+
   home.file.".emacs.d/init.el" = {
     source = ../config/emacs/init.el;
   };
   home.file.".emacs.d/config.org" = {
     source = ../config/emacs/config.org;
   };
+
+  # setup alias
+  programs.zsh.shellAliases.emacs = "em";
+  programs.zsh.shellAliases.emasc = "em";
+  programs.zsh.shellAliases.eamsc = "em";
+  programs.zsh.shellAliases.emaccs = "em";
+  programs.zsh.shellAliases.emacss = "em";
+  programs.zsh.shellAliases.raw-emacs = "${my-emacs}/bin/emacs";
 }
 
 

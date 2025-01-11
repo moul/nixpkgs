@@ -103,20 +103,20 @@ in {
       bottom # fancy version of `top` with ASCII graphs
       browsh # in terminal browser
       coreutils
-      cowsay
+      #cowsay
       curl
       diff-so-fancy
       #(nerdfonts.override { fonts = [ "Iosevka" "FiraCode" "Hack" ]; })
       nerd-fonts.iosevka
       nerd-fonts.fira-code
-      docker
+      #docker
       du-dust # fancy version of `du`
       #emacs-nox
       entr
       #exa # fancy version of `ls`
       expect
       fd # fancy version of `find`
-      ffmpeg
+      #ffmpeg
       file
       fzf
       gist
