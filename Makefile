@@ -111,3 +111,5 @@ nix-store-verify:
 	  --sigs-needed 10000 \
 	  /run/current-system
 
+check:
+	nix flake check --all-systems
