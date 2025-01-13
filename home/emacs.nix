@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ...}:
+{ config, lib, pkgs, ... }:
 
 let
   my-emacs = pkgs.emacs30-nox.override {
@@ -23,17 +23,17 @@ in {
       (setq dired-use-ls-dired nil)
     '';
 
-    extraPackages = epkgs: let
-      #sops = epkgs.trivialBuild {
-      #  pname = "sops";
-      #  version = "0.1.4";
-      #  src = pkgs.fetchurl {
-      #    url = "https://raw.githubusercontent.com/djgoku/sops/v0.1.4/sops.el";
-      #    hash = "sha256-GmEexfdDLQfgUQ2WrVo/C9edF9/NuocO3Dpnv3F7/qA=";
-      #  };
-      #};
-    in
-      with epkgs; [
+    extraPackages = epkgs:
+      let
+        #sops = epkgs.trivialBuild {
+        #  pname = "sops";
+        #  version = "0.1.4";
+        #  src = pkgs.fetchurl {
+        #    url = "https://raw.githubusercontent.com/djgoku/sops/v0.1.4/sops.el";
+        #    hash = "sha256-GmEexfdDLQfgUQ2WrVo/C9edF9/NuocO3Dpnv3F7/qA=";
+        #  };
+        #};
+      in with epkgs; [
         org
 
         better-defaults
@@ -74,12 +74,8 @@ in {
     raw-emacs-old
   ];
 
-  home.file.".emacs.d/init.el" = {
-    source = ../config/emacs/init.el;
-  };
-  home.file.".emacs.d/config.org" = {
-    source = ../config/emacs/config.org;
-  };
+  home.file.".emacs.d/init.el" = { source = ../config/emacs/init.el; };
+  home.file.".emacs.d/config.org" = { source = ../config/emacs/config.org; };
 
   # setup alias
   programs.zsh.shellAliases.emacs = "em";
@@ -89,7 +85,6 @@ in {
   programs.zsh.shellAliases.emacss = "em";
   programs.zsh.shellAliases.raw-emacs = "${my-emacs}/bin/emacs";
 }
-
 
 # inspirations
 # - https://github.com/philandstuff/nixcfg/blob/4d2a846335d4b7619f644a04005b10eb59536cd9/home-manager/emacs.nix#L39

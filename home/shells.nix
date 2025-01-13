@@ -174,7 +174,7 @@ in {
         }) (lib.range 0 10));
       in {
         "nix-shell" = "nix-shell --run zsh";
-        
+
         # gno
         gnox = "go run -C ~/go/src/github.com/gnolang/gno ./gnovm/cmd/gno";
         gnokeyx =

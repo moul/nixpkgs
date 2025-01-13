@@ -16,14 +16,15 @@
   programs.nix-index.enable = true;
 
   # Fonts
-  fonts.packages = with pkgs; [
-    # recursive
-    emacs-all-the-icons-fonts
-    #(nerdfonts.override { fonts = [ "Iosevka" "JetBrainsMono" "FiraCode" ]; })
-    #nerd-fonts.Iosevka
-    #nerd-fonts.FiraCode
-    #nerd-fonts.JetBrainsMono
-  ];
+  fonts.packages = with pkgs;
+    [
+      # recursive
+      emacs-all-the-icons-fonts
+      #(nerdfonts.override { fonts = [ "Iosevka" "JetBrainsMono" "FiraCode" ]; })
+      #nerd-fonts.Iosevka
+      #nerd-fonts.FiraCode
+      #nerd-fonts.JetBrainsMono
+    ];
 
   # Keyboard
   system.keyboard.enableKeyMapping = true;
