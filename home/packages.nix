@@ -162,6 +162,9 @@ in {
       unixtools.watch
       #youtube-dl
 
+      semgrep
+      golangci-lint-langserver
+      
       # Useful nix related tools
       vivid
       cachix # adding/managing alternative binary caches hosted by Cachix
