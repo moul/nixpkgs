@@ -92,6 +92,7 @@ in {
     #"docker"
     #"firefox-developer-edition"
     "fuse"
+    "ghostty"
     #"fuse-t"
     #"google-chrome"
     "google-drive"

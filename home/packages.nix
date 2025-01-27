@@ -162,8 +162,8 @@ in {
       unixtools.watch
       #youtube-dl
 
-      semgrep
-      golangci-lint-langserver
+      #semgrep
+      #golangci-lint-langserver
       
       # Useful nix related tools
       vivid
