@@ -58,8 +58,8 @@ in {
 
     #background_opacity = "0.92";
     #background_opacity = "0.8";
-    background_opacity = "0.7";
-    #background_opacity = "1.0";
+    #background_opacity = "0.7"; # cool when nice background
+    background_opacity = "1.0";
 
     kitty_mod = "ctrl+alt";
 
