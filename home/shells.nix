@@ -61,7 +61,7 @@ in {
     LC_ALL = "en_US.UTF-8";
     FZF_BASE = "${pkgs.fzf}/share/fzf";
     TERMINFO_DIRS =
-      "${pkgs.kitty.terminfo.outPath}/share/terminfo:$TERMINFO_DIRS";
+      "${pkgs.pkgs-stable.kitty.terminfo.outPath}/share/terminfo:$TERMINFO_DIRS";
 
   };
 
@@ -187,7 +187,7 @@ in {
         mydev = "(){ nix develop my#$1 -c $SHELL ;}";
 
         # kitty alias
-        kssh = "${kitty}/bin/kitty +kitten ssh";
+        kssh = "${pkgs.pkgs-stable.kitty}/bin/kitten ssh";
 
         # core alias
         ".." = "cd ..";
@@ -214,5 +214,5 @@ in {
       });
   };
 
-  #config.environment.systemPackages = [ pkgs.kitty.terminfo ];
+  #config.environment.systemPackages = [ pkgs.pkgs-stable.kitty.terminfo ];
 }

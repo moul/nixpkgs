@@ -85,7 +85,7 @@ in {
 
   programs.truecolor.enable = true;
   programs.truecolor.useterm = "xterm-kitty";
-  programs.truecolor.terminfo = "${pkgs.kitty.terminfo}/share/terminfo";
+  programs.truecolor.terminfo = "${pkgs.pkgs-stable.kitty.terminfo}/share/terminfo";
 
   programs.kitty.keybindings = {
     # open new tab with cmd+t

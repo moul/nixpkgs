@@ -11,7 +11,7 @@
 
   # https://github.com/nix-community/home-manager/issues/423
   environment.variables = {
-    # TERMINFO_DIRS = "${pkgs.kitty.terminfo.outPath}/share/terminfo";
+    # TERMINFO_DIRS = "${pkgs.pkgs-stable.kitty.terminfo.outPath}/share/terminfo";
   };
   programs.nix-index.enable = true;
 
@@ -39,5 +39,5 @@
   };
 
   # Add ability to used TouchID for sudo authentication
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 }
