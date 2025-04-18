@@ -140,10 +140,11 @@
 
       darwinModules = {
         # My configurations
-        my-bootstrap = import ./darwin/bootstrap.nix;
-        my-defaults = import ./darwin/defaults.nix;
-        my-env = import ./darwin/env.nix;
-        my-homebrew = import ./darwin/homebrew.nix;
+        my-darwin-config = import ./darwin/darwin.nix;
+        #my-bootstrap = import ./darwin/bootstrap.nix;
+        #my-defaults = import ./darwin/defaults.nix;
+        #my-env = import ./darwin/env.nix;
+        #my-homebrew = import ./darwin/homebrew.nix;
         #my-jankyborders = import ./darwin/jankyborders.nix;
 
         # local modules
@@ -197,7 +198,8 @@
         moul-dorado = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo
           // {
             system = "aarch64-darwin";
-            modules = (attrValues self.darwinModules)
+            modules = [ self.darwinModules.my-darwin-config ]
+              ++ (attrValues (self.lib.attrsets.filterAttrs (n: _: n != "my-darwin-config") self.darwinModules))
               ++ (attrValues self.commonModules) ++ singleton {
                 nixpkgs = nixpkgsDefaults;
                 networking.computerName = "moul-dorado";
@@ -216,7 +218,8 @@
         moul-abilite = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo
           // {
             system = "aarch64-darwin";
-            modules = (attrValues self.darwinModules)
+            modules = [ self.darwinModules.my-darwin-config ]
+              ++ (attrValues (self.lib.attrsets.filterAttrs (n: _: n != "my-darwin-config") self.darwinModules))
               ++ (attrValues self.commonModules) ++ singleton {
                 nixpkgs = nixpkgsDefaults;
                 networking.computerName = "moul-abilite";
@@ -235,7 +238,8 @@
         moul-scutum = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo
           // {
             system = "aarch64-darwin";
-            modules = (attrValues self.darwinModules)
+            modules = [ self.darwinModules.my-darwin-config ]
+              ++ (attrValues (self.lib.attrsets.filterAttrs (n: _: n != "my-darwin-config") self.darwinModules))
               ++ (attrValues self.commonModules) ++ singleton {
                 nixpkgs = nixpkgsDefaults;
                 networking.computerName = "moul-scutum";
@@ -254,7 +258,8 @@
         moul-volans = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo
           // {
             system = "x86_64-darwin";
-            modules = (attrValues self.darwinModules)
+            modules = [ self.darwinModules.my-darwin-config ]
+              ++ (attrValues (self.lib.attrsets.filterAttrs (n: _: n != "my-darwin-config") self.darwinModules))
               ++ (attrValues self.commonModules) ++ singleton {
                 nixpkgs = nixpkgsDefaults;
                 networking.computerName = "moul-volans";
@@ -278,7 +283,8 @@
         } // {
 
           system = "aarch64-darwin";
-          modules = (attrValues self.darwinModules)
+          modules = [ self.darwinModules.my-darwin-config ]
+            ++ (attrValues (self.lib.attrsets.filterAttrs (n: _: n != "my-darwin-config") self.darwinModules))
             ++ (attrValues self.commonModules) ++ singleton {
               nixpkgs = nixpkgsDefaults;
               networking.computerName = "moul-pyxis";
