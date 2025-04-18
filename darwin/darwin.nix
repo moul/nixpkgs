@@ -7,8 +7,7 @@ let
   mkIfCaskPresent = cask:
     mkIf (lib.any (x: x.name == cask) config.homebrew.casks);
   brewEnabled = config.homebrew.enable;
-in
-lib.mkMerge [
+in lib.mkMerge [
   # === bootstrap.nix ===
   {
     # Nix configuration ------------------------------------------------------------------------------
@@ -148,7 +147,7 @@ lib.mkMerge [
         # recursive
         emacs-all-the-icons-fonts
         #(nerdfonts.override { fonts = [ "Iosevka" "JetBrainsMono" "FiraCode" ]; })
-      #nerd-fonts.Iosevka
+        #nerd-fonts.Iosevka
         #nerd-fonts.FiraCode
         #nerd-fonts.JetBrainsMono
       ];
@@ -159,14 +158,17 @@ lib.mkMerge [
     system.keyboard.nonUS.remapTilde = true;
     # hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}]}'
 
-  # emacs daemon
-  services.emacsd = {
-    package = pkgs.emacs30-nox.override { withNativeCompilation = false; noGui = true; };
-    enable = false;
-  };
+    # emacs daemon
+    services.emacsd = {
+      package = pkgs.emacs30-nox.override {
+        withNativeCompilation = false;
+        noGui = true;
+      };
+      enable = false;
+    };
 
-  # Add ability to used TouchID for sudo authentication
-  security.pam.services.sudo_local.touchIdAuth = true;
+    # Add ability to used TouchID for sudo authentication
+    security.pam.services.sudo_local.touchIdAuth = true;
   }
 
   # === homebrew.nix ===
@@ -339,4 +341,4 @@ lib.mkMerge [
   # {
   #   services.jankyborders.enable = true;
   # }
-] 
+]

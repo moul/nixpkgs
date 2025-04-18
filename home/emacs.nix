@@ -1,7 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-  my-emacs = pkgs.emacs30-nox.override { withNativeCompilation = false; noGui = true; };
+  my-emacs = pkgs.emacs30-nox.override {
+    withNativeCompilation = false;
+    noGui = true;
+  };
   em = pkgs.writeScriptBin "em"
     (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${my-emacs}" ]
       (lib.readFile ./../config/em));

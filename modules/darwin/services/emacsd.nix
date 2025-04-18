@@ -14,7 +14,10 @@ in {
 
       package = mkOption {
         type = types.path;
-        default = pkgs.emacs30-nox.override{ withNativeCompilation = false; noGui = true; };
+        default = pkgs.emacs30-nox.override {
+          withNativeCompilation = false;
+          noGui = true;
+        };
         description = "This option specifies the emacs package to use.";
       };
 
