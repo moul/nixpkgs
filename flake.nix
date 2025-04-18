@@ -132,9 +132,7 @@
 
       # Non-system outputs --------------------------------------------------------------------- {{{
 
-      commonModules = {
-        colors = import ./modules/home/colors;
-      };
+      commonModules = { colors = import ./modules/home/colors; };
 
       darwinModules = {
         # My configurations
@@ -211,8 +209,10 @@
 
             inherit homeStateVersion;
             homeModules = [ self.homeManagerModules.my-home-config ]
-              ++ (attrValues (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config") self.homeManagerModules))
-              ++ (attrValues self.commonModules) ++ [
+              ++ (attrValues
+                (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config")
+                  self.homeManagerModules)) ++ (attrValues self.commonModules)
+              ++ [
 
               ];
           });
@@ -233,8 +233,10 @@
 
             inherit homeStateVersion;
             homeModules = [ self.homeManagerModules.my-home-config ]
-              ++ (attrValues (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config") self.homeManagerModules))
-              ++ (attrValues self.commonModules) ++ [
+              ++ (attrValues
+                (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config")
+                  self.homeManagerModules)) ++ (attrValues self.commonModules)
+              ++ [
 
               ];
           });
@@ -255,8 +257,10 @@
 
             inherit homeStateVersion;
             homeModules = [ self.homeManagerModules.my-home-config ]
-              ++ (attrValues (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config") self.homeManagerModules))
-              ++ (attrValues self.commonModules) ++ [
+              ++ (attrValues
+                (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config")
+                  self.homeManagerModules)) ++ (attrValues self.commonModules)
+              ++ [
 
               ];
           });
@@ -277,8 +281,10 @@
 
             inherit homeStateVersion;
             homeModules = [ self.homeManagerModules.my-home-config ]
-              ++ (attrValues (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config") self.homeManagerModules))
-              ++ (attrValues self.commonModules) ++ [
+              ++ (attrValues
+                (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config")
+                  self.homeManagerModules)) ++ (attrValues self.commonModules)
+              ++ [
 
               ];
           });
@@ -304,8 +310,10 @@
 
           inherit homeStateVersion;
           homeModules = [ self.homeManagerModules.my-home-config ]
-            ++ (attrValues (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config") self.homeManagerModules))
-            ++ (attrValues self.commonModules) ++ [
+            ++ (attrValues
+              (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config")
+                self.homeManagerModules)) ++ (attrValues self.commonModules)
+            ++ [
 
             ];
         });
@@ -327,9 +335,10 @@
         cloud = home-manager.lib.homeManagerConfiguration {
           pkgs = import inputs.nixpkgs-unstable
             (nixpkgsDefaults // { system = "x86_64-linux"; });
-          modules = [ self.homeManagerModules.my-home-config ]
-            ++ (attrValues (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config") self.homeManagerModules))
-            ++ (attrValues self.commonModules) ++ singleton ({ config, ... }: {
+          modules = [ self.homeManagerModules.my-home-config ] ++ (attrValues
+            (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config")
+              self.homeManagerModules)) ++ (attrValues self.commonModules)
+            ++ singleton ({ config, ... }: {
               home.user-info = primaryUserInfo // {
                 nixConfigDirectory = "${config.home.homeDirectory}/nixpkgs";
               };
@@ -342,9 +351,10 @@
         lyra = home-manager.lib.homeManagerConfiguration {
           pkgs = import inputs.nixpkgs-unstable
             (nixpkgsDefaults // { system = "x86_64-linux"; });
-          modules = [ self.homeManagerModules.my-home-config ]
-            ++ (attrValues (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config") self.homeManagerModules))
-            ++ (attrValues self.commonModules) ++ singleton ({ config, ... }: {
+          modules = [ self.homeManagerModules.my-home-config ] ++ (attrValues
+            (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config")
+              self.homeManagerModules)) ++ (attrValues self.commonModules)
+            ++ singleton ({ config, ... }: {
               home.user-info = primaryUserInfo // {
                 nixConfigDirectory = "${config.home.homeDirectory}/nixpkgs";
               };
@@ -358,9 +368,10 @@
         githubCI = home-manager.lib.homeManagerConfiguration {
           pkgs = import inputs.nixpkgs-unstable
             (nixpkgsDefaults // { system = "x86_64-linux"; });
-          modules = [ self.homeManagerModules.my-home-config ]
-            ++ (attrValues (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config") self.homeManagerModules))
-            ++ (attrValues self.commonModules) ++ singleton ({ config, ... }: {
+          modules = [ self.homeManagerModules.my-home-config ] ++ (attrValues
+            (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config")
+              self.homeManagerModules)) ++ (attrValues self.commonModules)
+            ++ singleton ({ config, ... }: {
               home.user-info = ciUserInfo // {
                 nixConfigDirectory = "${config.home.homeDirectory}/nixpkgs";
               };
