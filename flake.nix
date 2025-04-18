@@ -21,10 +21,6 @@
     # overlay
     home-manager.url = "github:nix-community/home-manager/master";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-
-    # Other sources
-
-    # emacs
     spacemacs.url = "github:syl20bnr/spacemacs/develop";
     spacemacs.flake = false;
 
@@ -124,8 +120,6 @@
         };
 
         # My overlays
-        #my-loon = import ./overlays/loon.nix;
-        #my-gnolint = import ./overlays/gnolint.nix;
         my-libvterm = import ./overlays/libvterm.nix;
         my-retry = import ./overlays/retry.nix;
       };
@@ -135,39 +129,15 @@
       commonModules = { colors = import ./modules/home/colors; };
 
       darwinModules = {
-        # My configurations
-        my-darwin-config = import ./darwin/darwin.nix;
-        #my-bootstrap = import ./darwin/bootstrap.nix;
-        #my-defaults = import ./darwin/defaults.nix;
-        #my-env = import ./darwin/env.nix;
-        #my-homebrew = import ./darwin/homebrew.nix;
-        #my-jankyborders = import ./darwin/jankyborders.nix;
-
-        # local modules
+        my-darwin-config = import ./darwin.nix;
         services-emacsd = import ./modules/darwin/services/emacsd.nix;
-        #services-jankybordersd =
-        #  import ./modules/darwin/services/jankybordersd.nix;
         users-primaryUser = import ./modules/darwin/users.nix;
         programs-nix-index = import ./modules/darwin/programs/nix-index.nix;
       };
 
       homeManagerModules = {
-        # My configurations
-        my-home-config = import ./home/home.nix;
-        #my-shells = import ./home/shells.nix;
-        #my-git = import ./home/git.nix;
-        #my-kitty = import ./home/kitty.nix;
-        #my-packages = import ./home/packages.nix;
-        #my-asdf = import ./home/asdf.nix;
-        #my-emacs = import ./home/emacs.nix;
-        #my-tmux = import ./home/tmux.nix;
-        #my-config = import ./home/config.nix;
-        #my-jankyborders = import ./home/jankyborders.nix;
-
-        # local modules
+        my-home-config = import ./home.nix;
         programs-truecolor = import ./modules/home/programs/truecolor;
-        #programs-jankyborders = import ./modules/home/programs/jankyborders;
-        # programs-asdf = import ./modules/home/programs/asdf;
         programs-kitty-extras = import ./modules/home/programs/kitty/extras.nix;
         programs-zsh-oh-my-zsh-extra =
           import ./modules/home/programs/zsh/oh-my-zsh/extras.nix;

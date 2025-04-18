@@ -27,10 +27,10 @@ let
   };
   em = pkgs.writeScriptBin "em"
     (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${my-emacs}" ]
-      (lib.readFile ./../config/em));
+      (lib.readFile ./config/em));
   raw-emacs-old = pkgs.writeScriptBin "raw-emacs-old"
     (builtins.replaceStrings [ "\${pkgs.emacs}" ] [ "${my-emacs}" ]
-      (lib.readFile ./../config/raw-emacs));
+      (lib.readFile ./config/raw-emacs));
 
   # === From jankyborders.nix ===
   janky-theme =
@@ -302,7 +302,7 @@ in lib.mkMerge [
   # === config.nix ===
   {
     home.file."/.config/btop" = {
-      source = "${lib.cleanSource ../config/btop}";
+      source = "${lib.cleanSource ./config/btop}";
       recursive = true;
     };
     home.file.".npmrc" = with pkgs; {
@@ -311,10 +311,6 @@ in lib.mkMerge [
       '';
     };
     # sketchybar
-    # home.file."/.config/sketchybar" = {
-    #   source = "${lib.cleanSource ../config/sketchybar}";
-    #   recursive = true;
-    # };
     home.file.".aspell.config" = with pkgs; {
       source = writeText "aspell.conf" ''
         dict-dir ""
@@ -362,8 +358,8 @@ in lib.mkMerge [
         ];
     };
     home.packages = with pkgs; [ sqlite em raw-emacs-old ];
-    home.file.".emacs.d/init.el" = { source = ../config/emacs/init.el; };
-    home.file.".emacs.d/config.org" = { source = ../config/emacs/config.org; };
+    home.file.".emacs.d/init.el" = { source = ./config/emacs/init.el; };
+    home.file.".emacs.d/config.org" = { source = ./config/emacs/config.org; };
     programs.zsh.shellAliases.emacs = "em";
     programs.zsh.shellAliases.emasc = "em";
     programs.zsh.shellAliases.eamsc = "em";
@@ -681,7 +677,7 @@ in lib.mkMerge [
       dotDir = ".config/zsh";
       plugins = [{
         name = "p10k-config";
-        src = lib.cleanSource ../config/zsh/p10k;
+        src = lib.cleanSource ./config/zsh/p10k;
         file = "config.zsh";
       }];
       enableCompletion = true;
