@@ -118,10 +118,6 @@
           zsh-plugins.fzf-tab = inputs.fzf-tab;
           zsh-plugins.powerlevel10k = inputs.powerlevel10k;
         };
-
-        # My overlays
-        my-libvterm = import ./overlays/libvterm.nix;
-        my-retry = import ./overlays/retry.nix;
       };
 
       # Non-system outputs --------------------------------------------------------------------- {{{

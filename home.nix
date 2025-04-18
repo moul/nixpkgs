@@ -613,7 +613,6 @@ in lib.mkMerge [
         cmake
         gnupg
         fzf
-        my-libvterm
         pkgs-stable.procs
         (aspellWithDicts (d: [ d.en d.fr d.en-computers d.en-science ]))
         aspellDicts.fr
