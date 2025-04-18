@@ -48,8 +48,8 @@
 
   outputs = { self, darwin, home-manager, flake-utils, ... }@inputs:
     let
-      inherit (self.lib) attrValues makeOverridable optionalAttrs singleton;
-      inherit (lib) removeAttrs;
+      flakeRoot = ./.;
+      inherit (self.lib) attrValues makeOverridable optionalAttrs singleton removeAttrs;
 
       homeStateVersion = "23.05";
 
@@ -74,6 +74,13 @@
         email = "github-actions@github.com";
         nixConfigDirectory = "/Users/runner/work/nixpkgs/nixpkgs";
       };
+
+      #darwinModulesCombined = import ./darwin.nix { inherit inputs flakeRoot; };
+      darwinModulesCombined = import ./darwin.nix { inherit inputs flakeRoot; };
+      homeManagerModulesCombined = import ./home.nix { inherit inputs flakeRoot; };
+      # Pre-calculate the module lists
+      darwinModuleList = self.lib.attrValues darwinModulesCombined;
+      homeModuleList = self.lib.attrValues homeManagerModulesCombined;
     in {
 
       # Add some additional functions to `lib`.
@@ -134,8 +141,10 @@
       # Non-system outputs --------------------------------------------------------------------- {{{
 
       # Import consolidated Darwin and Home Manager modules
-      darwinModulesCombined = import ./darwin.nix { inherit inputs pkgs lib config; };
-      homeManagerModulesCombined = import ./home.nix { inherit inputs pkgs lib config; };
+      #darwinModulesCombined = import ./darwin.nix { inherit inputs pkgs lib config; flakeRoot = flakeRoot; };
+      #homeManagerModulesCombined = import ./home.nix { inherit inputs pkgs lib config; flakeRoot = flakeRoot; };
+      #darwinModulesCombined = import ./darwin.nix { inherit inputs flakeRoot; };
+      #homeManagerModulesCombined = import ./home.nix { inherit inputs flakeRoot; };
 
       # }}}
 
@@ -154,7 +163,7 @@
         moul-dorado = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo
           // {
             system = "aarch64-darwin";
-            modules = (lib.attrValues darwinModulesCombined)
+            modules = (self.lib.attrValues darwinModulesCombined)
               ++ [ homeManagerModulesCombined."colors-module-options" ]
               ++ singleton {
                 nixpkgs = nixpkgsDefaults;
@@ -166,14 +175,14 @@
               };
 
             inherit homeStateVersion;
-            homeModules = (lib.attrValues homeManagerModulesCombined) ++ [
+            homeModules = (self.lib.attrValues homeManagerModulesCombined) ++ [
 
             ];
           });
         moul-abilite = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo
           // {
             system = "aarch64-darwin";
-            modules = (lib.attrValues darwinModulesCombined)
+            modules = (self.lib.attrValues darwinModulesCombined)
               ++ [ homeManagerModulesCombined."colors-module-options" ]
               ++ singleton {
                 nixpkgs = nixpkgsDefaults;
@@ -185,14 +194,14 @@
               };
 
             inherit homeStateVersion;
-            homeModules = (lib.attrValues homeManagerModulesCombined) ++ [
+            homeModules = (self.lib.attrValues homeManagerModulesCombined) ++ [
 
             ];
           });
         moul-scutum = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo
           // {
             system = "aarch64-darwin";
-            modules = (lib.attrValues darwinModulesCombined)
+            modules = (self.lib.attrValues darwinModulesCombined)
               ++ [ homeManagerModulesCombined."colors-module-options" ]
               ++ singleton {
                 nixpkgs = nixpkgsDefaults;
@@ -204,14 +213,14 @@
               };
 
             inherit homeStateVersion;
-            homeModules = (lib.attrValues homeManagerModulesCombined) ++ [
+            homeModules = (self.lib.attrValues homeManagerModulesCombined) ++ [
 
             ];
           });
         moul-volans = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo
           // {
             system = "x86_64-darwin";
-            modules = (lib.attrValues darwinModulesCombined)
+            modules = (self.lib.attrValues darwinModulesCombined)
               ++ [ homeManagerModulesCombined."colors-module-options" ]
               ++ singleton {
                 nixpkgs = nixpkgsDefaults;
@@ -223,7 +232,7 @@
               };
 
             inherit homeStateVersion;
-            homeModules = (lib.attrValues homeManagerModulesCombined) ++ [
+            homeModules = (self.lib.attrValues homeManagerModulesCombined) ++ [
 
             ];
           });
@@ -235,7 +244,7 @@
         } // {
 
           system = "aarch64-darwin";
-          modules = (lib.attrValues darwinModulesCombined)
+          modules = (self.lib.attrValues darwinModulesCombined)
             ++ [ homeManagerModulesCombined."colors-module-options" ]
             ++ singleton {
               nixpkgs = nixpkgsDefaults;
@@ -247,7 +256,7 @@
             };
 
           inherit homeStateVersion;
-          homeModules = (lib.attrValues homeManagerModulesCombined) ++ [
+          homeModules = (self.lib.attrValues homeManagerModulesCombined) ++ [
 
           ];
         });
@@ -269,7 +278,7 @@
         cloud = home-manager.lib.homeManagerConfiguration {
           pkgs = import inputs.nixpkgs-unstable
             (nixpkgsDefaults // { system = "x86_64-linux"; });
-          modules = (lib.attrValues homeManagerModulesCombined)
+          modules = (self.lib.attrValues homeManagerModulesCombined)
             ++ singleton ({ config, ... }: {
               home.user-info = primaryUserInfo // {
                 nixConfigDirectory = "${config.home.homeDirectory}/nixpkgs";
@@ -283,7 +292,7 @@
         lyra = home-manager.lib.homeManagerConfiguration {
           pkgs = import inputs.nixpkgs-unstable
             (nixpkgsDefaults // { system = "x86_64-linux"; });
-          modules = (lib.attrValues homeManagerModulesCombined)
+          modules = (self.lib.attrValues homeManagerModulesCombined)
             ++ singleton ({ config, ... }: {
               home.user-info = primaryUserInfo // {
                 nixConfigDirectory = "${config.home.homeDirectory}/nixpkgs";
@@ -298,7 +307,7 @@
         githubCI = home-manager.lib.homeManagerConfiguration {
           pkgs = import inputs.nixpkgs-unstable
             (nixpkgsDefaults // { system = "x86_64-linux"; });
-          modules = (lib.attrValues homeManagerModulesCombined)
+          modules = (self.lib.attrValues homeManagerModulesCombined)
             ++ singleton ({ config, ... }: {
               home.user-info = ciUserInfo // {
                 nixConfigDirectory = "${config.home.homeDirectory}/nixpkgs";

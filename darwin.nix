@@ -1,10 +1,10 @@
 # darwin.nix
 # Consolidated Darwin modules
-{ inputs, pkgs, lib, config, ... }:
+{ inputs, pkgs, lib, config, flakeRoot, ... }:
 
 let
-  # Helper function to read local config files relative to flake root
-  readFile = path: builtins.readFile (toString ./../config + "/${path}");
+  # Helper function using explicit flakeRoot
+  readFile = path: builtins.readFile "${flakeRoot}/config/${path}";
 in
 {
   # Contents from darwin/bootstrap.nix
@@ -259,18 +259,6 @@ in
   # Contents from modules/darwin/programs/nix-index.nix
   programs-nix-index = { config, lib, pkgs, ... }: {
     config = lib.mkIf config.programs.nix-index.enable {
-      programs.fish.interactiveShellInit = ''
-        function __fish_command_not_found_handler --on-event="fish_command_not_found"
-          ${\
-            if config.programs.fish.useBabelfish then ''
-              command_not_found_handle $argv
-            '' else ''
-              ${pkgs.bashInteractive}/bin/bash -c \
-                "source ${config.programs.nix-index.package}/etc/profile.d/command-not-found.sh; command_not_found_handle $argv"
-            ''\
-          }\
-        end
-      '';
     };
   };
 }

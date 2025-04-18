@@ -1,10 +1,10 @@
 # home.nix
 # Consolidated Home Manager modules
-{ inputs, pkgs, lib, config, ... }:
+{ inputs, lib, pkgs, config, flakeRoot, ... }:
 
 let
   # Helper function to read local config files relative to flake root
-  readFile = path: builtins.readFile (toString ./../config + "/${path}");
+  readFile = path: builtins.readFile "${flakeRoot}/config/${path}";
 
   # --- Start Inlined: modules/home/colors/colorscheme.nix ---
   inlined_colorscheme = { name, config, lib, ... }:
