@@ -46,10 +46,9 @@
     powerlevel10k.flake = false;
   };
 
-  outputs = { self, darwin, home-manager, flake-utils
-    , lib ? inputs.nixpkgs-unstable.lib, pkgs ? inputs.nixpkgs-unstable, ...
-    }@inputs:
+  outputs = { self, darwin, home-manager, flake-utils, ... }@inputs:
     let
+      lib = inputs.nixpkgs-unstable.lib; # Define base lib here
       flakeRoot = ./.;
       inherit (lib)
         attrValues makeOverridable optionalAttrs singleton
@@ -1230,13 +1229,18 @@
                   recursive = true;
                 };
               }) cfg.themes);
-              configExtra = concatStringsSep "\n"
-                (map (p: "## ${p.name} config\\n\\n${p.config}")
-                  (filter (p: p.config != "") cfg.plugins));
+              configExtra = concatStringsSep "\n" (
+                lib.filter (s: s != "") ( # Filter out empty strings
+                  map (p:
+                    lib.optionalString (lib.hasAttr "config" p && p.config != "")
+                      "## ${p.name} config\n\n${p.config}"
+                  ) cfg.plugins
+                )
+              );
             in mkIf config.programs.zsh.oh-my-zsh.enable {
               home.file = listToAttrs (pluginsList ++ themesList);
               programs.zsh.initExtra = mkIf (configExtra != "")
-                "# oh-my-zsh plugins config\\n\\n${configExtra}";
+                "# oh-my-zsh plugins config\n\n${configExtra}";
             };
           };
 
