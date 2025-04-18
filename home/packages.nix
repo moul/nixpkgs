@@ -170,7 +170,7 @@ in {
       cachix # adding/managing alternative binary caches hosted by Cachix
       comma # run software from without installing it
       # niv # easy dependency management for nix projects
-      nixfmt
+      nixfmt-classic
       nix-diff
       nix-index
       nix-info
@@ -261,7 +261,7 @@ in {
       niv # easy dependency management for nix projects
       nix-prefetch
       nix-prefetch-git
-      nixfmt
+      nixfmt-classic
     ] ++ lib.optionals stdenv.isDarwin [ cocoapods ]
     ++ lib.optionals stdenv.isLinux [ docker docker-compose ];
 }

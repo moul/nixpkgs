@@ -7,15 +7,6 @@ let
   dataDir = ".local/share";
   oh-my-zsh-custom = "${configDir}/oh-my-zsh";
 
-  xterm-emacsclient = pkgs.writeShellScriptBin "xemacsclient" ''
-    export TERM=xterm-emacs
-    ${pkgs.emacs-gtk}/bin/emacsclient $@
-  '';
-  xterm-emacs = pkgs.writeShellScriptBin "xemacs" ''
-    export TERM=xterm-emacs
-    ${pkgs.emacs-gtk}/bin/emacs $@
-  '';
-
   restart-service = pkgs.writeShellScriptBin "restart-service" ''
     set -e
 

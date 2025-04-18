@@ -7,7 +7,7 @@
   # Apps
   # `home-manager` currently has issues adding them to `~/Applications`
   # Issue: https://github.com/nix-community/home-manager/issues/1341
-  environment.systemPackages = with pkgs; [ emacs-gtk kitty terminal-notifier ];
+  environment.systemPackages = with pkgs; [ kitty terminal-notifier ];
 
   # https://github.com/nix-community/home-manager/issues/423
   environment.variables = {
@@ -34,8 +34,8 @@
 
   # emacs daemon
   services.emacsd = {
-    package = pkgs.emacs-gtk;
-    enable = true;
+    package = pkgs.emacs30-nox.override { withNativeCompilation = false; noGui = true; };
+    enable = false;
   };
 
   # Add ability to used TouchID for sudo authentication

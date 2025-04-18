@@ -14,7 +14,7 @@ in {
 
       package = mkOption {
         type = types.path;
-        default = pkgs.emacs;
+        default = pkgs.emacs30-nox.override{ withNativeCompilation = false; noGui = true; };
         description = "This option specifies the emacs package to use.";
       };
 
@@ -47,7 +47,8 @@ in {
     emacsd = pkgs.writeShellScriptBin "emacsd" ''
       export TERMINFO_DIRS="${config.system.path}/share/terminfo";
       export TERM=xterm-emacs
-      ${cfg.package}/bin/${cfg.exec} --with-profile=spacemacs --fg-daemon
+      #${cfg.package}/bin/${cfg.exec} --with-profile=spacemacs --fg-daemon
+      ${cfg.package}/bin/${cfg.exec} --fg-daemon
     '';
   in mkIf cfg.enable {
     launchd.user.agents.emacsd = {

@@ -40,36 +40,38 @@ in {
 
   # Prefer installing application from the Mac App Store
   homebrew.masApps = {
-    iStatMenus = 1319778037;
+    #iStatMenus = 1319778037;
+    #MicrosoftRemoteDesktop = 1295203466;
+    #WiFiExplorer = 494803304;
+    #iNetNetworkScanner = 403304796;
+    #oneSec = 1532875441;
+    #Actions = 1586435171;
+    #Backtrack = 1477089520;
+    #DaisyDisk = 411643860;
+    #Deliveries = 290986013;
+    #Keynote = 409183694;
+    #Monodraw = 920404675;
+    #NextDNS = 1464122853;
+    #Numbers = 409203825;
+    #Pages = 409201541;
+    #Pocket = 568494494;
+    #Screens = 1224268771;
+    #Slack = 803453959;
+    #Tailscale = 1475387142;
+    #Transmit = 1436522307;
+    #Twitter = 1482454543;
+
+    # OLD to reconsider
     #LogicPro = 634148309;
-    MicrosoftRemoteDesktop = 1295203466;
     #Model15 = 1041465860;
     #PixelmatorPro = 1289583905;
-    WiFiExplorer = 494803304;
+    #Canva = 897446215;
     #YubicoAuthenticator = 1497506650;
     #Grammarly = 1462114288;
-    iNetNetworkScanner = 403304796;
-    oneSec = 1532875441;
-    #Canva = 897446215;
-    Actions = 1586435171;
-    Backtrack = 1477089520;
-    DaisyDisk = 411643860;
-    Deliveries = 290986013;
+    #Trello = 1278508951;
     #Fantastical = 975937182;
     #GarageBand = 682658836;
     #iMovie = 408981434;
-    Keynote = 409183694;
-    Monodraw = 920404675;
-    NextDNS = 1464122853;
-    Numbers = 409203825;
-    Pages = 409201541;
-    Pocket = 568494494;
-    Screens = 1224268771;
-    Slack = 803453959;
-    Tailscale = 1475387142;
-    Transmit = 1436522307;
-    Twitter = 1482454543;
-    #Trello = 1278508951;
 
     # FIXME: optionals if darwin >= 12
     #Infuse = 1136220934;

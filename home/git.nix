@@ -10,7 +10,7 @@
     userName = config.home.user-info.username;
 
     extraConfig = {
-      core.editor = "em";
+      #core.editor = "em";
       core.whitespace = "trailing-space,space-before-tab";
       diff.colorMoved = "default";
       pull.rebase = true;
