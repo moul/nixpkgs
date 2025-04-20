@@ -124,7 +124,6 @@
 
       commonModules = { colors = import ./modules/home/colors; };
 
-
       darwinModules = {
         my-darwin-config = import ./darwin.nix;
         users-primaryUser = import ./modules/darwin/users.nix;
