@@ -158,15 +158,6 @@ in lib.mkMerge [
     system.keyboard.nonUS.remapTilde = true;
     # hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}]}'
 
-    # emacs daemon
-    services.emacsd = {
-      package = pkgs.emacs30-nox.override {
-        withNativeCompilation = false;
-        noGui = true;
-      };
-      enable = false;
-    };
-
     # Add ability to used TouchID for sudo authentication
     security.pam.services.sudo_local.touchIdAuth = true;
   }

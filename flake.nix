@@ -124,11 +124,10 @@
 
       commonModules = { colors = import ./modules/home/colors; };
 
+
       darwinModules = {
         my-darwin-config = import ./darwin.nix;
-        services-emacsd = import ./modules/darwin/services/emacsd.nix;
         users-primaryUser = import ./modules/darwin/users.nix;
-        programs-nix-index = import ./modules/darwin/programs/nix-index.nix;
       };
 
       homeManagerModules = {
