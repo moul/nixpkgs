@@ -21,10 +21,6 @@
     # overlay
     home-manager.url = "github:nix-community/home-manager/master";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-
-    # Other sources
-
-    # emacs
     spacemacs.url = "github:syl20bnr/spacemacs/develop";
     spacemacs.flake = false;
 
@@ -122,54 +118,21 @@
           zsh-plugins.fzf-tab = inputs.fzf-tab;
           zsh-plugins.powerlevel10k = inputs.powerlevel10k;
         };
-
-        # My overlays
-        #my-loon = import ./overlays/loon.nix;
-        #my-gnolint = import ./overlays/gnolint.nix;
-        my-libvterm = import ./overlays/libvterm.nix;
-        my-retry = import ./overlays/retry.nix;
       };
 
       # Non-system outputs --------------------------------------------------------------------- {{{
 
-      commonModules = {
-        colors = import ./modules/home/colors;
+      commonModules = { colors = import ./modules/home/colors; };
 
-        my-colors = import ./home/colors.nix;
-      };
 
       darwinModules = {
-        # My configurations
-        my-bootstrap = import ./darwin/bootstrap.nix;
-        my-defaults = import ./darwin/defaults.nix;
-        my-env = import ./darwin/env.nix;
-        my-homebrew = import ./darwin/homebrew.nix;
-        #my-jankyborders = import ./darwin/jankyborders.nix;
-
-        # local modules
-        services-emacsd = import ./modules/darwin/services/emacsd.nix;
-        #services-jankybordersd =
-        #  import ./modules/darwin/services/jankybordersd.nix;
+        my-darwin-config = import ./darwin.nix;
         users-primaryUser = import ./modules/darwin/users.nix;
-        programs-nix-index = import ./modules/darwin/programs/nix-index.nix;
       };
 
       homeManagerModules = {
-        # My configurations
-        my-shells = import ./home/shells.nix;
-        my-git = import ./home/git.nix;
-        my-kitty = import ./home/kitty.nix;
-        my-packages = import ./home/packages.nix;
-        my-asdf = import ./home/asdf.nix;
-        my-emacs = import ./home/emacs.nix;
-        my-tmux = import ./home/tmux.nix;
-        my-config = import ./home/config.nix;
-        #my-jankyborders = import ./home/jankyborders.nix;
-
-        # local modules
+        my-home-config = import ./home.nix;
         programs-truecolor = import ./modules/home/programs/truecolor;
-        #programs-jankyborders = import ./modules/home/programs/jankyborders;
-        # programs-asdf = import ./modules/home/programs/asdf;
         programs-kitty-extras = import ./modules/home/programs/kitty/extras.nix;
         programs-zsh-oh-my-zsh-extra =
           import ./modules/home/programs/zsh/oh-my-zsh/extras.nix;
@@ -197,8 +160,10 @@
         moul-dorado = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo
           // {
             system = "aarch64-darwin";
-            modules = (attrValues self.darwinModules)
-              ++ (attrValues self.commonModules) ++ singleton {
+            modules = [ self.darwinModules.my-darwin-config ] ++ (attrValues
+              (self.lib.attrsets.filterAttrs (n: _: n != "my-darwin-config")
+                self.darwinModules)) ++ (attrValues self.commonModules)
+              ++ singleton {
                 nixpkgs = nixpkgsDefaults;
                 networking.computerName = "moul-dorado";
                 networking.hostName = "moul-dorado";
@@ -208,16 +173,21 @@
               };
 
             inherit homeStateVersion;
-            homeModules = (attrValues self.homeManagerModules)
-              ++ (attrValues self.commonModules) ++ [
+            homeModules = [ self.homeManagerModules.my-home-config ]
+              ++ (attrValues
+                (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config")
+                  self.homeManagerModules)) ++ (attrValues self.commonModules)
+              ++ [
 
               ];
           });
         moul-abilite = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo
           // {
             system = "aarch64-darwin";
-            modules = (attrValues self.darwinModules)
-              ++ (attrValues self.commonModules) ++ singleton {
+            modules = [ self.darwinModules.my-darwin-config ] ++ (attrValues
+              (self.lib.attrsets.filterAttrs (n: _: n != "my-darwin-config")
+                self.darwinModules)) ++ (attrValues self.commonModules)
+              ++ singleton {
                 nixpkgs = nixpkgsDefaults;
                 networking.computerName = "moul-abilite";
                 networking.hostName = "moul-abilite";
@@ -227,16 +197,21 @@
               };
 
             inherit homeStateVersion;
-            homeModules = (attrValues self.homeManagerModules)
-              ++ (attrValues self.commonModules) ++ [
+            homeModules = [ self.homeManagerModules.my-home-config ]
+              ++ (attrValues
+                (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config")
+                  self.homeManagerModules)) ++ (attrValues self.commonModules)
+              ++ [
 
               ];
           });
         moul-scutum = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo
           // {
             system = "aarch64-darwin";
-            modules = (attrValues self.darwinModules)
-              ++ (attrValues self.commonModules) ++ singleton {
+            modules = [ self.darwinModules.my-darwin-config ] ++ (attrValues
+              (self.lib.attrsets.filterAttrs (n: _: n != "my-darwin-config")
+                self.darwinModules)) ++ (attrValues self.commonModules)
+              ++ singleton {
                 nixpkgs = nixpkgsDefaults;
                 networking.computerName = "moul-scutum";
                 networking.hostName = "moul-scutum";
@@ -246,16 +221,21 @@
               };
 
             inherit homeStateVersion;
-            homeModules = (attrValues self.homeManagerModules)
-              ++ (attrValues self.commonModules) ++ [
+            homeModules = [ self.homeManagerModules.my-home-config ]
+              ++ (attrValues
+                (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config")
+                  self.homeManagerModules)) ++ (attrValues self.commonModules)
+              ++ [
 
               ];
           });
         moul-volans = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo
           // {
             system = "x86_64-darwin";
-            modules = (attrValues self.darwinModules)
-              ++ (attrValues self.commonModules) ++ singleton {
+            modules = [ self.darwinModules.my-darwin-config ] ++ (attrValues
+              (self.lib.attrsets.filterAttrs (n: _: n != "my-darwin-config")
+                self.darwinModules)) ++ (attrValues self.commonModules)
+              ++ singleton {
                 nixpkgs = nixpkgsDefaults;
                 networking.computerName = "moul-volans";
                 networking.hostName = "moul-volans";
@@ -265,8 +245,11 @@
               };
 
             inherit homeStateVersion;
-            homeModules = (attrValues self.homeManagerModules)
-              ++ (attrValues self.commonModules) ++ [
+            homeModules = [ self.homeManagerModules.my-home-config ]
+              ++ (attrValues
+                (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config")
+                  self.homeManagerModules)) ++ (attrValues self.commonModules)
+              ++ [
 
               ];
           });
@@ -278,8 +261,10 @@
         } // {
 
           system = "aarch64-darwin";
-          modules = (attrValues self.darwinModules)
-            ++ (attrValues self.commonModules) ++ singleton {
+          modules = [ self.darwinModules.my-darwin-config ] ++ (attrValues
+            (self.lib.attrsets.filterAttrs (n: _: n != "my-darwin-config")
+              self.darwinModules)) ++ (attrValues self.commonModules)
+            ++ singleton {
               nixpkgs = nixpkgsDefaults;
               networking.computerName = "moul-pyxis";
               networking.hostName = "moul-pyxis";
@@ -289,8 +274,11 @@
             };
 
           inherit homeStateVersion;
-          homeModules = (attrValues self.homeManagerModules)
-            ++ (attrValues self.commonModules) ++ [
+          homeModules = [ self.homeManagerModules.my-home-config ]
+            ++ (attrValues
+              (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config")
+                self.homeManagerModules)) ++ (attrValues self.commonModules)
+            ++ [
 
             ];
         });
@@ -312,8 +300,10 @@
         cloud = home-manager.lib.homeManagerConfiguration {
           pkgs = import inputs.nixpkgs-unstable
             (nixpkgsDefaults // { system = "x86_64-linux"; });
-          modules = attrValues self.homeManagerModules
-            ++ (attrValues self.commonModules) ++ singleton ({ config, ... }: {
+          modules = [ self.homeManagerModules.my-home-config ] ++ (attrValues
+            (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config")
+              self.homeManagerModules)) ++ (attrValues self.commonModules)
+            ++ singleton ({ config, ... }: {
               home.user-info = primaryUserInfo // {
                 nixConfigDirectory = "${config.home.homeDirectory}/nixpkgs";
               };
@@ -326,8 +316,10 @@
         lyra = home-manager.lib.homeManagerConfiguration {
           pkgs = import inputs.nixpkgs-unstable
             (nixpkgsDefaults // { system = "x86_64-linux"; });
-          modules = attrValues self.homeManagerModules
-            ++ (attrValues self.commonModules) ++ singleton ({ config, ... }: {
+          modules = [ self.homeManagerModules.my-home-config ] ++ (attrValues
+            (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config")
+              self.homeManagerModules)) ++ (attrValues self.commonModules)
+            ++ singleton ({ config, ... }: {
               home.user-info = primaryUserInfo // {
                 nixConfigDirectory = "${config.home.homeDirectory}/nixpkgs";
               };
@@ -341,8 +333,10 @@
         githubCI = home-manager.lib.homeManagerConfiguration {
           pkgs = import inputs.nixpkgs-unstable
             (nixpkgsDefaults // { system = "x86_64-linux"; });
-          modules = attrValues self.homeManagerModules
-            ++ (attrValues self.commonModules) ++ singleton ({ config, ... }: {
+          modules = [ self.homeManagerModules.my-home-config ] ++ (attrValues
+            (self.lib.attrsets.filterAttrs (n: _: n != "my-home-config")
+              self.homeManagerModules)) ++ (attrValues self.commonModules)
+            ++ singleton ({ config, ... }: {
               home.user-info = ciUserInfo // {
                 nixConfigDirectory = "${config.home.homeDirectory}/nixpkgs";
               };
